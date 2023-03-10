@@ -4,6 +4,7 @@ import 'package:my_app/features/data/datasources/example/example_datasource.dart
 import 'package:my_app/features/data/repositories/example_repository.dart';
 import 'package:my_app/features/domain/usecases/get_example_from_username_usecase.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/features/presenter/pages/home_page.dart';
 
 class AppModule extends Module {
   @override
@@ -17,5 +18,6 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
+    ChildRoute("/", child: (_, __) => HomePage()),
   ];
 }
