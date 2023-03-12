@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ModularApp(
       module: AppModule(),
-      child: AppWidget(),
+      child: const  AppWidget(),
     );
   }
 }

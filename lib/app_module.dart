@@ -18,6 +18,6 @@ class AppModule extends Module {
 
   @override
   final List<ModularRoute> routes = [
-    ChildRoute("/", child: (_, __) => HomePage()),
+    ChildRoute("/", child: (_, __) => const HomePage()),
   ];
 }

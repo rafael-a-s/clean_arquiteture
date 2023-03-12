@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:my_app/features/presenter/widgets/appbar/app_bar.dart';
+import 'package:my_app/features/presenter/widgets/form/form.dart';
 
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
-class  HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -11,28 +13,32 @@ class  HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const AppBarSliver(),
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(20),
-          child: Center(
-            child: Column(
-              children: [
-                Text(
-                  "Welcome to Astronomy Picture of the Day!",
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.caption,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+          appBar: AppBar(
+            title: const Text('Ô Plano'),
+            bottom: const TabBar(
+              tabs: <Widget>[
+                Tab(
+                  icon: Icon(Icons.add),
                 ),
-                const SizedBox(
-                  height: 150,
+                Tab(
+                  icon: Icon(Icons.beach_access_sharp),
                 ),
-                SizedBox(height: 20),
+                Tab(
+                  icon: Icon(Icons.brightness_5_sharp),
+                ),
               ],
             ),
           ),
-        ),
-      ),
+          body: const Center(
+            child: TabBarView(children: <Widget>[
+              FormLogin(),
+              Icon(Icons.directions_transit, size: 350),
+              Icon(Icons.directions_car, size: 350),
+            ]),
+          )),
     );
   }
 }
