@@ -1,13 +1,13 @@
 import 'package:equatable/equatable.dart';
 
 class Adress extends Equatable {
-  final String cep;
-  final String logradouro;
-  final String bairro;
-  final String cidade;
-  final String estado;
+  String cep;
+  String logradouro;
+  String bairro;
+  String cidade;
+  String estado;
 
-  const Adress({
+  Adress({
     required this.cep,
     required this.logradouro,
     required this.bairro,

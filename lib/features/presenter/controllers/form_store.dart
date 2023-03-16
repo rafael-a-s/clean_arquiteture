@@ -7,7 +7,7 @@ class FormStore extends NotifierStore<Failure, Adress> {
   final GetAdressFromCep usecase;
 
   FormStore(this.usecase)
-      : super(const Adress(cep: '', logradouro: '', bairro: '', cidade: '', estado: ''));
+      : super(Adress(cep: '', logradouro: '', bairro: '', cidade: '', estado: ''));
 
   getAdressFromCep(String cep) async {
     executeEither(() => usecase(cep) as Future<EitherAdapter<Failure, Adress>>);
