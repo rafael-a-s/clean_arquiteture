@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/presenter/widgets/formImc/tela_resultado.dart';
 
 class FormImc extends StatefulWidget {
 
@@ -27,6 +28,10 @@ class _FormImc extends State<FormImc> {
     setState(() {
       _resultado = peso! / (altura! * altura);
     });
+
+    Navigator.push(context, 
+    MaterialPageRoute(builder: (context) => TelaResultado(result: _resultado.toStringAsFixed(2)))
+    );
   }
 
   @override
