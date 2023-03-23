@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:my_app/features/presenter/widgets/appbar/app_bar.dart';
 import 'package:my_app/features/presenter/widgets/form/form.dart';
+import 'package:my_app/features/presenter/widgets/formImc/form_img.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
                   icon: Icon(Icons.add),
                 ),
                 Tab(
-                  icon: Icon(Icons.beach_access_sharp),
+                  icon: Icon(Icons.calculate),
                 ),
                 Tab(
                   icon: Icon(Icons.brightness_5_sharp),
@@ -35,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           body: const Center(
             child: TabBarView(children: <Widget>[
               FormLogin(),
-              Icon(Icons.directions_transit, size: 350),
+              FormImc(),
               Icon(Icons.directions_car, size: 350),
             ]),
           )),
