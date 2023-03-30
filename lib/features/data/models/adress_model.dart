@@ -1,7 +1,7 @@
 import 'package:my_app/features/domain/entities/adress.dart';
 
 class AdressModel extends Adress {
-  const AdressModel({
+   AdressModel({
     required String cep,
     required String logradouro,
     required String bairro,

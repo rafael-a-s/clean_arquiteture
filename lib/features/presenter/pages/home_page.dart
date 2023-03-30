@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:my_app/features/presenter/widgets/appbar/app_bar.dart';
-import 'package:my_app/features/presenter/widgets/form/form.dart';
-import 'package:my_app/features/presenter/widgets/formImc/form_img.dart';
+import 'package:my_app/features/presenter/widgets/home/botton-navigation/bottom_navigation.dart';
+import 'package:my_app/features/presenter/widgets/home/box-decoration/box_decoration_home.dart';
+import 'package:my_app/features/presenter/widgets/home/mini-cards/mini_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -14,32 +13,79 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Ô Plano'),
-            bottom: const TabBar(
-              tabs: <Widget>[
-                Tab(
-                  icon: Icon(Icons.add),
+    return Scaffold(
+      backgroundColor: const Color(0xFF191d24),
+      bottomNavigationBar: const BottomNavigation(),
+      body: Column(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              const BoxDecorationHome(),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 70),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    const Text(
+                      'Portifolio.io',
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    const Text(
+                      'Olá, me chamo Rafael! \n Bem vindo a meu portifolio.',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    Padding(
+                      padding:const EdgeInsets.only(top: 20),
+                      child: Column(
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: const <Widget>[
+                              MiniCard(
+                                color: 0xFF47B4FF,
+                                label: ('About'),
+                                image: ('assets/images/projects.png'),
+                              ),
+                              MiniCard(
+                                color: 0xFF47B4FF,
+                                label: ('About'),
+                                image: ('assets/images/experiencia.png'),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 30),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: const <Widget>[
+                              MiniCard(
+                                color: 0xFF47B4FF,
+                                label: ('About'),
+                                image: ('assets/images/about56.png'),
+                              ),
+                              MiniCard(
+                                color: 0xFF47B4FF,
+                                label: ('About'),
+                                image: ('assets/images/about56.png'),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
-                Tab(
-                  icon: Icon(Icons.calculate),
-                ),
-                Tab(
-                  icon: Icon(Icons.brightness_5_sharp),
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-          body: const Center(
-            child: TabBarView(children: <Widget>[
-              FormLogin(),
-              FormImc(),
-              Icon(Icons.directions_car, size: 350),
-            ]),
-          )),
+        ],
+      ),
     );
   }
 }
