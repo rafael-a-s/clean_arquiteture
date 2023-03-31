@@ -1,17 +1,21 @@
 import 'dart:ffi';
 
 import 'package:flutter/material.dart';
+import 'package:my_app/app_module.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class MiniCard extends StatelessWidget {
   final String label;
   final String image;
   final int color;
+  final String navigation;
 
   const MiniCard(
       {super.key,
       required this.color,
       required this.image,
-      required this.label});
+      required this.label,
+      required this.navigation});
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +47,9 @@ class MiniCard extends StatelessWidget {
           ],
         ),
       ),
-      onTap: () {},
+      onTap: () {
+        Modular.to.navigate(navigation);
+      },
     );
   }
 }

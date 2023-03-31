@@ -50,13 +50,15 @@ class _HomePageState extends State<HomePage> {
                             children: const <Widget>[
                               MiniCard(
                                 color: 0xFF47B4FF,
-                                label: ('About'),
+                                label: ('Projetos'),
                                 image: ('assets/images/projects.png'),
+                                navigation: ('/projetos'),
                               ),
                               MiniCard(
                                 color: 0xFF47B4FF,
-                                label: ('About'),
+                                label: ('Experiências'),
                                 image: ('assets/images/experiencia.png'),
+                                navigation: ('/experience'),
                               ),
                             ],
                           ),
@@ -68,11 +70,13 @@ class _HomePageState extends State<HomePage> {
                                 color: 0xFF47B4FF,
                                 label: ('About'),
                                 image: ('assets/images/about56.png'),
+                                navigation: ('/about'),
                               ),
                               MiniCard(
                                 color: 0xFF47B4FF,
                                 label: ('About'),
                                 image: ('assets/images/about56.png'),
+                                navigation: ('/about'),
                               ),
                             ],
                           ),
