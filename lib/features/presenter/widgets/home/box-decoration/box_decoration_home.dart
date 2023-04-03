@@ -16,7 +16,7 @@ class BoxDecorationHome extends StatelessWidget {
           borderRadius: BorderRadius.circular(80),
           gradient: const LinearGradient(
             begin: Alignment.bottomLeft,
-            colors: [Color(0xFFfd8bab), Color(0xFFFD44C4)],
+            colors: [Color(0xFF481fe6), Color(0xFF7f3be6)],
           ),
         ),
       ),
