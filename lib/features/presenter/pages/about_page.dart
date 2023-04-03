@@ -7,17 +7,7 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF191d24),
-      appBar: AppBar(
-        backgroundColor: const Color(0xFF191d24),
-        title: const Text('Sobre mim'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () => Modular.to.navigate("/"),
-        ),
-      ),
-      body: Stack(
+    return Stack(
         children: <Widget>[
           Positioned(
             top: 0,
@@ -116,7 +106,6 @@ class AboutPage extends StatelessWidget {
             ),
           ),
         ],
-      ),
     );
   }
 }

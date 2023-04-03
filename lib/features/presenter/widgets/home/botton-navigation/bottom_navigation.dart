@@ -1,28 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/presenter/root.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
 
   @override
-  Widget build(BuildContext context){
-    return Container(
-      height: 80,
-      width: double.infinity,
-      padding: EdgeInsets.all(10),
-      color: Color(0xFF373856),
-      child: Padding(
-        padding: const EdgeInsets.only(bottom:10),
+  Widget build(BuildContext context) {
+    return BottomAppBar(
+      shape: const CircularNotchedRectangle(),
+      child: Container(
+        padding: const EdgeInsets.only(left: 30, right: 30),
+        height: 60.0,
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomLeft,
+            colors: [
+              Color(RootStyle.secondColor),
+              Color(0xFF182035),
+            ],
+          ),
+        ),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Icon(
-              Icons.wallet
+            IconButton(
+              iconSize: 30,
+              icon: const Icon(
+                Icons.add,
+                color: Color(0xFF949fb3),
+              ),
+              onPressed: () => {},
             ),
-            Icon(
-              Icons.person_2_rounded
-            ),
-            Icon(
-              Icons.phone
+            IconButton(
+              iconSize: 30,
+              icon: const Icon(
+                Icons.streetview,
+                color: Color(0xFF949fb3),
+              ),
+              onPressed: () => {},
             ),
           ],
         ),

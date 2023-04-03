@@ -1,22 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/presenter/widgets/about/image_circular.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
-class AppBarSliver extends StatefulWidget implements PreferredSizeWidget{
-  
-  const AppBarSliver({super.key});
+class AppBarDefault extends StatelessWidget {
+  const AppBarDefault({super.key});
 
-  @override
-  State<AppBarSliver> createState() => _AppBarSliver();
-
-  @override
-  Size get preferredSize => const Size.fromHeight(120.0);
-
-}
-
-class _AppBarSliver extends State<AppBarSliver> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
-    return AppBar(
-        title: const Text('Ô Plano'),
-      );
+    return Container(
+      padding: EdgeInsets.only( right: 15),
+      width: double.maxFinite,
+      height: 40,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: <Widget>[
+          
+          Column(
+            children: [
+              Text('Rafael.dev'),
+              Text('Rafael Aguiar Silva')
+            ],
+          ),
+         ImageCircle(),
+        ],
+      ),
+    );
   }
+
 }
