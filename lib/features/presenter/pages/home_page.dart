@@ -18,45 +18,52 @@ class _HomePageState extends State<HomePage> {
     return Container(
       padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
       height: double.maxFinite,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          const Text(
-              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'),
-          const SizedBox(
-            height: 30,
-          ),
-          const ContainerCard(),
-          Wrap(
-            children: const <Widget>[
-              MiniCard(
-                label: 'Entre e veja meus repositorios',
-                navigation: 'null',
-                title: 'Repositorios',
-                icon: Icons.card_giftcard,
-              ),
-              MiniCard(
-                label: 'Entre e veja meus repositorios',
-                navigation: 'null',
-                title: 'Repositorios',
-                icon: Icons.card_giftcard,
-              ),
-              MiniCard(
-                label: 'Entre e veja meus repositorios',
-                navigation: 'null',
-                title: 'Repositorios',
-                icon: Icons.card_giftcard,
-              ),
-              MiniCard(
-                label: 'Entre e veja meus repositorios',
-                navigation: 'null',
-                title: 'Repositorios',
-                icon: Icons.card_giftcard,
-              )
-            ],
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const Text(
+                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'),
+            const SizedBox(
+              height: 30,
+            ),
+            const ContainerCard(),
+            const SizedBox(
+              height: 25,
+            ),
+            Wrap(
+              spacing: 20,
+              runSpacing: 20,
+              children: const <Widget>[
+                MiniCard(
+                  label: 'Entre e veja meus repositorios',
+                  navigation: 'null',
+                  title: 'Repositorios',
+                  icon: Icons.card_giftcard,
+                ),
+                MiniCard(
+                  label: 'Entre e veja meus repositorios',
+                  navigation: 'null',
+                  title: 'Repositorios',
+                  icon: Icons.card_giftcard,
+                ),
+                MiniCard(
+                  label: 'Entre e veja meus repositorios',
+                  navigation: 'null',
+                  title: 'Repositorios',
+                  icon: Icons.card_giftcard,
+                ),
+                MiniCard(
+                  label: 'Entre e veja meus repositorios',
+                  navigation: 'null',
+                  title: 'Repositorios',
+                  icon: Icons.card_giftcard,
+                )
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

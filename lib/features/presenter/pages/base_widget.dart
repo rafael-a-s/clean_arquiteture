@@ -21,10 +21,10 @@ class BaseWidget extends StatelessWidget {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Column(
-        children:[
+        children: [
           const AppBarDefault(),
           Expanded(child: child),
-        ]
+        ],
       ),
     );
   }
