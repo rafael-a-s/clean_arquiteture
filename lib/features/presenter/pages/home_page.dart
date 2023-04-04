@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/home/botton-navigation/bottom_navigation.dart';
 import 'package:my_app/features/presenter/widgets/home/box-decoration/box_decoration_home.dart';
+import 'package:my_app/features/presenter/widgets/home/container-card/container_card.dart';
 import 'package:my_app/features/presenter/widgets/home/mini-cards/mini_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,79 +15,49 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Container(
+      padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
+      height: double.maxFinite,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Stack(
-            children: <Widget>[
-              const BoxDecorationHome(),
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 20, vertical: 70),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    const Text(
-                      'Portifolio.io',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 26,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    const Text(
-                      'Olá, me chamo Rafael! \n Bem vindo a meu portifolio.',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                    Padding(
-                      padding:const EdgeInsets.only(top: 20),
-                      child: Column(
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const <Widget>[
-                              MiniCard(
-                                color: 0xFF47B4FF,
-                                label: ('Projetos'),
-                                image: ('assets/images/projects.png'),
-                                navigation: ('/projetos'),
-                              ),
-                              MiniCard(
-                                color: 0xFF47B4FF,
-                                label: ('Experiências'),
-                                image: ('assets/images/experiencia.png'),
-                                navigation: ('/experience'),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 30),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: const <Widget>[
-                              MiniCard(
-                                color: 0xFF47B4FF,
-                                label: ('About'),
-                                image: ('assets/images/about56.png'),
-                                navigation: ('/about'),
-                              ),
-                              MiniCard(
-                                color: 0xFF47B4FF,
-                                label: ('About'),
-                                image: ('assets/images/about56.png'),
-                                navigation: ('/about'),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+          const Text(
+              'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'),
+          const SizedBox(
+            height: 30,
+          ),
+          const ContainerCard(),
+          Wrap(
+            children: const <Widget>[
+              MiniCard(
+                label: 'Entre e veja meus repositorios',
+                navigation: 'null',
+                title: 'Repositorios',
+                icon: Icons.card_giftcard,
               ),
+              MiniCard(
+                label: 'Entre e veja meus repositorios',
+                navigation: 'null',
+                title: 'Repositorios',
+                icon: Icons.card_giftcard,
+              ),
+              MiniCard(
+                label: 'Entre e veja meus repositorios',
+                navigation: 'null',
+                title: 'Repositorios',
+                icon: Icons.card_giftcard,
+              ),
+              MiniCard(
+                label: 'Entre e veja meus repositorios',
+                navigation: 'null',
+                title: 'Repositorios',
+                icon: Icons.card_giftcard,
+              )
             ],
           ),
         ],
+      ),
     );
   }
 }
