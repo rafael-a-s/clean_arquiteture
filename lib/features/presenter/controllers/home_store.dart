@@ -1,18 +1,19 @@
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:my_app/core/usecase/erros/failures.dart';
-import 'package:my_app/features/domain/entities/example.dart';
-import 'package:my_app/features/domain/usecases/get_example_from_username_usecase.dart';
+import 'package:my_app/core/usecase/usecase.dart';
+import 'package:my_app/features/domain/entities/portifolio.dart';
+import 'package:my_app/features/domain/usecases/coin_usecase.dart';
 
-class HomeStore extends NotifierStore<Failure, Example> {
-  final GetExampleFromUsernameUsecase usecase;
+class HomeStore extends NotifierStore<Failure, Coin> {
+  final CoinUseCase usecase;
 
-  HomeStore(this.usecase)
-      : super(Example(login: '', id: '', avatar_url: '', url: ''));
+  HomeStore(this.usecase) : super(const Coin(symbol: '', price: 0.0));
 
-  getUserGitFormUsername(String username) async {
-    executeEither(() => usecase(username) as Future<EitherAdapter<Failure, Example>>);
+  getCoinSymbol(String symbol) async {
+    setLoading(true);
+    final result = await usecase(symbol);
+    print(result);
+    result.fold((error) => setError(error), (sucess) => update(sucess));
+    setLoading(false);
   }
-
-
-
 }

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/domain/entities/portifolio.dart';
+import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/home/botton-navigation/bottom_navigation.dart';
 import 'package:my_app/features/presenter/widgets/home/box-decoration/box_decoration_home.dart';
 import 'package:my_app/features/presenter/widgets/home/container-card/container_card.dart';
 import 'package:my_app/features/presenter/widgets/home/mini-cards/mini_card.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -13,6 +16,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final store = Modular.get<HomeStore>();
+  var coin = Coin(symbol: '', price: 0.0);
+
+  Future<void> _loadData() async {
+    final result = await store.getCoinSymbol("BTCUSDT");
+    setState(() {
+      coin = result;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('Init State');
+    _loadData();
+    print('teste');
+    print(coin);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,6 +51,12 @@ class _HomePageState extends State<HomePage> {
               height: 30,
             ),
             const ContainerCard(),
+            const SizedBox(
+              height: 25,
+            ),
+            ElevatedButton(
+                onPressed: () => store.getCoinSymbol('BTCUSDT'),
+                child: Text('Pressione-me!')),
             const SizedBox(
               height: 25,
             ),
