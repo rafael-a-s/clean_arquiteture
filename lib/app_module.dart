@@ -8,8 +8,10 @@ import 'package:my_app/features/domain/usecases/coin_usecase.dart';
 import 'package:my_app/features/domain/usecases/get_example_from_username_usecase.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/features/presenter/controllers/home_store.dart';
+import 'package:my_app/features/presenter/controllers/trade_store.dart';
 import 'package:my_app/features/presenter/pages/about_page.dart';
 import 'package:my_app/features/presenter/pages/home_page.dart';
+import 'package:my_app/features/presenter/widgets/trade/new_trade.dart';
 
 class AppModule extends Module {
   @override
@@ -20,10 +22,12 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => http.Client()),
     Bind.lazySingleton((i) => DateInputConverter()),
     Bind.factory((i) => HomeStore(i())),
+    Bind.factory((i) => TradeStore(i())),
   ];
 
   @override
   List<ModularRoute> get routes => [
         ChildRoute("/", child: (_, __) => const HomePage()),
+        ChildRoute('/new-trade', child: (_, __) => const Trade()),
       ];
 }

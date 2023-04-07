@@ -12,10 +12,10 @@ class BaseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(RootStyle.bgColor),
+      backgroundColor: const Color(RootStyle.bgColor),
       bottomNavigationBar: const BottomNavigation(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Modular.to.navigate('/about'),
+        onPressed: () => Modular.to.navigate('/'),
         child: const Icon(Icons.home),
         backgroundColor: Color(RootStyle.primaryColor),
       ),

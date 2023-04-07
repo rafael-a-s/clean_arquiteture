@@ -11,7 +11,6 @@ class CoinUseCase implements Usecase<Coin, String> {
 
   @override
   Future<Either<Failure, Coin>> call(String symbol) async {
-    print('usecase');
     return symbol != null
         ? await repository.getCoinSymbol(symbol)
         : Left(NullParamFailure());

@@ -17,7 +17,6 @@ class CoinDataSource implements ICoinDataSource {
 
   @override
   Future<CoinModel> getCoinSymbol(String symbol) async {
-    print(BnEndPoints.getCoinSymbol('BTCUSDT').toString());
     final response = await client.get(BnEndPoints.getCoinSymbol(symbol));
     print(response.body);
 

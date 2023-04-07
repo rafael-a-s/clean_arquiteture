@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/features/presenter/root.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
@@ -30,7 +31,7 @@ class BottomNavigation extends StatelessWidget {
                 Icons.add,
                 color: Color(0xFF949fb3),
               ),
-              onPressed: () => {},
+              onPressed: () => Modular.to.navigate('/new-trade'),
             ),
             IconButton(
               iconSize: 30,
