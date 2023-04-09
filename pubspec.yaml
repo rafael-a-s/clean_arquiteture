@@ -28,6 +28,7 @@ dependencies:
   flutter_dotenv: ^5.0.2
   intl: ^0.18.0
   crypto: ^3.0.2
+  pocketbase: ^0.8.0
 
 dev_dependencies:
   flutter_test:

@@ -176,6 +176,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.6.5"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: c33da08e136c3df0190bd5bbe51ae1df4a7d96e7954d1d7249fea2968a72d317
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.8.0"
   lints:
     dependency: transitive
     description:
@@ -224,6 +232,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.4"
+  pocketbase:
+    dependency: "direct main"
+    description:
+      name: pocketbase
+      sha256: e53161f274bfee0a0861fd4c956b393251b63d78f3bddafbb01e2f97e979431c
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.8.0"
   rx_notifier:
     dependency: transitive
     description:

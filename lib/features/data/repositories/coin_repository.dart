@@ -12,7 +12,6 @@ class CoinRepository extends ICoinRepository {
 
   @override
   Future<Either<Failure, Coin>> getCoinSymbol(String symbol) async {
-    print('repository');
     try {
       final result = await datasource.getCoinSymbol(symbol);
       return Right(result);
