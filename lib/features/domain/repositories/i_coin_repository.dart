@@ -4,4 +4,5 @@ import 'package:dartz/dartz.dart';
 
 abstract class ICoinRepository {
   Future<Either<Failure, Coin>> getCoinSymbol(String symbol);
+  Future<Either<Failure, List<Coin>>> getAllCoin();
 }

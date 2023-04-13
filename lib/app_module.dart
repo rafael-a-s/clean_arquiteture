@@ -6,7 +6,7 @@ import 'package:my_app/features/data/datasources/trades/trade_datasource.dart';
 import 'package:my_app/features/data/repositories/coin_repository.dart';
 import 'package:my_app/features/data/repositories/example_repository.dart';
 import 'package:my_app/features/data/repositories/trade_repository.dart';
-import 'package:my_app/features/domain/usecases/coin_usecase.dart';
+import 'package:my_app/features/domain/usecases/coin/coin_usecase.dart';
 import 'package:my_app/features/domain/usecases/get_example_from_username_usecase.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/features/domain/usecases/trade/create.dart';

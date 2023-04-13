@@ -24,4 +24,16 @@ class CoinDataSource implements ICoinDataSource {
         ? CoinModel.fromJson(json.decode(response.body))
         : throw ServerException();
   }
+
+  @override
+  Future<List<CoinModel>> getAllSymbol() async {
+    final response = await client.get(BnEndPoints.getAllSymbol());
+
+    late List<dynamic> jsonResponse;
+    response.statusCode == 200
+        ? jsonResponse = json.decode(response.body)
+        : throw ServerException();
+
+    return jsonResponse.map((coin) => CoinModel.fromJson(coin)).toList();
+  }
 }
