@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:dartz/dartz.dart';
 import 'package:my_app/core/usecase/erros/exceptions.dart';
 import 'package:my_app/core/usecase/erros/failures.dart';

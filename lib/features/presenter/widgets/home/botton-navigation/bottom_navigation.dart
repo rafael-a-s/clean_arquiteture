@@ -31,7 +31,7 @@ class BottomNavigation extends StatelessWidget {
                 Icons.add,
                 color: Color(0xFF949fb3),
               ),
-              onPressed: () => Modular.to.navigate('/new-trade'),
+              onPressed: () => Modular.to.navigate('/list-coin'),
             ),
             IconButton(
               iconSize: 30,
