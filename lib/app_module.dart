@@ -41,8 +41,20 @@ class AppModule extends Module {
 
   @override
   List<ModularRoute> get routes => [
-        ChildRoute("/", child: (_, __) => const HomePage()),
-        ChildRoute("/list-coin", child: (_, __) => const ListCoinPage()),
-        ChildRoute('/new-trade', child: (_, __) => const Trade()),
+        ChildRoute(
+          "/",
+          child: (_, __) => const HomePage(),
+          transition: TransitionType.scale,
+        ),
+        ChildRoute(
+          "/list-coin",
+          child: (_, __) => const ListCoinPage(),
+          transition: TransitionType.downToUp,
+        ),
+        ChildRoute(
+          '/new-trade',
+          child: (_, __) => Trade(coin: __.data),
+          transition: TransitionType.leftToRightWithFade,
+        ),
       ];
 }

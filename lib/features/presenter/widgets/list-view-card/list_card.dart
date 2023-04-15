@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/root.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class ListCard extends StatefulWidget {
   final Coin coin;
@@ -27,7 +28,9 @@ class _ListCard extends State<ListCard> {
           children: [
             Text(widget.coin.symbol),
             IconButton(
-              onPressed: () => {},
+              onPressed: () => {
+                Modular.to.navigate('/new-trade', arguments: widget.coin),
+              },
               icon: const Icon(Icons.chevron_right),
             )
           ],

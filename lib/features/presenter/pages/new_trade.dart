@@ -1,3 +1,5 @@
+import 'dart:async';
+import 'dart:ffi' as ffi;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -9,7 +11,8 @@ import 'package:my_app/features/presenter/root.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class Trade extends StatefulWidget {
-  const Trade({super.key});
+  final Coin coin;
+  const Trade({super.key, required this.coin});
 
   @override
   State<StatefulWidget> createState() => _Trade();
@@ -19,6 +22,7 @@ class _Trade extends State<Trade> {
   final store = Modular.get<TradeStore>();
   var coin = const Coin(symbol: '', price: 0.0);
   var trade = const Assets(symbol: '', amount: 0.0, price: 0.0);
+  Timer? _timer;
 
   final _formKey = GlobalKey<FormState>();
   final _symbol = TextEditingController();
@@ -39,6 +43,15 @@ class _Trade extends State<Trade> {
       );
       _price.text = coin.price.toStringAsFixed(9);
     });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    print('object');
+    _symbol.text = widget.coin.symbol;
+    _price.text = widget.coin.price.toStringAsFixed(9);
+    _amount.text = '0';
   }
 
   Future<bool> _addTransactional(double? p, double? a) async {
@@ -82,40 +95,57 @@ class _Trade extends State<Trade> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            const Text(
-              'Adicione uma nova transação',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                    onPressed: () {
+                      Modular.to.navigate('/list-coin');
+                    },
+                    icon: const Icon(Icons.arrow_back)),
+                const Text(
+                  'Adicione uma nova transação',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
             ),
             Row(
               children: [
                 Expanded(
                   child: TextFormField(
-                    controller: _symbol,
+                    autofocus: true,
+                    keyboardType: TextInputType.number,
+                    controller: _amount,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return INVALID_LABEL;
                       }
                       return null;
                     },
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 40,
+                    ),
                     // ignore: prefer_const_constructors
                     decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      label: const Text('Moeda'),
-                      hintText: 'BTC',
-                      suffix: const Text('USDT'),
+                      border: InputBorder.none,
+                      suffix: Text(
+                        widget.coin.symbol.toString(),
+                        style: const TextStyle(fontSize: 20),
+                      ),
                     ),
+                    onChanged: (value) => {
+                      if (_timer?.isActive ?? false) _timer?.cancel(),
+                      _timer = Timer(const Duration(milliseconds: 800), () {
+                        if (_amount.text.isEmpty) _amount.text = '0';
+                      })
+                    },
                   ),
                 ),
-                const SizedBox(
-                  width: 15,
-                ),
-                IconButton(
-                  onPressed: () => _loadCoin(_symbol.text),
-                  icon: const Icon(Icons.search),
-                )
               ],
             ),
             Row(
@@ -134,31 +164,9 @@ class _Trade extends State<Trade> {
                     // ignore: prefer_const_constructors
                     decoration: InputDecoration(
                       border: const OutlineInputBorder(),
-                      label: const Text('Preço'),
+                      label: const Text('Preço por moeda'),
                       hintText: 'Preço',
                       suffix: const Text('\$'),
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  width: 20,
-                ),
-                Expanded(
-                  child: TextFormField(
-                    controller: _amount,
-                    keyboardType: TextInputType.number,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return INVALID_LABEL;
-                      }
-                      return null;
-                    },
-                    // ignore: prefer_const_constructors
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      label: const Text('Quantidade'),
-                      hintText: '0 - 9999',
-                      suffix: const Text('UN'),
                     ),
                   ),
                 ),
