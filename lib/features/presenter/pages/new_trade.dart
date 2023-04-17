@@ -25,44 +25,27 @@ class _Trade extends State<Trade> {
   Timer? _timer;
 
   final _formKey = GlobalKey<FormState>();
-  final _symbol = TextEditingController();
   final _price = TextEditingController();
   final _amount = TextEditingController();
 
   final String INVALID_LABEL = 'Campos obrigatórios não podem ser vazios!';
 
-  Future<void> _loadCoin(String symbol) async {
-    final result = await store.getCoinSymbol(symbol);
-
-    setState(() {
-      coin = result;
-      trade = Assets(
-        symbol: coin.symbol,
-        amount: 0.0,
-        price: 0.0,
-      );
-      _price.text = coin.price.toStringAsFixed(9);
-    });
-  }
-
   @override
   void initState() {
     super.initState();
-    print('object');
-    _symbol.text = widget.coin.symbol;
     _price.text = widget.coin.price.toStringAsFixed(9);
     _amount.text = '0';
   }
 
   Future<bool> _addTransactional(double? p, double? a) async {
-    trade = Assets(symbol: trade.symbol, amount: a!, price: p!);
-
+    trade = Assets(symbol: widget.coin.symbol, amount: a!, price: p!);
     Assets result = await store.createTrade(trade);
 
     return result.id == null ? false : true;
   }
 
   void showSuccessMessage(BuildContext context) {
+    
     showDialog(
       context: context,
       builder: (ctx) => AlertDialog(

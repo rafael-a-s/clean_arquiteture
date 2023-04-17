@@ -9,7 +9,7 @@ import 'package:pocketbase/pocketbase.dart';
 
 class TradeDataSource implements ITradeDataSource {
   final http.Client client;
-  final pb = PocketBase('http://127.0.0.1:8090');
+  final pb = PocketBase('http://10.0.2.2:8090');
 
   TradeDataSource({
     required this.client,
@@ -34,6 +34,7 @@ class TradeDataSource implements ITradeDataSource {
       },
       body: jsonEncode(body),
     );
+    print(response.statusCode);
 
     return response.statusCode == 200
         ? AssetsModel.fromJson(json.decode(response.body))
