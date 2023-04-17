@@ -8,17 +8,14 @@ class AppBarDefault extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 15, top: 5, left: 15),
+      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
       width: double.maxFinite,
-      height: 60,
+      height: 100,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: <Widget>[
           Column(
             children: const <Widget>[
-              SizedBox(
-                height: 10,
-              ),
               Text(
                 'Rafael.dev',
                 style: TextStyle(fontSize: 20),
