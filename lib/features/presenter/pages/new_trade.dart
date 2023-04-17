@@ -9,6 +9,7 @@ import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/controllers/trade_store.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:my_app/features/presenter/widgets/snack-bar/snack-bar.dart';
 
 class Trade extends StatefulWidget {
   final Coin coin;
@@ -45,17 +46,18 @@ class _Trade extends State<Trade> {
   }
 
   void showSuccessMessage(BuildContext context) {
-    
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: const Text("Transação Efetuada com sucesso"),
-        actions: <Widget>[
-          ElevatedButton(
-              onPressed: () => Modular.to.navigate('/'), child: Text("Ok"))
-        ],
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: SnackBarFlash(
+          title: 'Sucesso',
+          description: 'Sua transação foi salva com sucesso em seu portifolio.',
+        ),
+        behavior: SnackBarBehavior.floating,
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
     );
+    Modular.to.navigate('/');
   }
 
   @override

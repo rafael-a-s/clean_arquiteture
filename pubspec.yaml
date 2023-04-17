@@ -29,6 +29,7 @@ dependencies:
   intl: ^0.18.0
   crypto: ^3.0.2
   pocketbase: ^0.8.0
+  flutter_svg: ^2.0.5
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +64,7 @@ flutter:
     - assets/images/experiencia.png
     - assets/images/contact.png
     - assets/images/contact-us.png
+    - assets/svg/transaction.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
