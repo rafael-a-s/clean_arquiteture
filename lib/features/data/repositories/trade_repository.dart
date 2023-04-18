@@ -14,10 +14,17 @@ class TradeRepository implements ITradeRepoitory {
   TradeRepository(this.datasource);
 
   @override
-  Future<Either<Failure, Assets>> getAllTrades() async {
+  Future<Either<Failure, List<Assets>>> getAllTrades() async {
     try {
       final result = await datasource.getAllTrades();
-      return Right(result);
+      return Right(result
+          .map((asset) => Assets(
+                id: asset.id,
+                symbol: asset.symbol,
+                price: asset.price,
+                amount: asset.amount,
+              ))
+          .toList());
     } on ServerException {
       return Left(ServerFailure());
     }

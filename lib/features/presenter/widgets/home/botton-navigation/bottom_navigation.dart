@@ -39,7 +39,7 @@ class BottomNavigation extends StatelessWidget {
                 Icons.streetview,
                 color: Color(0xFF949fb3),
               ),
-              onPressed: () => {},
+              onPressed: () => Modular.to.navigate('/portifolio'),
             ),
           ],
         ),

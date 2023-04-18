@@ -16,12 +16,17 @@ class TradeDataSource implements ITradeDataSource {
   });
 
   @override
-  Future<AssetsModel> getAllTrades() async {
+  Future<List<AssetsModel>> getAllTrades() async {
     final response = await client.get(TradeEndPoints.getAllTrades());
 
-    return response.statusCode == 200
-        ? AssetsModel.fromJson(json.decode(response.body))
+    late dynamic jsonResponse;
+
+    response.statusCode == 200
+        ? jsonResponse = json.decode(response.body)
         : throw ServerException();
+    final items = jsonResponse['items'] as List;
+
+    return items.map((asset) => AssetsModel.fromJson(asset)).toList();
   }
 
   @override
@@ -34,7 +39,6 @@ class TradeDataSource implements ITradeDataSource {
       },
       body: jsonEncode(body),
     );
-    print(response.statusCode);
 
     return response.statusCode == 200
         ? AssetsModel.fromJson(json.decode(response.body))

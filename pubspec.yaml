@@ -65,6 +65,8 @@ flutter:
     - assets/images/contact.png
     - assets/images/contact-us.png
     - assets/svg/transaction.svg
+    - assets/svg/graph.svg
+    - assets/svg/coin.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

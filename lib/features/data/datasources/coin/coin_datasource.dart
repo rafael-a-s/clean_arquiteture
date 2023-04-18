@@ -18,7 +18,6 @@ class CoinDataSource implements ICoinDataSource {
   @override
   Future<CoinModel> getCoinSymbol(String symbol) async {
     final response = await client.get(BnEndPoints.getCoinSymbol(symbol));
-    print(response.body);
 
     return response.statusCode == 200
         ? CoinModel.fromJson(json.decode(response.body))
