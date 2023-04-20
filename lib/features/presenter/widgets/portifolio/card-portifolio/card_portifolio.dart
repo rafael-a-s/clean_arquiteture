@@ -3,7 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_app/features/presenter/root.dart';
 
 class CardPortifolio extends StatefulWidget {
-  const CardPortifolio({super.key});
+  double total = 0.0;
+
+  CardPortifolio({
+    super.key,
+    required this.total,
+  });
 
   @override
   State<StatefulWidget> createState() => _CardPortifolio();
@@ -14,7 +19,7 @@ class _CardPortifolio extends State<CardPortifolio> {
   Widget build(BuildContext context) {
     return Container(
       height: 180,
-      padding: EdgeInsets.all(25),
+      padding: const EdgeInsets.all(25),
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(20),
@@ -29,8 +34,8 @@ class _CardPortifolio extends State<CardPortifolio> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
+            children: [
+              const Text(
                 'Saldo total da carteira',
                 style: TextStyle(
                   fontSize: 15,
@@ -39,14 +44,14 @@ class _CardPortifolio extends State<CardPortifolio> {
                 ),
               ),
               Text(
-                '\$2,500.00',
-                style: TextStyle(
+                '\$ ${widget.total.toStringAsFixed(6)}',
+                style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w900,
                   color: Colors.black,
                 ),
               ),
-              Text(
+              const Text(
                 'Perfil este mês',
                 style: TextStyle(
                   fontSize: 15,

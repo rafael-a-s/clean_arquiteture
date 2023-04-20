@@ -15,7 +15,12 @@ class CoinRepository extends ICoinRepository {
   Future<Either<Failure, Coin>> getCoinSymbol(String symbol) async {
     try {
       final result = await datasource.getCoinSymbol(symbol);
-      return Right(result);
+      return Right(
+        Coin(
+          symbol: result.symbol,
+          price: result.price,
+        ),
+      );
     } on ServerException {
       return Left(ServerFailure());
     }

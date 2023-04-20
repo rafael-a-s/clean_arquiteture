@@ -17,6 +17,7 @@ class _PortifolioPage extends State<PortifolioPage> {
   final store = Modular.get<ListPortifolioStore>();
   late List<Assets> _list;
   bool _isLoading = false;
+  double total = 0.0;
 
   Future<void> _fetchTrades() async {
     _isLoading = true;
@@ -50,7 +51,7 @@ class _PortifolioPage extends State<PortifolioPage> {
           const SizedBox(
             height: 15,
           ),
-          const CardPortifolio(),
+          CardPortifolio(total: total),
           const SizedBox(
             height: 30,
           ),
@@ -67,7 +68,7 @@ class _PortifolioPage extends State<PortifolioPage> {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () => {},
+                    onPressed: () => {Modular.to.navigate('/list-coin')},
                     icon: const Icon(
                       Icons.add,
                     ),
@@ -87,9 +88,13 @@ class _PortifolioPage extends State<PortifolioPage> {
                       ? ListView.builder(
                           itemCount: _list.length,
                           itemBuilder: (context, item) {
-                            return ListCardPortifolio(
+                            ListCardPortifolio list = ListCardPortifolio(
                               assets: _list[item],
+                              onTotalProfitChanged: (newProfit) {
+                                total += newProfit;
+                              },
                             );
+                            return list;
                           },
                         )
                       : const Center(

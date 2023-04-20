@@ -9,11 +9,16 @@ class HomeStore extends NotifierStore<Failure, Coin> {
 
   HomeStore(this.usecase) : super(const Coin(symbol: '', price: 0.0));
 
-  getCoinSymbol(String symbol) async {
+  Future<Coin> getCoinSymbol(String symbol) async {
     setLoading(true);
     final result = await usecase(symbol);
-    print(result);
-    result.fold((error) => setError(error), (sucess) => update(sucess));
     setLoading(false);
+    return result.fold(
+      (error) => const Coin(
+        symbol: '',
+        price: 0.0,
+      ),
+      (sucess) => sucess,
+    );
   }
 }

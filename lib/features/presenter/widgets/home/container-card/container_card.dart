@@ -32,7 +32,7 @@ class ContainerCard extends StatelessWidget {
           Row(
             children: const <Widget>[
               Text(
-                'MEUS DADOS DO GITHUB',
+                'MINHA CARTEIRA',
                 style: TextStyle(
                     color: Colors.black,
                     fontSize: 14,
@@ -64,7 +64,7 @@ class ContainerCard extends StatelessWidget {
                   backgroundColor: MaterialStatePropertyAll(Colors.black),
                 ),
                 child: Text(
-                  'Visite >',
+                  'Visite seus dados >',
                   style: TextStyle(
                       color: Colors.white, fontWeight: FontWeight.w500),
                 ),

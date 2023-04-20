@@ -3,14 +3,19 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
+import 'package:my_app/features/domain/usecases/coin/coin_usecase.dart';
+import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class ListCardPortifolio extends StatefulWidget {
   final Assets assets;
-  const ListCardPortifolio({
+  final Function(double) onTotalProfitChanged;
+  double? profite = 0.0;
+  ListCardPortifolio({
     super.key,
     required this.assets,
+    required this.onTotalProfitChanged,
   });
 
   @override
@@ -18,8 +23,39 @@ class ListCardPortifolio extends StatefulWidget {
 }
 
 class _ListCardPortifolio extends State<ListCardPortifolio> {
+  final store = Modular.get<HomeStore>();
+  double profit = 0.0;
+  Coin coin = Coin(symbol: '', price: 0.0);
+  bool _isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _getValue();
+  }
+
+  Future<void> _getValue() async {
+    final result = await store.getCoinSymbol(widget.assets.symbol);
+    setState(() {
+      coin = result;
+    });
+  }
+
+  double get totalProfit => profit;
+
+  _getProfit(Coin coin) {
+    double valuePast = widget.assets.price * widget.assets.amount;
+    double valuePresent = coin.price * widget.assets.amount;
+
+    setState(() {
+      profit = valuePresent - valuePast;
+      widget.onTotalProfitChanged(valuePresent);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    _getProfit(coin);
     return Container(
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.only(
@@ -44,7 +80,7 @@ class _ListCardPortifolio extends State<ListCardPortifolio> {
                 height: 40,
                 width: 40,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 15,
               ),
               Column(
@@ -58,7 +94,21 @@ class _ListCardPortifolio extends State<ListCardPortifolio> {
               ),
             ],
           ),
-          const Text('\$50,024.03')
+          profit != 0.0
+              ? profit < 0
+                  ? Text(
+                      '\$${profit.toStringAsFixed(6)}',
+                      style: const TextStyle(
+                        color: Colors.red,
+                      ),
+                    )
+                  : Text(
+                      '+ \$${profit.toStringAsFixed(6)}',
+                      style: const TextStyle(
+                        color: Colors.green,
+                      ),
+                    )
+              : _getProfit(coin)
         ],
       ),
     );

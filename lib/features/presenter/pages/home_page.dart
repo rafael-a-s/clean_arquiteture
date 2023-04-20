@@ -29,10 +29,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    print('Init State');
     _loadData();
-    print('teste');
-    print(coin);
   }
 
   @override
@@ -54,9 +51,6 @@ class _HomePageState extends State<HomePage> {
             const SizedBox(
               height: 25,
             ),
-            ElevatedButton(
-                onPressed: () => store.getCoinSymbol('BTCUSDT'),
-                child: Text('Pressione-me!')),
             const SizedBox(
               height: 25,
             ),
@@ -65,27 +59,31 @@ class _HomePageState extends State<HomePage> {
               runSpacing: 20,
               children: const <Widget>[
                 MiniCard(
-                  label: 'Entre e veja meus repositorios',
+                  label:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting ',
                   navigation: 'null',
-                  title: 'Repositorios',
+                  title: 'Cryptos',
                   icon: Icons.card_giftcard,
                 ),
                 MiniCard(
-                  label: 'Entre e veja meus repositorios',
+                  label:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting ',
                   navigation: 'null',
-                  title: 'Repositorios',
+                  title: 'Cryptos',
                   icon: Icons.card_giftcard,
                 ),
                 MiniCard(
-                  label: 'Entre e veja meus repositorios',
+                  label:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting ',
                   navigation: 'null',
-                  title: 'Repositorios',
+                  title: 'Cryptos',
                   icon: Icons.card_giftcard,
                 ),
                 MiniCard(
-                  label: 'Entre e veja meus repositorios',
+                  label:
+                      'Lorem Ipsum is simply dummy text of the printing and typesetting ',
                   navigation: 'null',
-                  title: 'Repositorios',
+                  title: 'Cryptos',
                   icon: Icons.card_giftcard,
                 )
               ],
