@@ -27,7 +27,8 @@ class _ListCoinPage extends State<ListCoinPage> {
     final result = await store.getAllCoinSymbol();
     setState(() {
       _list = result;
-      _filtered = _list;
+      _filtered =
+          _list.where((e) => e.symbol.toUpperCase().contains('USDT')).toList();
       _isLoading = false;
     });
   }
@@ -84,6 +85,8 @@ class _ListCoinPage extends State<ListCoinPage> {
                       .where((coin) => coin.symbol
                           .toLowerCase()
                           .contains(value.toLowerCase()))
+                      .where(
+                          (coin) => coin.symbol.toUpperCase().contains('USDT'))
                       .toList();
                 });
               }),
