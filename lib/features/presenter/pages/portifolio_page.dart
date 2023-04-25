@@ -24,6 +24,7 @@ class _PortifolioPage extends State<PortifolioPage> {
     final result = await store.getAllTrade();
     setState(() {
       _list = result;
+      _list.forEach((e) => total += e.price * e.amount);
       _isLoading = false;
     });
   }
@@ -90,9 +91,6 @@ class _PortifolioPage extends State<PortifolioPage> {
                           itemBuilder: (context, item) {
                             ListCardPortifolio list = ListCardPortifolio(
                               assets: _list[item],
-                              onTotalProfitChanged: (newProfit) {
-                                total += newProfit;
-                              },
                             );
                             return list;
                           },

@@ -10,12 +10,10 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class ListCardPortifolio extends StatefulWidget {
   final Assets assets;
-  final Function(double) onTotalProfitChanged;
   double? profite = 0.0;
   ListCardPortifolio({
     super.key,
     required this.assets,
-    required this.onTotalProfitChanged,
   });
 
   @override
@@ -49,7 +47,6 @@ class _ListCardPortifolio extends State<ListCardPortifolio> {
 
     setState(() {
       profit = valuePresent - valuePast;
-      widget.onTotalProfitChanged(valuePresent);
     });
   }
 

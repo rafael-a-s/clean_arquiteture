@@ -16,6 +16,12 @@ class CardPortifolio extends StatefulWidget {
 
 class _CardPortifolio extends State<CardPortifolio> {
   @override
+  void didUpdateWidget(covariant CardPortifolio oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    widget.total;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
       height: 180,
