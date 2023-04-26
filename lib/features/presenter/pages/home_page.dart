@@ -5,6 +5,7 @@ import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/home/botton-navigation/bottom_navigation.dart';
 import 'package:my_app/features/presenter/widgets/home/box-decoration/box_decoration_home.dart';
 import 'package:my_app/features/presenter/widgets/home/container-card/container_card.dart';
+import 'package:my_app/features/presenter/widgets/home/graph/graph.dart';
 import 'package:my_app/features/presenter/widgets/home/mini-cards/mini_card.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -57,35 +58,27 @@ class _HomePageState extends State<HomePage> {
             Wrap(
               spacing: 20,
               runSpacing: 20,
-              children: const <Widget>[
-                MiniCard(
-                  label:
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting ',
-                  navigation: 'null',
-                  title: 'Cryptos',
-                  icon: Icons.card_giftcard,
+              children: <Widget>[
+                const GraphHome(),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: const [
+                    MiniCard(
+                      label:
+                          'Lorem Ipsum is simply dummy text of the printing and typesetting ',
+                      navigation: 'null',
+                      title: 'Cryptos',
+                      icon: Icons.card_giftcard,
+                    ),
+                    MiniCard(
+                      label:
+                          'Lorem Ipsum is simply dummy text of the printing and typesetting ',
+                      navigation: 'null',
+                      title: 'Cryptos',
+                      icon: Icons.card_giftcard,
+                    ),
+                  ],
                 ),
-                MiniCard(
-                  label:
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting ',
-                  navigation: 'null',
-                  title: 'Cryptos',
-                  icon: Icons.card_giftcard,
-                ),
-                MiniCard(
-                  label:
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting ',
-                  navigation: 'null',
-                  title: 'Cryptos',
-                  icon: Icons.card_giftcard,
-                ),
-                MiniCard(
-                  label:
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting ',
-                  navigation: 'null',
-                  title: 'Cryptos',
-                  icon: Icons.card_giftcard,
-                )
               ],
             ),
           ],
