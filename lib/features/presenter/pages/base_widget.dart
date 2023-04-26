@@ -22,13 +22,12 @@ class BaseWidget extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Column(
         children: [
+          const AppBarDefault(),
           Expanded(
             child: Container(
-              padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
               child: child,
             ),
           ),
-          
         ],
       ),
     );

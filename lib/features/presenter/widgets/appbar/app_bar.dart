@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/about/image_circular.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -8,25 +9,36 @@ class AppBarDefault extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      padding:
+          EdgeInsets.only(top: MediaQuery.of(context).padding.top, left: 15),
       width: double.maxFinite,
-      height: 100,
+      height: 115,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Column(
-            children: const <Widget>[
-              Text(
-                'Rafael.dev',
-                style: TextStyle(fontSize: 20),
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: const <Widget>[
+                  Text(
+                    'Olá,',
+                    textAlign: TextAlign.start,
+                    style: TextStyle(
+                      fontSize: 15,
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    'Rafael Aguiar',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                'Rafael Aguiar Silva',
-                style: TextStyle(fontSize: 10),
-              )
             ],
           ),
           ImageCircle(),
