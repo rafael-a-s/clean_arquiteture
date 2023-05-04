@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
-class BottomNavigation extends StatelessWidget {
+class BottomNavigation extends StatefulWidget {
   const BottomNavigation({super.key});
 
+  @override
+  State<StatefulWidget> createState() => _BottomNavigation();
+}
+
+class _BottomNavigation extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
@@ -21,19 +26,27 @@ class BottomNavigation extends StatelessWidget {
           children: <Widget>[
             IconButton(
               iconSize: 30,
-              icon: const Icon(
+              icon: Icon(
                 Icons.home,
-                color: Color(RootStyle.primaryColor),
+                color: Modular.to.path == '/'
+                    ? Color(RootStyle.primaryColor)
+                    : Color(RootStyle.stColor),
               ),
-              onPressed: () => Modular.to.navigate('/'),
+              onPressed: () => setState(() {
+                Modular.to.navigate('/');
+              }),
             ),
             IconButton(
               iconSize: 30,
-              icon: const Icon(
+              icon: Icon(
                 Icons.ballot,
-                color: Color(RootStyle.stColor),
+                color: Modular.to.path == '/list-coin'
+                    ? Color(RootStyle.primaryColor)
+                    : Color(RootStyle.stColor),
               ),
-              onPressed: () => Modular.to.navigate('/list-coin'),
+              onPressed: () => setState(() {
+                Modular.to.navigate('/list-coin');
+              }),
             ),
             IconButton(
               iconSize: 30,
@@ -41,15 +54,21 @@ class BottomNavigation extends StatelessWidget {
                 Icons.signal_cellular_alt,
                 color: Color(RootStyle.stColor),
               ),
-              onPressed: () => Modular.to.navigate('/'),
+              onPressed: () => setState(() {
+                Modular.to.navigate('/');
+              }),
             ),
             IconButton(
               iconSize: 30,
-              icon: const Icon(
+              icon: Icon(
                 Icons.credit_score,
-                color: Color(RootStyle.stColor),
+                color: Modular.to.path == '/portifolio'
+                    ? Color(RootStyle.primaryColor)
+                    : Color(RootStyle.stColor),
               ),
-              onPressed: () => Modular.to.navigate('/portifolio'),
+              onPressed: () => setState(() {
+                Modular.to.navigate('/portifolio');
+              }),
             ),
           ],
         ),
