@@ -46,7 +46,7 @@ class _CardPortifolio extends State<CardPortifolio> {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black54,
+                  color: Color(RootStyle.ptColor),
                 ),
               ),
               Text(
@@ -54,7 +54,7 @@ class _CardPortifolio extends State<CardPortifolio> {
                 style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w900,
-                  color: Colors.black,
+                  color: Color(RootStyle.ptColor),
                 ),
               ),
               const Text(
@@ -62,15 +62,15 @@ class _CardPortifolio extends State<CardPortifolio> {
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black54,
+                  color: Color(RootStyle.ptColor),
                 ),
               ),
-              Text(
+              const Text(
                 '\$25.09 +10%',
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
-                  color: Colors.black54,
+                  color: Color.fromARGB(255, 0, 255, 8),
                 ),
               ),
             ],
@@ -83,12 +83,12 @@ class _CardPortifolio extends State<CardPortifolio> {
                   Text(
                     'USD',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Color(RootStyle.ptColor),
                     ),
                   ),
                   Icon(
                     Icons.expand_more,
-                    color: Colors.black,
+                    color: Color(RootStyle.ptColor),
                   ),
                 ],
               ),
@@ -96,6 +96,7 @@ class _CardPortifolio extends State<CardPortifolio> {
                 "assets/svg/graph.svg",
                 width: 60,
                 height: 60,
+                color: Color.fromARGB(255, 62, 146, 64),
               )
             ],
           ),
