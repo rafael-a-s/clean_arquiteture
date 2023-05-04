@@ -42,12 +42,11 @@ class _ListCoinPage extends State<ListCoinPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.only(top: 70),
       padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
       height: double.maxFinite,
       // ignore: prefer_const_constructors
       decoration: BoxDecoration(
-        color: const Color(RootStyle.secondColor),
+        color: const Color(RootStyle.bgColor),
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(40),
           topRight: Radius.circular(40),
@@ -65,13 +64,25 @@ class _ListCoinPage extends State<ListCoinPage> {
             },
             // ignore: prefer_const_constructors
             decoration: InputDecoration(
-              fillColor: Colors.grey[200],
-              border: OutlineInputBorder(
+              filled: true,
+              fillColor: const Color(RootStyle.secondColor),
+              labelStyle: const TextStyle(
+                color: Color(RootStyle.stColor),
+              ),
+              enabledBorder: OutlineInputBorder(
                 borderSide: const BorderSide(
-                  width: 1.5,
-                  color: Color.fromARGB(255, 163, 157, 157),
+                  color: Color(
+                    RootStyle.secondColor,
+                  ),
                 ),
-                borderRadius: BorderRadius.circular(50.0),
+                borderRadius: BorderRadius.circular(15),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: const BorderSide(
+                  width: 1,
+                  color: Color(RootStyle.stColor),
+                ),
+                borderRadius: BorderRadius.circular(15),
               ),
               label: const Text('Pesquise'),
               hintText: 'BTCUSDT',

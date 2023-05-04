@@ -18,27 +18,41 @@ class ListCard extends StatefulWidget {
 class _ListCard extends State<ListCard> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(
-          height: 10,
+    return Container(
+      margin: const EdgeInsets.only(top: 20),
+      padding: const EdgeInsets.all(10),
+      decoration: const BoxDecoration(
+        color: Color(
+          RootStyle.secondColor,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(widget.coin.symbol),
-            IconButton(
-              onPressed: () => {
-                Modular.to.navigate('/new-trade', arguments: widget.coin),
-              },
-              icon: const Icon(Icons.chevron_right),
-            )
-          ],
+        borderRadius: BorderRadius.all(
+          Radius.circular(15),
         ),
-        const Divider(
-          color: Color(RootStyle.bgColor),
-        ),
-      ],
+      ),
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(widget.coin.symbol),
+              Text(
+                '\$ ${widget.coin.price.toStringAsFixed(6)}',
+                style: TextStyle(
+                  color: Colors.green.shade400,
+                ),
+              ),
+              IconButton(
+                onPressed: () => {
+                  Modular.to.navigate('/new-trade', arguments: widget.coin),
+                },
+                icon: const Icon(
+                  Icons.chevron_right,
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
