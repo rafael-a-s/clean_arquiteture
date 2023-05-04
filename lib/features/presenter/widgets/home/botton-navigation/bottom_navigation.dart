@@ -25,7 +25,7 @@ class BottomNavigation extends StatelessWidget {
                 Icons.home,
                 color: Color(RootStyle.primaryColor),
               ),
-              onPressed: () => Modular.to.navigate('/list-coin'),
+              onPressed: () => Modular.to.navigate('/'),
             ),
             IconButton(
               iconSize: 30,
@@ -41,7 +41,7 @@ class BottomNavigation extends StatelessWidget {
                 Icons.signal_cellular_alt,
                 color: Color(RootStyle.stColor),
               ),
-              onPressed: () => Modular.to.navigate('/portifolio'),
+              onPressed: () => Modular.to.navigate('/'),
             ),
             IconButton(
               iconSize: 30,
