@@ -38,7 +38,11 @@ class _PortifolioPage extends State<PortifolioPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).padding.top,
+        left: 15,
+        right: 15,
+      ),
       height: double.maxFinite,
       child: Column(
         children: [

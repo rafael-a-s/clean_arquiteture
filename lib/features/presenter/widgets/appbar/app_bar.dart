@@ -27,7 +27,7 @@ class AppBarDefault extends StatelessWidget {
                     'Bem vindo de volta',
                     textAlign: TextAlign.start,
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 16,
                       color: Color(RootStyle.primaryColor),
                     ),
                   ),
@@ -37,7 +37,7 @@ class AppBarDefault extends StatelessWidget {
                   Text(
                     'Rafael',
                     style: TextStyle(
-                      fontSize: 20,
+                      fontSize: 30,
                       fontWeight: FontWeight.w700,
                     ),
                   ),

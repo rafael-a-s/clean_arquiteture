@@ -4,6 +4,7 @@ import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/controllers/list_portifolio_store.dart';
 import 'package:my_app/features/presenter/root.dart';
+import 'package:my_app/features/presenter/widgets/appbar/app_bar.dart';
 import 'package:my_app/features/presenter/widgets/home/botton-navigation/bottom_navigation.dart';
 import 'package:my_app/features/presenter/widgets/home/box-decoration/box_decoration_home.dart';
 import 'package:my_app/features/presenter/widgets/home/container-card/container_card.dart';
@@ -50,6 +51,7 @@ class _HomePageState extends State<HomePage> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
+          const AppBarDefault(),
           const SizedBox(
             height: 30,
           ),
