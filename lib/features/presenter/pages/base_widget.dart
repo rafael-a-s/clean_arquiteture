@@ -14,11 +14,6 @@ class BaseWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(RootStyle.bgColor),
       bottomNavigationBar: const BottomNavigation(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => Modular.to.navigate('/'),
-        child: const Icon(Icons.home),
-        backgroundColor: Color(RootStyle.primaryColor),
-      ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Column(
         children: [

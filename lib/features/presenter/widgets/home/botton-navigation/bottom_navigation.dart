@@ -13,31 +13,41 @@ class BottomNavigation extends StatelessWidget {
         padding: const EdgeInsets.only(left: 30, right: 30),
         height: 60.0,
         decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomLeft,
-            colors: [
-              Color(RootStyle.secondColor),
-              Color(0xFF182035),
-            ],
-          ),
-        ),
+            color: Color(
+          RootStyle.secondColor,
+        )),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             IconButton(
               iconSize: 30,
               icon: const Icon(
-                Icons.add,
-                color: Color(0xFF949fb3),
+                Icons.home,
+                color: Color(RootStyle.primaryColor),
               ),
               onPressed: () => Modular.to.navigate('/list-coin'),
             ),
             IconButton(
               iconSize: 30,
               icon: const Icon(
-                Icons.streetview,
-                color: Color(0xFF949fb3),
+                Icons.ballot,
+                color: Color(RootStyle.stColor),
+              ),
+              onPressed: () => Modular.to.navigate('/list-coin'),
+            ),
+            IconButton(
+              iconSize: 30,
+              icon: const Icon(
+                Icons.signal_cellular_alt,
+                color: Color(RootStyle.stColor),
+              ),
+              onPressed: () => Modular.to.navigate('/portifolio'),
+            ),
+            IconButton(
+              iconSize: 30,
+              icon: const Icon(
+                Icons.credit_score,
+                color: Color(RootStyle.stColor),
               ),
               onPressed: () => Modular.to.navigate('/portifolio'),
             ),

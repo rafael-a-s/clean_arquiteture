@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
+import 'package:my_app/features/presenter/controllers/list_portifolio_store.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/home/botton-navigation/bottom_navigation.dart';
 import 'package:my_app/features/presenter/widgets/home/box-decoration/box_decoration_home.dart';
@@ -8,6 +10,7 @@ import 'package:my_app/features/presenter/widgets/home/container-card/container_
 import 'package:my_app/features/presenter/widgets/home/graph/graph.dart';
 import 'package:my_app/features/presenter/widgets/home/mini-cards/mini_card.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:my_app/features/presenter/widgets/portifolio/list-portifolio/list_card.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -18,19 +21,25 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final store = Modular.get<HomeStore>();
-  var coin = Coin(symbol: '', price: 0.0);
+  final storeTransaction = Modular.get<ListPortifolioStore>();
+  var _isLoading = false;
+  double total = 0.0;
+  late List<Assets> _list;
 
-  Future<void> _loadData() async {
-    final result = await store.getCoinSymbol("BTCUSDT");
+  Future<void> _fetchTrades() async {
+    _isLoading = true;
+    final result = await storeTransaction.getAllTrade();
     setState(() {
-      coin = result;
+      _list = result;
+      _list.forEach((e) => total += e.price * e.amount);
+      _isLoading = false;
     });
   }
 
   @override
   void initState() {
     super.initState();
-    _loadData();
+    _fetchTrades();
   }
 
   @override
@@ -38,51 +47,45 @@ class _HomePageState extends State<HomePage> {
     return Container(
       padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
       height: double.maxFinite,
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-                'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry'),
-            const SizedBox(
-              height: 30,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          const SizedBox(
+            height: 30,
+          ),
+          const ContainerCard(),
+          const SizedBox(
+            height: 40,
+          ),
+          const Text(
+            'Transações recentes',
+            textAlign: TextAlign.start,
+            style: TextStyle(
+              color: Color(RootStyle.ptColor),
+              fontSize: 23,
+              fontWeight: FontWeight.w900,
             ),
-            const ContainerCard(),
-            const SizedBox(
-              height: 25,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            Wrap(
-              spacing: 20,
-              runSpacing: 20,
-              children: <Widget>[
-                const GraphHome(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    MiniCard(
-                      label:
-                          'Lorem Ipsum is simply dummy text of the printing and typesetting ',
-                      navigation: 'null',
-                      title: 'Cryptos',
-                      icon: Icons.card_giftcard,
-                    ),
-                    MiniCard(
-                      label:
-                          'Lorem Ipsum is simply dummy text of the printing and typesetting ',
-                      navigation: 'null',
-                      title: 'Cryptos',
-                      icon: Icons.card_giftcard,
-                    ),
-                  ],
+          ),
+          _isLoading
+              ? const Center(
+                  child: CircularProgressIndicator(),
+                )
+              : Expanded(
+                  child: _list.isNotEmpty
+                      ? ListView.builder(
+                          itemCount: _list.length,
+                          itemBuilder: (context, item) {
+                            ListCardPortifolio list = ListCardPortifolio(
+                              assets: _list[item],
+                            );
+                            return list;
+                          },
+                        )
+                      : const Center(
+                          child: Text('Sem resultados encontrados.'),
+                        ),
                 ),
-              ],
-            ),
-          ],
-        ),
+        ],
       ),
     );
   }

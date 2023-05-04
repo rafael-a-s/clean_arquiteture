@@ -24,18 +24,22 @@ class AppBarDefault extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: const <Widget>[
                   Text(
-                    'Olá,',
+                    'Bem vindo de volta',
                     textAlign: TextAlign.start,
                     style: TextStyle(
                       fontSize: 15,
+                      color: Color(RootStyle.primaryColor),
                     ),
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   Text(
-                    'Rafael Aguiar',
-                    style: TextStyle(fontSize: 20),
+                    'Rafael',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
                   ),
                 ],
               ),

@@ -7,7 +7,7 @@ class ContainerCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 150,
+      height: 200,
       width: double.maxFinite,
       padding: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
@@ -18,25 +18,22 @@ class ContainerCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: const <Widget>[
-              Text(
-                'rafael-a-s',
-                style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold),
-              )
-            ],
-          ),
-          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const <Widget>[
               Text(
                 'MINHA CARTEIRA',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Color(RootStyle.ptColor),
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
+              ),
+              Text(
+                '\$ 1,929.21',
+                style: TextStyle(
+                  color: Color(RootStyle.ptColor),
+                  fontSize: 20,
+                  fontWeight: FontWeight.w900,
+                ),
               )
             ],
           ),
@@ -45,30 +42,17 @@ class ContainerCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: const <Widget>[
               Text(
-                '0,5%',
+                '+ 0,5%',
                 style: TextStyle(
-                    color: Colors.black,
+                    color: Color(RootStyle.ptColor),
                     fontSize: 30,
                     fontWeight: FontWeight.bold),
               ),
-              Text(
-                'Lorem',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 14,
-                ),
-              ),
-              TextButton(
-                onPressed: null,
-                style: ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(Colors.black),
-                ),
-                child: Text(
-                  'Visite seus dados >',
-                  style: TextStyle(
-                      color: Colors.white, fontWeight: FontWeight.w500),
-                ),
-              ),
+              Icon(
+                Icons.trending_up,
+                size: 40,
+                color: Colors.green,
+              )
             ],
           )
         ],
