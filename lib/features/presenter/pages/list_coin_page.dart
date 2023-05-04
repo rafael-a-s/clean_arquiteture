@@ -42,7 +42,8 @@ class _ListCoinPage extends State<ListCoinPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.only(top: 50, left: 15, right: 15),
+      padding: EdgeInsets.only(
+          top: MediaQuery.of(context).padding.top + 15, left: 15, right: 15),
       height: double.maxFinite,
       // ignore: prefer_const_constructors
       decoration: BoxDecoration(
