@@ -2,7 +2,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:my_app/core/utils/date_input_converter.dart';
 import 'package:my_app/features/data/datasources/coin/coin_datasource.dart';
 import 'package:my_app/features/data/datasources/example/example_datasource.dart';
-import 'package:my_app/features/data/datasources/trades/trade_datasource.dart';
+import 'package:my_app/features/data/datasources/portifolio/portifolio_datasource.dart';
 import 'package:my_app/features/data/repositories/coin_repository.dart';
 import 'package:my_app/features/data/repositories/example_repository.dart';
 import 'package:my_app/features/data/repositories/trade_repository.dart';

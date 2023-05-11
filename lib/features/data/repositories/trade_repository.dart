@@ -1,6 +1,6 @@
 import 'package:my_app/core/usecase/erros/exceptions.dart';
 import 'package:my_app/features/data/datasources/coin/i_coin_datasource.dart';
-import 'package:my_app/features/data/datasources/trades/i_trade_datasource.dart';
+import 'package:my_app/features/data/datasources/portifolio/i_portifolio_datasource.dart';
 import 'package:my_app/features/data/models/assets_model.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
