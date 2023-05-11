@@ -3,13 +3,13 @@ import 'package:equatable/equatable.dart';
 class Assets extends Equatable {
   final String? id;
   final String symbol;
-  final double amount;
+  final double quanty;
   final double price;
 
   const Assets({
     this.id,
     required this.symbol,
-    required this.amount,
+    required this.quanty,
     required this.price,
   });
 
@@ -17,7 +17,7 @@ class Assets extends Equatable {
   List<Object?> get props => [
         id,
         symbol,
-        amount,
+        quanty,
         price,
       ];
 }
