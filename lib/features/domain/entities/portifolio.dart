@@ -1,18 +1,30 @@
 import 'dart:ffi';
 import 'package:equatable/equatable.dart';
 
-class Coin extends Equatable {
-  final String symbol;
-  final double price;
+class Portifolio extends Equatable {
+  final String? id;
+  final String name;
+  final Doule subTotal;
+  final Double totalPriceActual;
+  final Double percent;
+  final Assets assets;
 
-  const Coin({
-    required this.symbol,
-    required this.price,
+  const Portifolio({
+    String? id;
+    required this.name,
+    required this.subTotal,
+    required this.totalPriceActual,
+    required this.percent,
+    required this.assets,
   });
 
   @override
   List<Object?> get props => [
-        symbol,
-        price,
+        id,
+        name,
+        subTotal,
+        totalPriceActual,
+        percent,
+        assets,
       ];
 }
