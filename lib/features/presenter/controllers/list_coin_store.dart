@@ -1,6 +1,7 @@
 import 'package:flutter_triple/flutter_triple.dart';
 import 'package:my_app/core/usecase/erros/failures.dart';
 import 'package:my_app/core/usecase/usecase.dart';
+import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/domain/usecases/coin/get_all_coin_usecase.dart';
 
