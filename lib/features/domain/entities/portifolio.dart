@@ -1,16 +1,17 @@
 import 'dart:ffi';
 import 'package:equatable/equatable.dart';
+import 'package:my_app/features/domain/entities/assets.dart';
 
 class Portifolio extends Equatable {
   final String? id;
   final String name;
-  final Doule subTotal;
+  final Double subTotal;
   final Double totalPriceActual;
   final Double percent;
   final Assets assets;
 
   const Portifolio({
-    String? id;
+    this.id,
     required this.name,
     required this.subTotal,
     required this.totalPriceActual,
