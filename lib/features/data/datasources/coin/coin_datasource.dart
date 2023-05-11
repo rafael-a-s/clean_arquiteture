@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:my_app/features/data/datasources/endpoints/bn_endpoints.dart';
 import 'package:my_app/features/data/datasources/coin/i_coin_datasource.dart';
+import 'package:my_app/features/data/models/coin_model.dart';
 import 'package:my_app/features/data/models/portifolio_model.dart';
 import '../../../../core/usecase/erros/exceptions.dart';
 

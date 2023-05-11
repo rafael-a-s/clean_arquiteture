@@ -32,7 +32,7 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => GetAllCoinUseCase(i())),
     //Trade
     Bind.lazySingleton((i) => CreateTradeUseCase(i())),
-    Bind.lazySingleton((i) => TradeRepository(i())),
+    Bind.lazySingleton((i) => PortifolioRepository(i())),
     Bind.lazySingleton((i) => PortifolioDataSource(client: i())),
     Bind.lazySingleton((i) => GetAllTradeUseCase(i())),
     //Http Client
