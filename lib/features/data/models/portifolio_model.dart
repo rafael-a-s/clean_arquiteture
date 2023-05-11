@@ -9,7 +9,7 @@ class PortifolioModel extends Portifolio {
     required Double subTotal,
     required Double totalPriceActual,
     required Double percent,
-    required AssetsModel assets,
+    required List<AssetsModel> assets,
   }) : super(
           id: id,
           name: name,

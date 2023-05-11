@@ -8,7 +8,7 @@ class Portifolio extends Equatable {
   final Double subTotal;
   final Double totalPriceActual;
   final Double percent;
-  final Assets assets;
+  final List<Assets> assets;
 
   const Portifolio({
     this.id,

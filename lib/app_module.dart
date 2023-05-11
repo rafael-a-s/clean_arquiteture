@@ -5,7 +5,7 @@ import 'package:my_app/features/data/datasources/example/example_datasource.dart
 import 'package:my_app/features/data/datasources/portifolio/portifolio_datasource.dart';
 import 'package:my_app/features/data/repositories/coin_repository.dart';
 import 'package:my_app/features/data/repositories/example_repository.dart';
-import 'package:my_app/features/data/repositories/trade_repository.dart';
+import 'package:my_app/features/data/repositories/portifolio_repository.dart';
 import 'package:my_app/features/domain/usecases/coin/coin_usecase.dart';
 import 'package:my_app/features/domain/usecases/coin/get_all_coin_usecase.dart';
 import 'package:my_app/features/domain/usecases/get_example_from_username_usecase.dart';
@@ -33,7 +33,7 @@ class AppModule extends Module {
     //Trade
     Bind.lazySingleton((i) => CreateTradeUseCase(i())),
     Bind.lazySingleton((i) => TradeRepository(i())),
-    Bind.lazySingleton((i) => TradeDataSource(client: i())),
+    Bind.lazySingleton((i) => PortifolioDataSource(client: i())),
     Bind.lazySingleton((i) => GetAllTradeUseCase(i())),
     //Http Client
     Bind.lazySingleton((i) => http.Client()),
