@@ -1,14 +1,11 @@
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:my_app/core/utils/date_input_converter.dart';
 import 'package:my_app/features/data/datasources/coin/coin_datasource.dart';
-import 'package:my_app/features/data/datasources/example/example_datasource.dart';
 import 'package:my_app/features/data/datasources/portifolio/portifolio_datasource.dart';
 import 'package:my_app/features/data/repositories/coin_repository.dart';
-import 'package:my_app/features/data/repositories/example_repository.dart';
 import 'package:my_app/features/data/repositories/portifolio_repository.dart';
 import 'package:my_app/features/domain/usecases/coin/coin_usecase.dart';
 import 'package:my_app/features/domain/usecases/coin/get_all_coin_usecase.dart';
-import 'package:my_app/features/domain/usecases/get_example_from_username_usecase.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/features/domain/usecases/portifolio/create.dart';
 import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.dart';
@@ -31,10 +28,10 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => CoinDataSource(client: i())),
     Bind.lazySingleton((i) => GetAllCoinUseCase(i())),
     //Trade
-    Bind.lazySingleton((i) => CreateTradeUseCase(i())),
+    Bind.lazySingleton((i) => CreatePortifolioUseCase(i())),
     Bind.lazySingleton((i) => PortifolioRepository(i())),
     Bind.lazySingleton((i) => PortifolioDataSource(client: i())),
-    Bind.lazySingleton((i) => GetAllTradeUseCase(i())),
+    Bind.lazySingleton((i) => GetAllPortifolioUseCase(i())),
     //Http Client
     Bind.lazySingleton((i) => http.Client()),
     //Store
