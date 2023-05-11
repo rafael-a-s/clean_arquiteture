@@ -4,7 +4,7 @@ import 'package:my_app/core/usecase/usecase.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/domain/usecases/coin/get_all_coin_usecase.dart';
-import 'package:my_app/features/domain/usecases/trade/get_all_trade_usecase.dart';
+import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.dart';
 
 class ListPortifolioStore extends NotifierStore<Failure, Assets> {
   final GetAllTradeUseCase usecase;

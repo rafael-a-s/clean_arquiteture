@@ -6,14 +6,14 @@ import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/domain/repositories/i_coin_repository.dart';
 import 'package:my_app/features/domain/repositories/i_portifolio_repository.dart';
 
-class GetAllTradeUseCase implements Usecase<List<Assets>, NoParams> {
-  late final ITradeRepoitory repository;
+class GetAllPortifolioUseCase implements Usecase<List<Portifolio>, NoParams> {
+  late final IPortifolioRepoitory repository;
 
-  GetAllTradeUseCase(this.repository);
+  GetAllPortifolioUseCase(this.repository);
 
   @override
-  Future<Either<Failure, List<Assets>>> call(noParams) async {
-    final result = await repository.getAllTrades();
+  Future<Either<Failure, List<Portifolio>>> call(noParams) async {
+    final result = await repository.getAllPortifolios();
     return result;
   }
 }
