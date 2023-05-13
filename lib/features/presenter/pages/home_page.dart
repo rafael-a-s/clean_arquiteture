@@ -11,6 +11,7 @@ import 'package:my_app/features/presenter/widgets/home/container-card/container_
 import 'package:my_app/features/presenter/widgets/home/graph/graph.dart';
 import 'package:my_app/features/presenter/widgets/home/mini-cards/mini_card.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:my_app/features/presenter/widgets/home/plus-portifolio/plus_portifolio.dart';
 import 'package:my_app/features/presenter/widgets/portifolio/list-portifolio/list_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -55,7 +56,16 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 30,
           ),
-          const ContainerCard(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: const [
+              Expanded(
+                child: ContainerCard(),
+              ),
+              SizedBox(width: 15),
+              PlusPortifolio()
+            ],
+          ),
           const SizedBox(
             height: 40,
           ),
