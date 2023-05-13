@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/features/presenter/root.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
 class PlusPortifolio extends StatelessWidget {
   const PlusPortifolio({super.key});
@@ -13,7 +14,7 @@ class PlusPortifolio extends StatelessWidget {
           color: Color(0xFF9b9bdd),
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
       child: IconButton(
-        onPressed: () {},
+        onPressed: () => Modular.to.navigate('/new-portifolio'),
         icon: const Icon(Icons.add),
       ),
     );

@@ -14,6 +14,7 @@ import 'package:my_app/features/presenter/controllers/list_coin_store.dart';
 import 'package:my_app/features/presenter/controllers/list_portifolio_store.dart';
 import 'package:my_app/features/presenter/controllers/trade_store.dart';
 import 'package:my_app/features/presenter/pages/about_page.dart';
+import 'package:my_app/features/presenter/pages/create_portifolio.dart';
 import 'package:my_app/features/presenter/pages/home_page.dart';
 import 'package:my_app/features/presenter/pages/list_coin_page.dart';
 import 'package:my_app/features/presenter/pages/new_trade.dart';
@@ -62,6 +63,11 @@ class AppModule extends Module {
           '/portifolio',
           child: (_, __) => const PortifolioPage(),
           transition: TransitionType.leftToRightWithFade,
+        ),
+        ChildRoute(
+          '/new-portifolio',
+          child: (_, __) => const CreatePortifolio(),
+          transition: TransitionType.upToDown,
         ),
       ];
 }
