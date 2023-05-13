@@ -12,7 +12,10 @@ class PlusPortifolio extends StatelessWidget {
       decoration: const BoxDecoration(
           color: Color(0xFF9b9bdd),
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
-      child: Icon(Icons.add),
+      child: IconButton(
+        onPressed: () {},
+        icon: const Icon(Icons.add),
+      ),
     );
   }
 }
