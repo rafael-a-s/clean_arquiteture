@@ -19,12 +19,12 @@ class _PortifolioPage extends State<PortifolioPage> {
   bool _isLoading = false;
   double total = 0.0;
 
-  Future<void> _fetchTrades() async {
+  Future<void> _fetchPortifolios() async {
     _isLoading = true;
     final result = await store.getAllTrade();
     setState(() {
       _list = result;
-      _list.forEach((e) => total += e.price * e.amount);
+      _list.forEach((e) => total += e.price * e.quanty);
       _isLoading = false;
     });
   }
@@ -32,7 +32,7 @@ class _PortifolioPage extends State<PortifolioPage> {
   @override
   void initState() {
     super.initState();
-    _fetchTrades();
+    _fetchPortifolios();
   }
 
   @override

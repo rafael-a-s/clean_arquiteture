@@ -12,7 +12,7 @@ class CoinModel extends Coin {
 
   factory CoinModel.fromJson(Map<String, dynamic> json) => CoinModel(
         symbol: json['symbol'],
-        price: (json['price'] as num).toDouble(),
+        price: double.parse(json['price']),
       );
 
   Map<String, dynamic> toJson() => {

@@ -14,15 +14,17 @@ class ListCoinStore extends NotifierStore<Failure, Coin> {
           const Coin(symbol: '', price: 0.0),
         );
 
-  getAllCoinSymbol() async {
+  Future<List<Coin>> getAllCoinSymbol() async {
     setLoading(true);
     final result = await usecase(NoParams());
     setLoading(false);
     return result.fold(
-      (error) => const Coin(
-        symbol: '',
-        price: 0.0,
-      ),
+      (error) => const <Coin>[
+        Coin(
+          symbol: '',
+          price: 0.0,
+        ),
+      ],
       (success) => success,
     );
   }

@@ -32,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     final result = await storeTransaction.getAllTrade();
     setState(() {
       _list = result;
-      _list.forEach((e) => total += e.price * e.amount);
+      _list.forEach((e) => total += e.price * e.quanty);
       _isLoading = false;
     });
   }
@@ -40,7 +40,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _fetchTrades();
+    _list = [];
   }
 
   @override

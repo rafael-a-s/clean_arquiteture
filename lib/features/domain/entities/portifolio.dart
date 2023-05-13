@@ -5,9 +5,9 @@ import 'package:my_app/features/domain/entities/assets.dart';
 class Portifolio extends Equatable {
   final String? id;
   final String name;
-  final Double subTotal;
-  final Double totalPriceActual;
-  final Double percent;
+  final double subTotal;
+  final double totalPriceActual;
+  final double percent;
   final List<Assets> assets;
 
   const Portifolio({

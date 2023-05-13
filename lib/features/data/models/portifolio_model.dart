@@ -6,9 +6,9 @@ class PortifolioModel extends Portifolio {
   const PortifolioModel({
     String? id,
     required String name,
-    required Double subTotal,
-    required Double totalPriceActual,
-    required Double percent,
+    required double subTotal,
+    required double totalPriceActual,
+    required double percent,
     required List<AssetsModel> assets,
   }) : super(
           id: id,

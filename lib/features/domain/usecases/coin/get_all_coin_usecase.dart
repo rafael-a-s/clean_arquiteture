@@ -13,6 +13,6 @@ class GetAllCoinUseCase implements Usecase<List<Coin>, NoParams> {
   @override
   Future<Either<Failure, List<Coin>>> call(noParams) async {
     final result = await repository.getAllCoin();
-    return result;
+    return result.isRight() ? result : Left(ServerFailure());
   }
 }

@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:my_app/features/domain/entities/portifolio.dart';
+import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/presenter/controllers/list_coin_store.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/list-view-card/list_card.dart';

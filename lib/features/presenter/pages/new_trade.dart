@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
+import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/controllers/trade_store.dart';
@@ -22,7 +23,14 @@ class Trade extends StatefulWidget {
 class _Trade extends State<Trade> {
   final store = Modular.get<TradeStore>();
   var coin = const Coin(symbol: '', price: 0.0);
-  var trade = const Assets(symbol: '', amount: 0.0, price: 0.0);
+  var trade = const Portifolio(
+    id: '',
+    name: '',
+    subTotal: 0.0,
+    totalPriceActual: 0.0,
+    percent: 0.0,
+    assets: [Assets(symbol: '', quanty: 0, price: 0)],
+  );
   Timer? _timer;
 
   final _formKey = GlobalKey<FormState>();
@@ -39,7 +47,14 @@ class _Trade extends State<Trade> {
   }
 
   Future<bool> _addTransactional(double? p, double? a) async {
-    trade = Assets(symbol: widget.coin.symbol, amount: a!, price: p!);
+    var portifolio = const Portifolio(
+      id: '',
+      name: '',
+      subTotal: 0,
+      totalPriceActual: 0,
+      percent: 0,
+      assets: [Assets(symbol: '', quanty: 0, price: 0)],
+    );
     Assets result = await store.createTrade(trade);
 
     return result.id == null ? false : true;

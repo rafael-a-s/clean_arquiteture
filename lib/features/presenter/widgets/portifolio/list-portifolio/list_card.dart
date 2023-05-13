@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
+import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/domain/usecases/coin/coin_usecase.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
@@ -42,8 +43,8 @@ class _ListCardPortifolio extends State<ListCardPortifolio> {
   double get totalProfit => profit;
 
   _getProfit(Coin coin) {
-    double valuePast = widget.assets.price * widget.assets.amount;
-    double valuePresent = coin.price * widget.assets.amount;
+    double valuePast = widget.assets.price * widget.assets.quanty;
+    double valuePresent = coin.price * widget.assets.quanty;
 
     setState(() {
       profit = valuePresent - valuePast;

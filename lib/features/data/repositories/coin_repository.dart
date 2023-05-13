@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter/material.dart';
 import 'package:my_app/core/usecase/erros/exceptions.dart';
 import 'package:my_app/core/usecase/erros/failures.dart';
 import 'package:my_app/features/data/datasources/coin/i_coin_datasource.dart';
@@ -31,14 +32,13 @@ class CoinRepository extends ICoinRepository {
   Future<Either<Failure, List<Coin>>> getAllCoin() async {
     try {
       final result = await datasource.getAllSymbol();
-
       return Right(result
           .map((coin) => Coin(
                 price: coin.price,
                 symbol: coin.symbol,
               ))
           .toList());
-    } catch (e) {
+    } on ServerException {
       return Left(ServerFailure());
     }
   }
