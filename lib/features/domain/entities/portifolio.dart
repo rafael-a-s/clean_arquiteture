@@ -5,6 +5,7 @@ import 'package:my_app/features/domain/entities/assets.dart';
 class Portifolio extends Equatable {
   final String? id;
   final String name;
+  final String coin;
   final double subTotal;
   final double totalPriceActual;
   final double percent;
@@ -13,6 +14,7 @@ class Portifolio extends Equatable {
   const Portifolio({
     this.id,
     required this.name,
+    required this.coin,
     required this.subTotal,
     required this.totalPriceActual,
     required this.percent,
@@ -23,6 +25,7 @@ class Portifolio extends Equatable {
   List<Object?> get props => [
         id,
         name,
+        coin,
         subTotal,
         totalPriceActual,
         percent,

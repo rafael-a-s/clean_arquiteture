@@ -21,7 +21,6 @@ class AssetsModel extends Assets {
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
         'symbol': symbol,
         'quanty': quanty,
         'price': price,

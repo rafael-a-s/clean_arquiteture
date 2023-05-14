@@ -26,6 +26,7 @@ class _Trade extends State<Trade> {
   var trade = const Portifolio(
     id: '',
     name: '',
+    coin: '',
     subTotal: 0.0,
     totalPriceActual: 0.0,
     percent: 0.0,
@@ -50,6 +51,7 @@ class _Trade extends State<Trade> {
     var portifolio = const Portifolio(
       id: '',
       name: '',
+      coin: '',
       subTotal: 0,
       totalPriceActual: 0,
       percent: 0,

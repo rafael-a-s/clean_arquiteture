@@ -37,6 +37,7 @@ class TradeStore extends NotifierStore<Failure, Coin> {
       (error) => const Portifolio(
         id: '',
         name: '',
+        coin: '',
         subTotal: 0,
         totalPriceActual: 0,
         percent: 0,

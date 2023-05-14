@@ -31,7 +31,7 @@ class PortifolioDataSource implements IPortifolioDataSource {
 
   @override
   Future<PortifolioModel> createPortifolio(PortifolioModel portifolio) async {
-    final body = portifolio.toJson();
+    final body = portifolio.toJsonCrate();
     final response = await client.post(
       PortifolioEndPoints.createPortifolio(),
       headers: <String, String>{

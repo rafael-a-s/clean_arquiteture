@@ -9,6 +9,7 @@ import 'package:my_app/features/domain/usecases/coin/get_all_coin_usecase.dart';
 import 'package:http/http.dart' as http;
 import 'package:my_app/features/domain/usecases/portifolio/create.dart';
 import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.dart';
+import 'package:my_app/features/presenter/controllers/create_portifolio.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/controllers/list_coin_store.dart';
 import 'package:my_app/features/presenter/controllers/list_portifolio_store.dart';
@@ -40,6 +41,7 @@ class AppModule extends Module {
     Bind.factory((i) => TradeStore(i(), i())),
     Bind.factory((i) => ListCoinStore(i())),
     Bind.factory((i) => ListPortifolioStore(i())),
+    Bind.factory((i) => CreatePortifolioStore(i())),
   ];
 
   @override

@@ -6,13 +6,14 @@ import 'package:my_app/core/usecase/usecase.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/domain/usecases/coin/get_all_coin_usecase.dart';
+import 'package:my_app/features/domain/usecases/portifolio/create.dart';
 import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.dart';
 
-class ListPortifolioStore extends NotifierStore<Failure, Portifolio> {
-  final GetAllPortifolioUseCase usecase;
+class CreatePortifolioStore extends NotifierStore<Failure, Portifolio> {
+  final CreatePortifolioUseCase create;
 
-  ListPortifolioStore(
-    this.usecase,
+  CreatePortifolioStore(
+    this.create,
   ) : super(
           const Portifolio(
             id: '',
@@ -25,9 +26,9 @@ class ListPortifolioStore extends NotifierStore<Failure, Portifolio> {
           ),
         );
 
-  getAllTrade() async {
+  createTrade(Portifolio portifolio) async {
     setLoading(true);
-    final result = await usecase(NoParams());
+    final result = await create(portifolio);
     setLoading(false);
     return result.fold(
       (error) => const Portifolio(
@@ -39,7 +40,7 @@ class ListPortifolioStore extends NotifierStore<Failure, Portifolio> {
         percent: 0,
         assets: [Assets(symbol: '', quanty: 0, price: 0)],
       ),
-      (success) => success,
+      (sucess) => sucess,
     );
   }
 }

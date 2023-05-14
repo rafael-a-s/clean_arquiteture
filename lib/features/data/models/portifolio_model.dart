@@ -6,6 +6,7 @@ class PortifolioModel extends Portifolio {
   const PortifolioModel({
     String? id,
     required String name,
+    required String coin,
     required double subTotal,
     required double totalPriceActual,
     required double percent,
@@ -13,6 +14,7 @@ class PortifolioModel extends Portifolio {
   }) : super(
           id: id,
           name: name,
+          coin: coin,
           subTotal: subTotal,
           totalPriceActual: totalPriceActual,
           percent: percent,
@@ -23,6 +25,7 @@ class PortifolioModel extends Portifolio {
       PortifolioModel(
         id: json['id'],
         name: json['name'],
+        coin: json['coin'],
         subTotal: json['subTotal'],
         totalPriceActual: json['totalPriceActual'],
         percent: json['percent'],
@@ -32,9 +35,16 @@ class PortifolioModel extends Portifolio {
   Map<String, dynamic> toJson() => {
         'id': id,
         'name': name,
+        'coin': coin,
         'subTotal': subTotal,
         'totalPriceActual': totalPriceActual,
         'percent': percent,
+        'assets': assets,
+      };
+
+  Map<String, dynamic> toJsonCrate() => {
+        'name': name,
+        'coin': coin,
         'assets': assets,
       };
 }

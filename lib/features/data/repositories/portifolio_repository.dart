@@ -22,6 +22,7 @@ class PortifolioRepository implements IPortifolioRepoitory {
           .map((value) => Portifolio(
                 id: value.id,
                 name: value.name,
+                coin: value.coin,
                 percent: value.percent,
                 subTotal: value.subTotal,
                 totalPriceActual: value.totalPriceActual,
@@ -40,6 +41,7 @@ class PortifolioRepository implements IPortifolioRepoitory {
       final result = await datasource.createPortifolio(PortifolioModel(
         id: portifolio.id,
         name: portifolio.name,
+        coin: portifolio.coin,
         percent: portifolio.percent,
         subTotal: portifolio.subTotal,
         totalPriceActual: portifolio.totalPriceActual,
@@ -55,6 +57,7 @@ class PortifolioRepository implements IPortifolioRepoitory {
       return Right(Portifolio(
         id: result.id,
         name: result.name,
+        coin: portifolio.coin,
         percent: result.percent,
         subTotal: result.subTotal,
         totalPriceActual: result.totalPriceActual,
