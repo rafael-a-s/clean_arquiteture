@@ -72,13 +72,21 @@ class _HomePageState extends State<HomePage> {
           SizedBox(
             height: 200,
             child: ListView.builder(
-              physics: ClampingScrollPhysics(),
+              physics: const ClampingScrollPhysics(),
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
               itemCount: _listPortifolio.length,
               itemBuilder: (context, item) {
-                return ContainerCard(
-                  portifolio: _listPortifolio[item],
+                return GestureDetector(
+                  onTap: () {
+                    Modular.to.navigate(
+                      '/portifolio',
+                      arguments: _listPortifolio[item],
+                    );
+                  },
+                  child: ContainerCard(
+                    portifolio: _listPortifolio[item],
+                  ),
                 );
               },
             ),

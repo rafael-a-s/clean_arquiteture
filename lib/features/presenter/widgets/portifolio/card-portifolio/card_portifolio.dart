@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/root.dart';
 
 class CardPortifolio extends StatefulWidget {
-  double total = 0.0;
+  Portifolio portifolio;
 
   CardPortifolio({
     super.key,
-    required this.total,
+    required this.portifolio,
   });
 
   @override
@@ -15,12 +16,6 @@ class CardPortifolio extends StatefulWidget {
 }
 
 class _CardPortifolio extends State<CardPortifolio> {
-  @override
-  void didUpdateWidget(covariant CardPortifolio oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    widget.total;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -50,7 +45,7 @@ class _CardPortifolio extends State<CardPortifolio> {
                 ),
               ),
               Text(
-                '\$ ${widget.total.toStringAsFixed(6)}',
+                '\$ ${widget.portifolio.subTotal.toStringAsFixed(4)}',
                 style: const TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.w900,
@@ -65,9 +60,9 @@ class _CardPortifolio extends State<CardPortifolio> {
                   color: Color(RootStyle.ptColor),
                 ),
               ),
-              const Text(
-                '\$25.09 +10%',
-                style: TextStyle(
+              Text(
+                '%${widget.portifolio.percent.toStringAsFixed(4)}',
+                style: const TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
                   color: Color.fromARGB(255, 0, 255, 8),

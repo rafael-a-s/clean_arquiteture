@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
+import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/controllers/list_portifolio_store.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/portifolio/card-portifolio/card_portifolio.dart';
@@ -7,7 +8,11 @@ import 'package:flutter_modular/flutter_modular.dart';
 import 'package:my_app/features/presenter/widgets/portifolio/list-portifolio/list_card.dart';
 
 class PortifolioPage extends StatefulWidget {
-  const PortifolioPage({super.key});
+  Portifolio portifolio;
+  PortifolioPage({
+    super.key,
+    required this.portifolio,
+  });
 
   @override
   State<StatefulWidget> createState() => _PortifolioPage();
@@ -32,7 +37,7 @@ class _PortifolioPage extends State<PortifolioPage> {
   @override
   void initState() {
     super.initState();
-    _fetchPortifolios();
+    //_fetchPortifolios();
   }
 
   @override
@@ -56,7 +61,9 @@ class _PortifolioPage extends State<PortifolioPage> {
           const SizedBox(
             height: 15,
           ),
-          CardPortifolio(total: total),
+          CardPortifolio(
+            portifolio: widget.portifolio,
+          ),
           const SizedBox(
             height: 30,
           ),
@@ -89,12 +96,12 @@ class _PortifolioPage extends State<PortifolioPage> {
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
-                  child: _list.isNotEmpty
+                  child: widget.portifolio.assets.isNotEmpty
                       ? ListView.builder(
-                          itemCount: _list.length,
+                          itemCount: widget.portifolio.assets.length,
                           itemBuilder: (context, item) {
                             ListCardPortifolio list = ListCardPortifolio(
-                              assets: _list[item],
+                              assets: widget.portifolio.assets[item],
                             );
                             return list;
                           },

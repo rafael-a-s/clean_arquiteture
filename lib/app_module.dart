@@ -63,7 +63,7 @@ class AppModule extends Module {
         ),
         ChildRoute(
           '/portifolio',
-          child: (_, __) => const PortifolioPage(),
+          child: (_, __) => PortifolioPage(portifolio: __.data),
           transition: TransitionType.leftToRightWithFade,
         ),
         ChildRoute(
