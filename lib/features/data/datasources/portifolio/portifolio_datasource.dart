@@ -19,14 +19,15 @@ class PortifolioDataSource implements IPortifolioDataSource {
   Future<List<PortifolioModel>> getAllPortifolios() async {
     final response = await client.get(PortifolioEndPoints.getAllPortifolios());
 
-    late dynamic jsonResponse;
+    late List<dynamic> jsonResponse;
 
     response.statusCode == 200
         ? jsonResponse = json.decode(response.body)
         : throw ServerException();
-    final items = jsonResponse['items'] as List;
 
-    return items.map((value) => PortifolioModel.fromJson(value)).toList();
+    return jsonResponse
+        .map((value) => PortifolioModel.fromJson(value))
+        .toList();
   }
 
   @override

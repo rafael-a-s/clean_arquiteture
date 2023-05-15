@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/core/usecase/usecase.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
@@ -18,7 +19,7 @@ class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -27,6 +28,7 @@ class _HomePageState extends State<HomePage> {
   var _isLoading = false;
   double total = 0.0;
   late List<Assets> _list;
+  List<Portifolio> _listPortifolio = [];
 
   Future<void> _fetchTrades() async {
     _isLoading = true;
@@ -38,10 +40,21 @@ class _HomePageState extends State<HomePage> {
     });
   }
 
+  Future<void> _fetchPortifolio() async {
+    _isLoading = true;
+    final result = await store.getAllPortifolio();
+    _list = [];
+
+    setState(() {
+      _listPortifolio = result;
+      _isLoading = false;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    _list = [];
+    _fetchPortifolio();
   }
 
   @override
@@ -56,15 +69,19 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 30,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Expanded(
-                child: ContainerCard(),
-              ),
-              SizedBox(width: 15),
-              PlusPortifolio()
-            ],
+          SizedBox(
+            height: 200,
+            child: ListView.builder(
+              physics: ClampingScrollPhysics(),
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: _listPortifolio.length,
+              itemBuilder: (context, item) {
+                return ContainerCard(
+                  portifolio: _listPortifolio[item],
+                );
+              },
+            ),
           ),
           const SizedBox(
             height: 40,

@@ -21,16 +21,20 @@ class PortifolioModel extends Portifolio {
           assets: assets,
         );
 
-  factory PortifolioModel.fromJson(Map<String, dynamic> json) =>
-      PortifolioModel(
-        id: json['id'],
-        name: json['name'],
-        coin: json['coin'],
-        subTotal: json['subTotal'],
-        totalPriceActual: json['totalPriceActual'],
-        percent: json['percent'],
-        assets: json['assets'],
-      );
+  factory PortifolioModel.fromJson(Map<String, dynamic> json) {
+    List<dynamic> assetsJson = json['assets'];
+    List<AssetsModel> assets =
+        assetsJson.map((value) => AssetsModel.fromJson(value)).toList();
+    return PortifolioModel(
+      id: json['id'],
+      name: json['name'],
+      coin: json['coin'],
+      subTotal: double.parse(json['subTotal'].toString()),
+      totalPriceActual: double.parse(json['totalPriceActual'].toString()),
+      percent: double.parse(json['percent'].toString()),
+      assets: assets,
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         'id': id,

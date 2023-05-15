@@ -26,7 +26,13 @@ class PortifolioRepository implements IPortifolioRepoitory {
                 percent: value.percent,
                 subTotal: value.subTotal,
                 totalPriceActual: value.totalPriceActual,
-                assets: value.assets,
+                assets: value.assets
+                    .map((value) => Assets(
+                          symbol: value.symbol,
+                          quanty: value.quanty,
+                          price: value.price,
+                        ))
+                    .toList(),
               ))
           .toList());
     } on ServerException {

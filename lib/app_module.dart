@@ -37,7 +37,7 @@ class AppModule extends Module {
     //Http Client
     Bind.lazySingleton((i) => http.Client()),
     //Store
-    Bind.factory((i) => HomeStore(i())),
+    Bind.factory((i) => HomeStore(i(), i())),
     Bind.factory((i) => TradeStore(i(), i())),
     Bind.factory((i) => ListCoinStore(i())),
     Bind.factory((i) => ListPortifolioStore(i())),

@@ -1,14 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/root.dart';
 
-class ContainerCard extends StatelessWidget {
-  const ContainerCard({super.key});
+class ContainerCard extends StatefulWidget {
+  Portifolio portifolio;
 
+  ContainerCard({super.key, required this.portifolio});
+
+  @override
+  State<ContainerCard> createState() => _ContainerCardState();
+}
+
+class _ContainerCardState extends State<ContainerCard> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 200,
-      width: double.maxFinite,
+      height: 150,
+      width: 300,
+      margin: const EdgeInsets.only(
+        left: 10,
+        right: 10,
+      ),
       padding: const EdgeInsets.all(15),
       decoration: const BoxDecoration(
           color: Color(RootStyle.primaryColor),
@@ -19,17 +31,17 @@ class ContainerCard extends StatelessWidget {
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const <Widget>[
+            children: <Widget>[
               Text(
-                'MINHA CARTEIRA',
-                style: TextStyle(
+                widget.portifolio.name,
+                style: const TextStyle(
                     color: Color(RootStyle.ptColor),
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
               ),
               Text(
-                '\$ 1,929.21',
-                style: TextStyle(
+                widget.portifolio.subTotal.toString(),
+                style: const TextStyle(
                   color: Color(RootStyle.ptColor),
                   fontSize: 20,
                   fontWeight: FontWeight.w900,
@@ -40,15 +52,16 @@ class ContainerCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
-            children: const <Widget>[
+            children: <Widget>[
               Text(
-                '+ 0,5%',
-                style: TextStyle(
-                    color: Color(RootStyle.ptColor),
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold),
+                widget.portifolio.percent.toStringAsFixed(5),
+                style: const TextStyle(
+                  color: Color(RootStyle.ptColor),
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              Icon(
+              const Icon(
                 Icons.trending_up,
                 size: 40,
                 color: Colors.green,
