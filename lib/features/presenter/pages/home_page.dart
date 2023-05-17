@@ -24,29 +24,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final store = Modular.get<HomeStore>();
-  final storeTransaction = Modular.get<ListPortifolioStore>();
   var _isLoading = false;
-  double total = 0.0;
-  late List<Assets> _list;
-  List<Portifolio> _listPortifolio = [];
+  late List<Assets> _listAssets;
+  late List<Portifolio> _listPortifolio;
 
-  Future<void> _fetchTrades() async {
+  Future _fetchs() async {
     _isLoading = true;
-    final result = await storeTransaction.getAllTrade();
+    final resultAssets = await store.getAllAssetsRecents();
+    final resultPortifolios = await store.getAllPortifolio();
     setState(() {
-      _list = result;
-      _list.forEach((e) => total += e.price * e.quanty);
-      _isLoading = false;
-    });
-  }
-
-  Future<void> _fetchPortifolio() async {
-    _isLoading = true;
-    final result = await store.getAllPortifolio();
-    _list = [];
-
-    setState(() {
-      _listPortifolio = result;
+      _listPortifolio = resultPortifolios;
+      _listAssets = resultAssets;
       _isLoading = false;
     });
   }
@@ -54,7 +42,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    _fetchPortifolio();
+    _fetchs();
   }
 
   @override
@@ -70,10 +58,11 @@ class _HomePageState extends State<HomePage> {
             height: 30,
           ),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 height: 200,
-                width: 300,
+                width: 335,
                 child: _isLoading
                     ? const Center(
                         child: CircularProgressIndicator(),
@@ -122,12 +111,12 @@ class _HomePageState extends State<HomePage> {
                   child: CircularProgressIndicator(),
                 )
               : Expanded(
-                  child: _list.isNotEmpty
+                  child: _listAssets.isNotEmpty
                       ? ListView.builder(
-                          itemCount: _list.length,
+                          itemCount: _listAssets.length,
                           itemBuilder: (context, item) {
                             ListCardPortifolio list = ListCardPortifolio(
-                              assets: _list[item],
+                              assets: _listAssets[item],
                             );
                             return list;
                           },

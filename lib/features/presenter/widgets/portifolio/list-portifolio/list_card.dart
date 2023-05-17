@@ -11,8 +11,7 @@ import 'package:flutter_modular/flutter_modular.dart';
 
 class ListCardPortifolio extends StatefulWidget {
   final Assets assets;
-  double? profite = 0.0;
-  ListCardPortifolio({
+  const ListCardPortifolio({
     super.key,
     required this.assets,
   });
@@ -23,29 +22,14 @@ class ListCardPortifolio extends StatefulWidget {
 
 class _ListCardPortifolio extends State<ListCardPortifolio> {
   final store = Modular.get<HomeStore>();
-  double profit = 0.0;
-  Coin coin = Coin(symbol: '', price: 0.0);
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
   }
 
-  double get totalProfit => profit;
-
-  _getProfit(Coin coin) {
-    double valuePast = widget.assets.price * widget.assets.quanty;
-    double valuePresent = coin.price * widget.assets.quanty;
-
-    setState(() {
-      profit = valuePresent - valuePast;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    _getProfit(coin);
     return Container(
       padding: const EdgeInsets.all(20),
       margin: const EdgeInsets.only(
@@ -84,21 +68,12 @@ class _ListCardPortifolio extends State<ListCardPortifolio> {
               ),
             ],
           ),
-          profit != 0.0
-              ? profit < 0
-                  ? Text(
-                      '\$${profit.toStringAsFixed(6)}',
-                      style: const TextStyle(
-                        color: Colors.red,
-                      ),
-                    )
-                  : Text(
-                      '+ \$${profit.toStringAsFixed(6)}',
-                      style: const TextStyle(
-                        color: Colors.green,
-                      ),
-                    )
-              : _getProfit(coin)
+          Text(
+            '\$${widget.assets.price}',
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          )
         ],
       ),
     );
