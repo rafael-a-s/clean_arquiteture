@@ -16,7 +16,7 @@ class _ContainerCardState extends State<ContainerCard> {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      width: 300,
+      width: 280,
       margin: const EdgeInsets.only(
         left: 10,
         right: 10,

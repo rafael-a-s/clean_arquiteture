@@ -69,27 +69,41 @@ class _HomePageState extends State<HomePage> {
           const SizedBox(
             height: 30,
           ),
-          SizedBox(
-            height: 200,
-            child: ListView.builder(
-              physics: const ClampingScrollPhysics(),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: _listPortifolio.length,
-              itemBuilder: (context, item) {
-                return GestureDetector(
-                  onTap: () {
-                    Modular.to.navigate(
-                      '/portifolio',
-                      arguments: _listPortifolio[item],
-                    );
-                  },
-                  child: ContainerCard(
-                    portifolio: _listPortifolio[item],
-                  ),
-                );
-              },
-            ),
+          Row(
+            children: [
+              SizedBox(
+                height: 200,
+                width: 300,
+                child: _isLoading
+                    ? const Center(
+                        child: CircularProgressIndicator(),
+                      )
+                    : _listPortifolio.isEmpty
+                        ? const Center(
+                            child: Text('Sem portifolio no momento'),
+                          )
+                        : ListView.builder(
+                            physics: const ClampingScrollPhysics(),
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: _listPortifolio.length,
+                            itemBuilder: (context, item) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Modular.to.navigate(
+                                    '/portifolio',
+                                    arguments: _listPortifolio[item],
+                                  );
+                                },
+                                child: ContainerCard(
+                                  portifolio: _listPortifolio[item],
+                                ),
+                              );
+                            },
+                          ),
+              ),
+              const PlusPortifolio()
+            ],
           ),
           const SizedBox(
             height: 40,
