@@ -44,7 +44,7 @@ class _ListCard extends State<ListCard> {
               ),
               IconButton(
                 onPressed: () => {
-                  Modular.to.navigate('/new-trade', arguments: widget.coin),
+                  Modular.to.navigate('/new-asset', arguments: widget.coin),
                 },
                 icon: const Icon(
                   Icons.chevron_right,

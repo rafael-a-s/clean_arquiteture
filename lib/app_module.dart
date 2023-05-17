@@ -16,12 +16,13 @@ import 'package:my_app/features/presenter/controllers/create_portifolio.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/controllers/list_coin_store.dart';
 import 'package:my_app/features/presenter/controllers/list_portifolio_store.dart';
+import 'package:my_app/features/presenter/controllers/portifolio/add_asset_store.dart';
 import 'package:my_app/features/presenter/controllers/trade_store.dart';
 import 'package:my_app/features/presenter/pages/about_page.dart';
 import 'package:my_app/features/presenter/pages/create_portifolio.dart';
 import 'package:my_app/features/presenter/pages/home_page.dart';
 import 'package:my_app/features/presenter/pages/list_coin_page.dart';
-import 'package:my_app/features/presenter/pages/new_trade.dart';
+import 'package:my_app/features/presenter/pages/portifolio/add_asset_portifolio.dart';
 import 'package:my_app/features/presenter/pages/portifolio_page.dart';
 
 class AppModule extends Module {
@@ -45,7 +46,7 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => http.Client()),
     //Store
     Bind.factory((i) => HomeStore(i(), i(), i())),
-    Bind.factory((i) => TradeStore(i(), i())),
+    Bind.factory((i) => AddAssetStore(i(), i())),
     Bind.factory((i) => ListCoinStore(i())),
     Bind.factory((i) => ListPortifolioStore(i())),
     Bind.factory((i) => CreatePortifolioStore(i())),
@@ -64,8 +65,8 @@ class AppModule extends Module {
           transition: TransitionType.downToUp,
         ),
         ChildRoute(
-          '/new-trade',
-          child: (_, __) => Trade(coin: __.data),
+          '/new-asset',
+          child: (_, __) => AddNewAssetPortifolioPage(portifolio: __.data),
           transition: TransitionType.leftToRightWithFade,
         ),
         ChildRoute(

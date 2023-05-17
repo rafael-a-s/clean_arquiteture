@@ -7,31 +7,24 @@ import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
+import 'package:my_app/features/presenter/controllers/portifolio/add_asset_store.dart';
 import 'package:my_app/features/presenter/controllers/trade_store.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:my_app/features/presenter/widgets/snack-bar/snack-bar.dart';
 
-class Trade extends StatefulWidget {
-  final Coin coin;
-  const Trade({super.key, required this.coin});
+class AddNewAssetPortifolioPage extends StatefulWidget {
+  final Portifolio portifolio;
+  const AddNewAssetPortifolioPage({super.key, required this.portifolio});
 
   @override
-  State<StatefulWidget> createState() => _Trade();
+  State<StatefulWidget> createState() => _AddNewAssetPortifolioPage();
 }
 
-class _Trade extends State<Trade> {
-  final store = Modular.get<TradeStore>();
+class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
+  final store = Modular.get<AddAssetStore>();
   var coin = const Coin(symbol: '', price: 0.0);
-  var trade = const Portifolio(
-    id: '',
-    name: '',
-    coin: '',
-    subTotal: 0.0,
-    totalPriceActual: 0.0,
-    percent: 0.0,
-    assets: [Assets(symbol: '', quanty: 0, price: 0)],
-  );
+
   Timer? _timer;
 
   final _formKey = GlobalKey<FormState>();
@@ -40,26 +33,19 @@ class _Trade extends State<Trade> {
 
   final String INVALID_LABEL = 'Campos obrigatórios não podem ser vazios!';
 
+  Future _fetchCoin() async {
+    final result = await store.getCoinSymbol(widget.portifolio.coin);
+    setState(() {
+      coin = result;
+      _price.text = coin.price.toStringAsFixed(9);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
-    _price.text = widget.coin.price.toStringAsFixed(9);
     _amount.text = '0';
-  }
-
-  Future<bool> _addTransactional(double? p, double? a) async {
-    var portifolio = const Portifolio(
-      id: '',
-      name: '',
-      coin: '',
-      subTotal: 0,
-      totalPriceActual: 0,
-      percent: 0,
-      assets: [Assets(symbol: '', quanty: 0, price: 0)],
-    );
-    Assets result = await store.createTrade(trade);
-
-    return result.id == null ? false : true;
+    _fetchCoin();
   }
 
   void showSuccessMessage(BuildContext context) {
@@ -103,7 +89,10 @@ class _Trade extends State<Trade> {
               children: [
                 IconButton(
                     onPressed: () {
-                      Modular.to.navigate('/list-coin');
+                      Modular.to.navigate(
+                        '/portifolio',
+                        arguments: widget.portifolio,
+                      );
                     },
                     icon: const Icon(Icons.arrow_back)),
                 const Text(
@@ -136,7 +125,7 @@ class _Trade extends State<Trade> {
                     decoration: InputDecoration(
                       border: InputBorder.none,
                       suffix: Text(
-                        widget.coin.symbol.toString(),
+                        widget.portifolio.coin,
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),
@@ -174,23 +163,22 @@ class _Trade extends State<Trade> {
                 ),
               ],
             ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(RootStyle.bgColor),
-                minimumSize: const Size(100, 50),
+            TextButton(
+              style: const ButtonStyle(
+                minimumSize: MaterialStatePropertyAll<Size?>(
+                  Size(double.infinity, 50),
+                ),
+                backgroundColor: MaterialStatePropertyAll<Color?>(
+                  Color(RootStyle.primaryColor),
+                ),
               ),
-              onPressed: () async => {
-                if (_formKey.currentState!.validate())
-                  {
-                    _addTransactional(
-                      double.tryParse(_price.text),
-                      double.tryParse(_amount.text.toString()),
-                    ).then(
-                      (value) => value ? showSuccessMessage(context) : false,
-                    )
-                  }
-              },
-              child: const Text('Adicionar Transação'),
+              onPressed: () async => {},
+              child: const Text(
+                'Adicionar Transação',
+                style: TextStyle(
+                  color: Color(RootStyle.ptColor),
+                ),
+              ),
             )
           ],
         ),

@@ -80,7 +80,12 @@ class _PortifolioPage extends State<PortifolioPage> {
               Row(
                 children: [
                   IconButton(
-                    onPressed: () => {Modular.to.navigate('/list-coin')},
+                    onPressed: () => {
+                      Modular.to.navigate(
+                        '/new-asset',
+                        arguments: widget.portifolio,
+                      )
+                    },
                     icon: const Icon(
                       Icons.add,
                     ),
