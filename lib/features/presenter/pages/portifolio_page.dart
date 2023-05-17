@@ -86,7 +86,7 @@ class _PortifolioPage extends State<PortifolioPage> {
                     ),
                     hoverColor: const Color(RootStyle.bgColor),
                   ),
-                  const Text('Adicionar Trade')
+                  const Text('Adicionar Moeda')
                 ],
               )
             ],
