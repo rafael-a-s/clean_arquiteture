@@ -30,14 +30,6 @@ class _ListCardPortifolio extends State<ListCardPortifolio> {
   @override
   void initState() {
     super.initState();
-    _getValue();
-  }
-
-  Future<void> _getValue() async {
-    final result = await store.getCoinSymbol(widget.assets.symbol);
-    setState(() {
-      coin = result;
-    });
   }
 
   double get totalProfit => profit;
