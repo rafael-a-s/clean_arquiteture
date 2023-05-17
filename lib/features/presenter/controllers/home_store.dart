@@ -11,7 +11,7 @@ import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.d
 class HomeStore extends NotifierStore<Failure, Coin> {
   final CoinUseCase usecase;
   final GetAllPortifolioUseCase getAllPortifolioUseCase;
-  final GetAllAssetsRecents getAllAssetsRecentsUseCase;
+  final GetAllAssetsRecentsUseCase getAllAssetsRecentsUseCase;
 
   HomeStore(
     this.usecase,
