@@ -4,16 +4,19 @@ import 'package:my_app/core/usecase/usecase.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
+import 'package:my_app/features/domain/usecases/assets/get_all_recents_usecase.dart';
 import 'package:my_app/features/domain/usecases/coin/coin_usecase.dart';
 import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.dart';
 
 class HomeStore extends NotifierStore<Failure, Coin> {
   final CoinUseCase usecase;
   final GetAllPortifolioUseCase getAllPortifolioUseCase;
+  final GetAllAssetsRecents getAllAssetsRecentsUseCase;
 
   HomeStore(
     this.usecase,
     this.getAllPortifolioUseCase,
+    this.getAllAssetsRecentsUseCase,
   ) : super(
           const Coin(
             symbol: '',
@@ -41,15 +44,18 @@ class HomeStore extends NotifierStore<Failure, Coin> {
     );
   }
 
-  Future<Coin> getCoinSymbol(String symbol) async {
+  Future<List<Assets>> getAllAssetsRecents() async {
     setLoading(true);
-    final result = await usecase(symbol);
+    final result = await getAllAssetsRecentsUseCase(NoParams());
     setLoading(false);
     return result.fold(
-      (error) => const Coin(
-        symbol: '',
-        price: 0.0,
-      ),
+      (error) => <Assets>[
+        const Assets(
+          symbol: '',
+          price: 0.0,
+          quanty: 0.0,
+        )
+      ],
       (sucess) => sucess,
     );
   }
