@@ -1,12 +1,13 @@
 import 'package:my_app/core/usecase/erros/exceptions.dart';
 import 'package:my_app/features/data/datasources/assets/assets_datasource.dart';
+import 'package:my_app/features/data/datasources/assets/i_assets_datasource.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/core/usecase/erros/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:my_app/features/domain/repositories/i_assets_repository.dart';
 
 class AssetsRepository implements IAssetsRepository {
-  late final AssetsDataSource dataSource;
+  late final IAssetsDataSource dataSource;
 
   AssetsRepository(this.dataSource);
 
