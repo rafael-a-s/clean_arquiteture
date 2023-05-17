@@ -63,7 +63,14 @@ class _ListCardPortifolio extends State<ListCardPortifolio> {
                   const SizedBox(
                     height: 10,
                   ),
-                  Text(widget.assets.price.toString()),
+                  Text(
+                    widget.assets.price.toString(),
+                    style: const TextStyle(
+                      color: Color(
+                        RootStyle.stColor,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ],
