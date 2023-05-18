@@ -46,7 +46,7 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => http.Client()),
     //Store
     Bind.factory((i) => HomeStore(i(), i(), i())),
-    Bind.factory((i) => AddAssetStore(i())),
+    Bind.factory((i) => AddAssetStore(i(), i())),
     Bind.factory((i) => ListCoinStore(i())),
     Bind.factory((i) => ListPortifolioStore(i())),
     Bind.factory((i) => CreatePortifolioStore(i())),

@@ -11,9 +11,11 @@ import 'package:my_app/features/domain/usecases/portifolio/add_asset_portifolio.
 import 'package:my_app/features/domain/usecases/portifolio/create.dart';
 
 class AddAssetStore extends NotifierStore<Failure, Portifolio> {
+  final CoinUseCase usecase;
   final AddAssetPortifolioUseCase usecaseAddAsset;
 
   AddAssetStore(
+    this.usecase,
     this.usecaseAddAsset,
   ) : super(
           const Portifolio(
@@ -25,6 +27,19 @@ class AddAssetStore extends NotifierStore<Failure, Portifolio> {
             assets: [],
           ),
         );
+
+  Future<Coin> getCoinSymbol(String symbol) async {
+    setLoading(true);
+    final result = await usecase(symbol);
+    setLoading(false);
+    return result.fold(
+      (error) => const Coin(
+        symbol: '',
+        price: 0.0,
+      ),
+      (success) => success,
+    );
+  }
 
   Future<Portifolio> addAsset(String id, Assets asset) async {
     setLoading(true);
