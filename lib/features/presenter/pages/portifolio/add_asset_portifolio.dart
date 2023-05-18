@@ -24,12 +24,12 @@ class AddNewAssetPortifolioPage extends StatefulWidget {
 class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
   final store = Modular.get<AddAssetStore>();
   var coin = const Coin(symbol: '', price: 0.0);
-
+  late Portifolio portifolioUpdated;
   Timer? _timer;
 
   final _formKey = GlobalKey<FormState>();
   final _price = TextEditingController();
-  final _amount = TextEditingController();
+  final _quanty = TextEditingController();
 
   final String INVALID_LABEL = 'Campos obrigatórios não podem ser vazios!';
 
@@ -44,8 +44,14 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
   @override
   void initState() {
     super.initState();
-    _amount.text = '0';
+    _quanty.text = '0';
     _fetchCoin();
+  }
+
+  Future<bool> _addAssetPortifolio(String id, Assets asset) async {
+    Portifolio result = await store.addAsset(id, asset);
+    portifolioUpdated = result;
+    return result.id == null ? false : true;
   }
 
   void showSuccessMessage(BuildContext context) {
@@ -60,7 +66,10 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
         elevation: 0,
       ),
     );
-    Modular.to.navigate('/');
+    Modular.to.navigate(
+      '/portifolio',
+      arguments: portifolioUpdated,
+    );
   }
 
   @override
@@ -110,7 +119,7 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
                   child: TextFormField(
                     autofocus: true,
                     keyboardType: TextInputType.number,
-                    controller: _amount,
+                    controller: _quanty,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return INVALID_LABEL;
@@ -132,7 +141,7 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
                     onChanged: (value) => {
                       if (_timer?.isActive ?? false) _timer?.cancel(),
                       _timer = Timer(const Duration(milliseconds: 800), () {
-                        if (_amount.text.isEmpty) _amount.text = '0';
+                        if (_quanty.text.isEmpty) _quanty.text = '0';
                       })
                     },
                   ),
@@ -172,7 +181,21 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
                   Color(RootStyle.primaryColor),
                 ),
               ),
-              onPressed: () async => {},
+              onPressed: () async => {
+                if (_formKey.currentState!.validate())
+                  {
+                    _addAssetPortifolio(
+                      widget.portifolio.id!,
+                      Assets(
+                        symbol: coin.symbol,
+                        quanty: double.parse(_quanty.text),
+                        price: double.parse(_price.text),
+                      ),
+                    ).then(
+                      (value) => value ? showSuccessMessage(context) : false,
+                    )
+                  },
+              },
               child: const Text(
                 'Adicionar Transação',
                 style: TextStyle(

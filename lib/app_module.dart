@@ -10,6 +10,7 @@ import 'package:my_app/features/domain/usecases/assets/get_all_recents_usecase.d
 import 'package:my_app/features/domain/usecases/coin/coin_usecase.dart';
 import 'package:my_app/features/domain/usecases/coin/get_all_coin_usecase.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/features/domain/usecases/portifolio/add_asset_portifolio.dart';
 import 'package:my_app/features/domain/usecases/portifolio/create.dart';
 import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.dart';
 import 'package:my_app/features/presenter/controllers/create_portifolio.dart';
@@ -39,6 +40,7 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => AssetsDataSource(client: i())),
     //Portifolio
     Bind.lazySingleton((i) => CreatePortifolioUseCase(i())),
+    Bind.lazySingleton((i) => AddAssetPortifolioUseCase(i())),
     Bind.lazySingleton((i) => PortifolioRepository(i())),
     Bind.lazySingleton((i) => PortifolioDataSource(client: i())),
     Bind.lazySingleton((i) => GetAllPortifolioUseCase(i())),
