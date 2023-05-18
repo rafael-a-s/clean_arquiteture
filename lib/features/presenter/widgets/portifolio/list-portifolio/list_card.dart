@@ -64,7 +64,7 @@ class _ListCardPortifolio extends State<ListCardPortifolio> {
                     height: 10,
                   ),
                   Text(
-                    widget.assets.price.toString(),
+                    widget.assets.quanty.toString(),
                     style: const TextStyle(
                       color: Color(
                         RootStyle.stColor,
