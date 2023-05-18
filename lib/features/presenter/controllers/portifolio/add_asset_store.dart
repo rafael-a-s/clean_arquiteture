@@ -7,14 +7,15 @@ import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/domain/usecases/coin/coin_usecase.dart';
+import 'package:my_app/features/domain/usecases/portifolio/add_asset_portifolio.dart';
 import 'package:my_app/features/domain/usecases/portifolio/create.dart';
 
 class AddAssetStore extends NotifierStore<Failure, Portifolio> {
-  final CoinUseCase usecase;
-  final CreatePortifolioUseCase usecaseTrade;
+  final AddAssetPortifolioUseCase usecaseAddAsset;
 
-  AddAssetStore(this.usecase, this.usecaseTrade)
-      : super(
+  AddAssetStore(
+    this.usecaseAddAsset,
+  ) : super(
           const Portifolio(
             name: '',
             coin: '',
@@ -25,22 +26,15 @@ class AddAssetStore extends NotifierStore<Failure, Portifolio> {
           ),
         );
 
-  Future<Coin> getCoinSymbol(String symbol) async {
+  Future<Portifolio> addAsset(String id, Assets asset) async {
     setLoading(true);
-    final result = await usecase(symbol);
-    setLoading(false);
-    return result.fold(
-      (error) => const Coin(
-        symbol: '',
-        price: 0.0,
+    final result = await usecaseAddAsset(
+      TwoInputParams(
+        id,
+        asset,
       ),
-      (success) => success,
     );
-  }
 
-  addAsset(Portifolio portifolio) async {
-    setLoading(true);
-    final result = await usecaseTrade(portifolio);
     setLoading(false);
     return result.fold(
       (error) => const Portifolio(
