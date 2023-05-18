@@ -3,4 +3,6 @@ class PortifolioEndPoints {
 
   static Uri getAllPortifolios() => Uri.http(_host, '/portifolio');
   static Uri createPortifolio() => Uri.http(_host, '/portifolio');
+  static Uri addAssetPortifolio(String id) =>
+      Uri.http(_host, '/portifolio/add-asset/$id');
 }

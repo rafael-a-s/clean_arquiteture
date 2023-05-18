@@ -45,4 +45,21 @@ class PortifolioDataSource implements IPortifolioDataSource {
         ? PortifolioModel.fromJson(json.decode(response.body))
         : throw ServerException();
   }
+
+  @override
+  Future<PortifolioModel> addAssetPortifolio(
+      String id, AssetsModel asset) async {
+    final body = asset.toJson();
+    final response = await client.patch(
+      PortifolioEndPoints.addAssetPortifolio(id),
+      headers: <String, String>{
+        'Content-Type': 'application/json',
+      },
+      body: jsonEncode(body),
+    );
+
+    return response.statusCode == 200
+        ? PortifolioModel.fromJson(json.decode(response.body))
+        : throw ServerException();
+  }
 }
