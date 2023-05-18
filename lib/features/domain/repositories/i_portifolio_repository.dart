@@ -6,4 +6,8 @@ import 'package:dartz/dartz.dart';
 abstract class IPortifolioRepoitory {
   Future<Either<Failure, List<Portifolio>>> getAllPortifolios();
   Future<Either<Failure, Portifolio>> createPortifolio(Portifolio assets);
+  Future<Either<Failure, Portifolio>> addAssetPortifolio(
+    String id,
+    Assets asset,
+  );
 }

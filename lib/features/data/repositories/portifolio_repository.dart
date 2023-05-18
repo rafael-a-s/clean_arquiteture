@@ -73,4 +73,30 @@ class PortifolioRepository implements IPortifolioRepoitory {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  Future<Either<Failure, Portifolio>> addAssetPortifolio(
+      String id, Assets asset) async {
+    try {
+      final result = await datasource.addAssetPortifolio(
+          id,
+          AssetsModel(
+            symbol: asset.symbol,
+            quanty: asset.quanty,
+            price: asset.price,
+          ));
+
+      return Right(Portifolio(
+        id: result.id,
+        name: result.name,
+        coin: result.coin,
+        percent: result.percent,
+        subTotal: result.subTotal,
+        totalPriceActual: result.totalPriceActual,
+        assets: result.assets,
+      ));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
 }
