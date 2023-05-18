@@ -3,6 +3,7 @@ import 'dart:ffi' as ffi;
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
@@ -25,13 +26,27 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
   final store = Modular.get<AddAssetStore>();
   var coin = const Coin(symbol: '', price: 0.0);
   late Portifolio portifolioUpdated;
-  Timer? _timer;
 
   final _formKey = GlobalKey<FormState>();
   final _price = TextEditingController();
   final _quanty = TextEditingController();
 
   final String INVALID_LABEL = 'Campos obrigatórios não podem ser vazios!';
+
+  String _subTotal() {
+    final price = _quanty.text.isNotEmpty
+        ? double.parse(
+            _quanty.text.replaceAll(' ', ''),
+          )
+        : 0;
+    final quanty = _price.text.isNotEmpty
+        ? double.parse(
+            _price.text.replaceAll(' ', ''),
+          )
+        : 0;
+
+    return (price * quanty).toStringAsFixed(6);
+  }
 
   Future _fetchCoin() async {
     final result = await store.getCoinSymbol(widget.portifolio.coin);
@@ -46,6 +61,13 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
     super.initState();
     _quanty.text = '0';
     _fetchCoin();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _price.dispose();
+    _quanty.dispose();
   }
 
   Future<bool> _addAssetPortifolio(String id, Assets asset) async {
@@ -120,6 +142,8 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
                     autofocus: true,
                     keyboardType: TextInputType.number,
                     controller: _quanty,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    autovalidateMode: AutovalidateMode.always,
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return INVALID_LABEL;
@@ -139,10 +163,7 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
                       ),
                     ),
                     onChanged: (value) => {
-                      if (_timer?.isActive ?? false) _timer?.cancel(),
-                      _timer = Timer(const Duration(milliseconds: 800), () {
-                        if (_quanty.text.isEmpty) _quanty.text = '0';
-                      })
+                      setState(() {}),
                     },
                   ),
                 ),
@@ -155,6 +176,11 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
                   child: TextFormField(
                     controller: _price,
                     keyboardType: TextInputType.number,
+                    inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                    autovalidateMode: AutovalidateMode.always,
+                    onChanged: (value) => {
+                      setState(() {}),
+                    },
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return INVALID_LABEL;
@@ -172,6 +198,72 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
                 ),
               ],
             ),
+            SizedBox(
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Preço',
+                        style: TextStyle(
+                          color: Color(
+                            RootStyle.stColor,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        _price.text,
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Quantidade',
+                        style: TextStyle(
+                          color: Color(
+                            RootStyle.stColor,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        _quanty.value.text.toString(),
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Total da ordem',
+                        style: TextStyle(
+                          color: Color(
+                            RootStyle.stColor,
+                          ),
+                        ),
+                      ),
+                      Text(
+                        '\$ ${_subTotal()}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
             TextButton(
               style: const ButtonStyle(
                 minimumSize: MaterialStatePropertyAll<Size?>(
@@ -188,8 +280,8 @@ class _AddNewAssetPortifolioPage extends State<AddNewAssetPortifolioPage> {
                       widget.portifolio.id!,
                       Assets(
                         symbol: coin.symbol,
-                        quanty: double.parse(_quanty.text),
-                        price: double.parse(_price.text),
+                        quanty: double.parse(_quanty.text.replaceAll(' ', '')),
+                        price: double.parse(_price.text.replaceAll(' ', '')),
                       ),
                     ).then(
                       (value) => value ? showSuccessMessage(context) : false,
