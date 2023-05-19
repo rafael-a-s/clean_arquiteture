@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class RootStyle {
-  static const primaryColor = 0xFF804fbc;
+  static const primaryColor = 0xFF5D2A98;
   static const secondColor = 0xFF161728;
   static const bgColor = 0xFF000000;
   static const ptColor = 0xFFFFFFFF;

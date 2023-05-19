@@ -30,7 +30,7 @@ class _ContainerCardState extends State<ContainerCard> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.end,
             children: <Widget>[
               Text(
                 widget.portifolio.name,
@@ -39,32 +39,34 @@ class _ContainerCardState extends State<ContainerCard> {
                     fontSize: 14,
                     fontWeight: FontWeight.w500),
               ),
-              Text(
-                widget.portifolio.subTotal.toString(),
-                style: const TextStyle(
-                  color: Color(RootStyle.ptColor),
-                  fontSize: 20,
-                  fontWeight: FontWeight.w900,
-                ),
-              )
             ],
+          ),
+          Text(
+            '\$${widget.portifolio.subTotal.toString()}',
+            style: const TextStyle(
+              color: Color(RootStyle.ptColor),
+              fontSize: 35,
+              fontWeight: FontWeight.w900,
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Text(
-                widget.portifolio.percent.toStringAsFixed(5),
-                style: const TextStyle(
-                  color: Color(RootStyle.ptColor),
-                  fontSize: 20,
+                '% ${widget.portifolio.percent.toStringAsFixed(2)}',
+                style: TextStyle(
+                  color:
+                      widget.portifolio.percent < 0 ? Colors.red : Colors.green,
+                  fontSize: 15,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const Icon(
+              Icon(
                 Icons.trending_up,
                 size: 40,
-                color: Colors.green,
+                color:
+                    widget.portifolio.percent < 0 ? Colors.red : Colors.green,
               )
             ],
           )

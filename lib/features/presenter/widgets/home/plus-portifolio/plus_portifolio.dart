@@ -11,7 +11,7 @@ class PlusPortifolio extends StatelessWidget {
       height: 200,
       width: 40,
       decoration: const BoxDecoration(
-          color: Color(0xFF9b9bdd),
+          color: Color(RootStyle.primaryColor),
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
       child: IconButton(
         onPressed: () => Modular.to.navigate('/new-portifolio'),
