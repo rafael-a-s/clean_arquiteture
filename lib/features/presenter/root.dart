@@ -8,6 +8,8 @@ class RootStyle {
   static const stColor = 0xFFb9b9b9;
   static const otherColor = 0xFF33415b;
 
+  static const defaultPadding = 16.0;
+
   static const title1Style = TextStyle(
     fontSize: 30,
     fontWeight: FontWeight.w700,
