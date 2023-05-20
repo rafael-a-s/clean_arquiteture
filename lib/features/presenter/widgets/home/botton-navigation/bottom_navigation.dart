@@ -62,12 +62,12 @@ class _BottomNavigation extends State<BottomNavigation> {
               iconSize: 30,
               icon: Icon(
                 Icons.credit_score,
-                color: Modular.to.path == '/portifolio'
+                color: Modular.to.path == '/portifolio-geral'
                     ? Color(RootStyle.primaryColor)
                     : Color(RootStyle.stColor),
               ),
               onPressed: () => setState(() {
-                Modular.to.navigate('/portifolio');
+                Modular.to.navigate('/portifolio-geral');
               }),
             ),
           ],
