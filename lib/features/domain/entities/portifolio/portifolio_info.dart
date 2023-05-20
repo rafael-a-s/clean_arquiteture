@@ -2,10 +2,10 @@ import 'dart:ffi';
 import 'package:equatable/equatable.dart';
 
 class PortifolioInfo extends Equatable {
-  final String total;
-  final String totalUpdated;
-  final String pnl;
-  final String percent;
+  final double total;
+  final double totalUpdated;
+  final double pnl;
+  final double percent;
 
   const PortifolioInfo({
     required this.total,

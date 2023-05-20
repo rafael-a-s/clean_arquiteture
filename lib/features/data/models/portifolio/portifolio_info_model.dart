@@ -2,10 +2,10 @@ import 'package:my_app/features/domain/entities/portifolio/portifolio_info.dart'
 
 class PortifolioInfoModel extends PortifolioInfo {
   const PortifolioInfoModel({
-    required String total,
-    required String totalUpdated,
-    required String pnl,
-    required String percent,
+    required double total,
+    required double totalUpdated,
+    required double pnl,
+    required double percent,
   }) : super(
           total: total,
           totalUpdated: totalUpdated,
@@ -15,10 +15,10 @@ class PortifolioInfoModel extends PortifolioInfo {
 
   factory PortifolioInfoModel.fromJson(Map<String, dynamic> json) {
     return PortifolioInfoModel(
-      total: json['total'],
-      totalUpdated: json['totalUpdated'],
-      pnl: json['pnl'],
-      percent: json['percent'],
+      total: double.parse(json['total']),
+      totalUpdated: double.parse(json['totalUpdated']),
+      pnl: double.parse(json['pnl']),
+      percent: double.parse(json['pnl']),
     );
   }
 
