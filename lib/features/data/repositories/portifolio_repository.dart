@@ -7,6 +7,7 @@ import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/core/usecase/erros/failures.dart';
 import 'package:dartz/dartz.dart';
+import 'package:my_app/features/domain/entities/portifolio/portifolio_info.dart';
 import 'package:my_app/features/domain/repositories/i_portifolio_repository.dart';
 
 class PortifolioRepository implements IPortifolioRepoitory {
@@ -95,6 +96,23 @@ class PortifolioRepository implements IPortifolioRepoitory {
         totalPriceActual: result.totalPriceActual,
         assets: result.assets,
       ));
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, PortifolioInfo>> getInfoPortifolio() async {
+    try {
+      final result = await datasource.getInfoAboutPortifolio();
+      return Right(
+        PortifolioInfo(
+          total: result.total,
+          totalUpdated: result.totalUpdated,
+          pnl: result.pnl,
+          percent: result.percent,
+        ),
+      );
     } on ServerException {
       return Left(ServerFailure());
     }
