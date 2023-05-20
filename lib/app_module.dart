@@ -19,6 +19,7 @@ import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/controllers/list_coin_store.dart';
 import 'package:my_app/features/presenter/controllers/list_portifolio_store.dart';
 import 'package:my_app/features/presenter/controllers/portifolio/add_asset_store.dart';
+import 'package:my_app/features/presenter/controllers/portifolio/geral_page_store.dart';
 import 'package:my_app/features/presenter/controllers/trade_store.dart';
 import 'package:my_app/features/presenter/pages/about_page.dart';
 import 'package:my_app/features/presenter/pages/create_portifolio.dart';
@@ -46,6 +47,7 @@ class AppModule extends Module {
     Bind.lazySingleton((i) => PortifolioRepository(i())),
     Bind.lazySingleton((i) => PortifolioDataSource(client: i())),
     Bind.lazySingleton((i) => GetAllPortifolioUseCase(i())),
+    Bind.lazySingleton((i) => GetInfoPortifolioUseCase(i())),
     //Http Client
     Bind.lazySingleton((i) => http.Client()),
     //Store
@@ -54,7 +56,7 @@ class AppModule extends Module {
     Bind.factory((i) => ListCoinStore(i())),
     Bind.factory((i) => ListPortifolioStore(i())),
     Bind.factory((i) => CreatePortifolioStore(i())),
-    Bind.factory((i) => GetInfoPortifolioUseCase(i())),
+    Bind.factory((i) => GeralPageStore(i())),
   ];
 
   @override
