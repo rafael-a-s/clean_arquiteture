@@ -13,10 +13,10 @@ class GeralPageStore extends NotifierStore<Failure, PortifolioInfo> {
     this.getInfoUsecase,
   ) : super(
           const PortifolioInfo(
-            total: '',
-            totalUpdated: '',
-            pnl: '',
-            percent: '',
+            total: 0,
+            totalUpdated: 0,
+            pnl: 0,
+            percent: 0,
           ),
         );
 
@@ -26,10 +26,10 @@ class GeralPageStore extends NotifierStore<Failure, PortifolioInfo> {
     setLoading(false);
     return result.fold(
       (error) => const PortifolioInfo(
-        total: '',
-        totalUpdated: '',
-        pnl: '',
-        percent: '',
+        total: 0,
+        totalUpdated: 0,
+        pnl: 0,
+        percent: 0,
       ),
       (sucess) => sucess,
     );
