@@ -5,6 +5,7 @@ import 'package:my_app/features/data/datasources/endpoints/portifolio_endpoints.
 import 'package:my_app/features/data/datasources/portifolio/i_portifolio_datasource.dart';
 import 'package:my_app/features/data/models/assets_model.dart';
 import 'package:http/http.dart' as http;
+import 'package:my_app/features/data/models/portifolio/portifolio_info_model.dart';
 import 'package:my_app/features/data/models/portifolio_model.dart';
 import 'package:pocketbase/pocketbase.dart';
 
@@ -60,6 +61,20 @@ class PortifolioDataSource implements IPortifolioDataSource {
 
     return response.statusCode == 200
         ? PortifolioModel.fromJson(json.decode(response.body))
+        : throw ServerException();
+  }
+
+  @override
+  Future<PortifolioInfoModel> getInfoAboutPortifolio() async {
+    final response =
+        await client.get(PortifolioEndPoints.infosAboutPortifolios());
+
+    return response.statusCode == 200
+        ? PortifolioInfoModel.fromJson(
+            json.decode(
+              response.body,
+            ),
+          )
         : throw ServerException();
   }
 }
