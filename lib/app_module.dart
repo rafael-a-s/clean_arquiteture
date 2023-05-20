@@ -13,6 +13,7 @@ import 'package:http/http.dart' as http;
 import 'package:my_app/features/domain/usecases/portifolio/add_asset_portifolio.dart';
 import 'package:my_app/features/domain/usecases/portifolio/create.dart';
 import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.dart';
+import 'package:my_app/features/domain/usecases/portifolio/get_infos_portifolio.dart';
 import 'package:my_app/features/presenter/controllers/create_portifolio.dart';
 import 'package:my_app/features/presenter/controllers/home_store.dart';
 import 'package:my_app/features/presenter/controllers/list_coin_store.dart';
@@ -24,6 +25,7 @@ import 'package:my_app/features/presenter/pages/create_portifolio.dart';
 import 'package:my_app/features/presenter/pages/home_page.dart';
 import 'package:my_app/features/presenter/pages/list_coin_page.dart';
 import 'package:my_app/features/presenter/pages/portifolio/add_asset_portifolio.dart';
+import 'package:my_app/features/presenter/pages/portifolio/geral_page.dart';
 import 'package:my_app/features/presenter/pages/portifolio_page.dart';
 
 class AppModule extends Module {
@@ -52,6 +54,7 @@ class AppModule extends Module {
     Bind.factory((i) => ListCoinStore(i())),
     Bind.factory((i) => ListPortifolioStore(i())),
     Bind.factory((i) => CreatePortifolioStore(i())),
+    Bind.factory((i) => GetInfoPortifolioUseCase(i())),
   ];
 
   @override
@@ -80,6 +83,11 @@ class AppModule extends Module {
           '/new-portifolio',
           child: (_, __) => const CreatePortifolio(),
           transition: TransitionType.upToDown,
+        ),
+        ChildRoute(
+          '/portifolio-geral',
+          child: (_, __) => GeralPortifolioPage(),
+          transition: TransitionType.leftToRightWithFade,
         ),
       ];
 }
