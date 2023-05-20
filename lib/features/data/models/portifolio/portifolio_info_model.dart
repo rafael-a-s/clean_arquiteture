@@ -15,10 +15,10 @@ class PortifolioInfoModel extends PortifolioInfo {
 
   factory PortifolioInfoModel.fromJson(Map<String, dynamic> json) {
     return PortifolioInfoModel(
-      total: double.parse(json['total']),
-      totalUpdated: double.parse(json['totalUpdated']),
-      pnl: double.parse(json['pnl']),
-      percent: double.parse(json['pnl']),
+      total: double.parse(json['total'].toString()),
+      totalUpdated: double.parse(json['totalUpdated'].toString()),
+      pnl: double.parse(json['pnl'].toString()),
+      percent: double.parse(json['pnl'].toString()),
     );
   }
 
