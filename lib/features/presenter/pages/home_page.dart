@@ -66,9 +66,7 @@ class _HomePageState extends State<HomePage> {
                 height: 200,
                 width: 335,
                 child: _isLoading
-                    ? const Center(
-                        child: ContainerCardSkeleton(),
-                      )
+                    ? const ContainerCardSkeleton()
                     : _listPortifolio.isEmpty
                         ? const Center(
                             child: Text('Sem portifolio no momento'),

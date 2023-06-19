@@ -2,14 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/base/skeleton/skeleton.dart';
 
-class ContainerCardSkeleton extends StatefulWidget {
+class ContainerCardSkeleton extends StatelessWidget {
   const ContainerCardSkeleton({super.key});
 
-  @override
-  State<ContainerCardSkeleton> createState() => _ContainerCardSkeleton();
-}
-
-class _ContainerCardSkeleton extends State<ContainerCardSkeleton> {
   @override
   Widget build(BuildContext context) {
     return Container(
