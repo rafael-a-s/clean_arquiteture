@@ -56,7 +56,7 @@ class AppModule extends Module {
     Bind.factory((i) => ListCoinStore(i())),
     Bind.factory((i) => ListPortifolioStore(i())),
     Bind.factory((i) => CreatePortifolioStore(i())),
-    Bind.factory((i) => GeralPageStore(i())),
+    Bind.factory((i) => GeralPageStore(i(), i())),
   ];
 
   @override
