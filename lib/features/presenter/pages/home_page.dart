@@ -14,6 +14,7 @@ import 'package:my_app/features/presenter/widgets/home/graph/graph.dart';
 import 'package:my_app/features/presenter/widgets/home/mini-cards/mini_card.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:my_app/features/presenter/widgets/home/plus-portifolio/plus_portifolio.dart';
+import 'package:my_app/features/presenter/widgets/portifolio/list-portifolio/list_card_skeleton.dart';
 import 'package:my_app/features/presenter/widgets/portifolio/list-portifolio/list_card.dart';
 
 class HomePage extends StatefulWidget {
@@ -108,8 +109,13 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           _isLoading
-              ? const Center(
-                  child: CircularProgressIndicator(),
+              ? Expanded(
+                  child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (context, item) {
+                      return const ListCardPortifolioSkeleton();
+                    },
+                  ),
                 )
               : Expanded(
                   child: _listAssets.isNotEmpty
