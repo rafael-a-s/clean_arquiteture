@@ -24,7 +24,6 @@ class _CardGeralPortifolio extends State<CardGeralPortifolio> {
   late PortifolioInfo infoPortifolio;
 
   dynamic color;
-  dynamic winnerOrLoss;
 
   final formatCurrency = NumberFormat.simpleCurrency(
     locale: "en_US",
@@ -46,7 +45,6 @@ class _CardGeralPortifolio extends State<CardGeralPortifolio> {
     super.initState();
     _fetchInfoAboutPortifolios();
     color = widget.info.pnl > 0 ? RootStyle.winerColor : RootStyle.lossColor;
-    winnerOrLoss = widget.info.pnl > 0 ? '+ ' : '- ';
   }
 
   @override
@@ -94,7 +92,7 @@ class _CardGeralPortifolio extends State<CardGeralPortifolio> {
                 ),
               ),
               Text(
-                winnerOrLoss + formatCurrency.format(widget.info.pnl),
+                formatCurrency.format(widget.info.pnl),
                 style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w500,
