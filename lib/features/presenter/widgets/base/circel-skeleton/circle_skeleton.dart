@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/presenter/root.dart';
 
 class CircleSkeleton extends StatelessWidget {
-  const CircleSkeleton({Key? key, this.size = 24}) : super(key: key);
+  const CircleSkeleton({Key? key, this.width, this.height}) : super(key: key);
 
-  final double? size;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size,
-      width: size,
+      height: height,
+      width: width,
+      padding: const EdgeInsets.all(RootStyle.defaultPadding / 2),
       decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor.withOpacity(0.04),
+        color: Colors.white.withOpacity(0.04),
         shape: BoxShape.circle,
       ),
     );
