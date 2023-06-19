@@ -59,7 +59,7 @@ class _GraphPortifolioState extends State<GraphPortifolio> {
 
     return List.generate(tamanhoLista, (i) {
       final isTouched = i == index;
-      final fontSize = isTouched ? 18.0 : 14.0;
+      final fontSize = isTouched ? 18.0 : 13.0;
       final radius = isTouched ? 60.0 : 50.0;
 
       final color = isTouched
@@ -69,7 +69,7 @@ class _GraphPortifolioState extends State<GraphPortifolio> {
       return PieChartSectionData(
         color: color,
         value: value,
-        title: formatCurrency.format(value),
+        title: '${widget.portifolio[i].coin}\n ${formatCurrency.format(value)}',
         radius: radius,
         titleStyle: TextStyle(
           fontSize: fontSize,
