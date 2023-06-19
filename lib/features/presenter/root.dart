@@ -8,6 +8,9 @@ class RootStyle {
   static const stColor = 0xFFb9b9b9;
   static const otherColor = 0xFF33415b;
 
+  static const winerColor = 0xFF25C432;
+  static const lossColor = 0xFFCA1F1F;
+
   static const defaultPadding = 16.0;
 
   static const title1Style = TextStyle(
