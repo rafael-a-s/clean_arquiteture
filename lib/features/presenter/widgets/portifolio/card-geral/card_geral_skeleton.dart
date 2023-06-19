@@ -11,13 +11,13 @@ class SkeletonCardGeralPortifolio extends StatelessWidget {
     return Container(
       height: 200,
       padding: const EdgeInsets.all(25),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(
           Radius.circular(20),
         ),
-        color: Color(
-          0xFF22282C,
-        ),
+        color: const Color(
+          RootStyle.primaryColor,
+        ).withOpacity(0.7),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
