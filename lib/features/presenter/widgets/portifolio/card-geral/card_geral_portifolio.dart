@@ -56,9 +56,7 @@ class _CardGeralPortifolio extends State<CardGeralPortifolio> {
         borderRadius: BorderRadius.all(
           Radius.circular(20),
         ),
-        color: Color(
-          0xFF22282C,
-        ),
+        color: Color(RootStyle.primaryColor),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
