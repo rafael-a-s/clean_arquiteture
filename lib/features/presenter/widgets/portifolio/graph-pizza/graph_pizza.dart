@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -23,6 +25,17 @@ class _GraphPortifolioState extends State<GraphPortifolio> {
   double total = 0;
   String portifolioLabel = '';
   double graficoValor = 0;
+
+  final random = Random();
+
+  List<Color> colors = [
+    Colors.orange,
+    Colors.green,
+    Colors.blue,
+    Colors.purple,
+    // Adicione mais cores conforme necessário
+  ];
+
   final formatCurrency = NumberFormat.simpleCurrency(
     locale: "en_US",
     decimalDigits: 2,
@@ -48,7 +61,10 @@ class _GraphPortifolioState extends State<GraphPortifolio> {
       final isTouched = i == index;
       final fontSize = isTouched ? 18.0 : 14.0;
       final radius = isTouched ? 60.0 : 50.0;
-      final color = isTouched ? Colors.tealAccent : Colors.tealAccent[400];
+
+      final color = isTouched
+          ? colors[i % colors.length].withOpacity(0.7)
+          : colors[i % colors.length];
       var value = widget.portifolio[i].totalPriceActual;
       return PieChartSectionData(
         color: color,
@@ -58,7 +74,7 @@ class _GraphPortifolioState extends State<GraphPortifolio> {
         titleStyle: TextStyle(
           fontSize: fontSize,
           fontWeight: FontWeight.bold,
-          color: Colors.black87,
+          color: const Color(RootStyle.ptColor),
         ),
       );
     });
@@ -99,14 +115,14 @@ class _GraphPortifolioState extends State<GraphPortifolio> {
               portifolioLabel,
               style: const TextStyle(
                 fontSize: 20,
-                color: Colors.teal,
+                color: Color(RootStyle.ptColor),
               ),
             ),
             Text(
               formatCurrency.format(graficoValor),
               style: const TextStyle(
                 fontSize: 30,
-                color: Colors.teal,
+                color: Color(RootStyle.ptColor),
               ),
             ),
           ],
