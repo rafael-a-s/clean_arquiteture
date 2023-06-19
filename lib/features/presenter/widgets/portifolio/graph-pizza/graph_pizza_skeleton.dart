@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_app/features/presenter/widgets/base/circel-skeleton/circle_skeleton.dart';
 import 'package:my_app/features/presenter/widgets/base/skeleton/skeleton.dart';
 
 class GraphPortifolioSkeleton extends StatefulWidget {
@@ -17,10 +18,9 @@ class _GraphPortifolioSkeletonState extends State<GraphPortifolioSkeleton> {
     return Stack(
       alignment: Alignment.center,
       children: [
-        Skeleton(
+        CircleSkeleton(
           height: MediaQuery.of(context).size.height / 2.5,
           width: MediaQuery.of(context).size.width,
-          isCircle: true,
         ),
         Column(
           children: const [
