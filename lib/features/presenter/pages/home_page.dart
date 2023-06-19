@@ -9,6 +9,7 @@ import 'package:my_app/features/presenter/widgets/appbar/app_bar.dart';
 import 'package:my_app/features/presenter/widgets/home/botton-navigation/bottom_navigation.dart';
 import 'package:my_app/features/presenter/widgets/home/box-decoration/box_decoration_home.dart';
 import 'package:my_app/features/presenter/widgets/home/container-card/container_card.dart';
+import 'package:my_app/features/presenter/widgets/home/container-card/container_card_skeleton.dart';
 import 'package:my_app/features/presenter/widgets/home/graph/graph.dart';
 import 'package:my_app/features/presenter/widgets/home/mini-cards/mini_card.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -65,7 +66,7 @@ class _HomePageState extends State<HomePage> {
                 width: 335,
                 child: _isLoading
                     ? const Center(
-                        child: CircularProgressIndicator(),
+                        child: ContainerCardSkeleton(),
                       )
                     : _listPortifolio.isEmpty
                         ? const Center(
