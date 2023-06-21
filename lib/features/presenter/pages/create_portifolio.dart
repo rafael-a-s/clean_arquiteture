@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:my_app/core/utils/status-screen-arguments/StatusScreenArgument.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
@@ -67,21 +68,6 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
     print(result.id);
 
     return result.id == null ? false : true;
-  }
-
-  void showSuccessMessage(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: SnackBarFlash(
-          title: 'Sucesso',
-          description: 'Sua transação foi salva com sucesso em seu portifolio.',
-        ),
-        behavior: SnackBarBehavior.floating,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-    );
-    Modular.to.navigate('/');
   }
 
   @override
@@ -239,9 +225,29 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
               onPressed: () async => {
                 if (_formKey.currentState!.validate())
                   {
-                    _createPortifolio().then(
-                      (value) => value ? showSuccessMessage(context) : false,
-                    )
+                    _createPortifolio().then((value) => value
+                        ? Modular.to.navigate(
+                            '/status-feedback',
+                            arguments: StatusScreenArguments(
+                              isError: false,
+                              message:
+                                  'Seu portifolio foi criado. Você poderá verificá lo, na pagina inicial. Fique a vontade para criar novos portifolios e adicionar novas compras.',
+                              onPressed: () {
+                                Modular.to.navigate('/');
+                              },
+                            ),
+                          )
+                        : Modular.to.navigate(
+                            '/status-feedback',
+                            arguments: StatusScreenArguments(
+                              isError: true,
+                              message:
+                                  'Infelizmente ocorreu um erro ao criar seu portifolio. Por favor tente novamente.',
+                              onPressed: () {
+                                Modular.to.navigate('/new-portifolio');
+                              },
+                            ),
+                          ))
                   }
               },
               child: const Text(
