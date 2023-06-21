@@ -28,6 +28,7 @@ import 'package:my_app/features/presenter/pages/list_coin_page.dart';
 import 'package:my_app/features/presenter/pages/portifolio/add_asset_portifolio.dart';
 import 'package:my_app/features/presenter/pages/portifolio/geral_page.dart';
 import 'package:my_app/features/presenter/pages/portifolio_page.dart';
+import 'package:my_app/features/presenter/widgets/base/screens/status-feedback/status_feedback.dart';
 
 class AppModule extends Module {
   @override
@@ -64,6 +65,13 @@ class AppModule extends Module {
         ChildRoute(
           "/",
           child: (_, __) => const HomePage(),
+          transition: TransitionType.scale,
+        ),
+        ChildRoute(
+          "/status-feedback",
+          child: (_, __) => StatusScreen(
+            arguments: __.data,
+          ),
           transition: TransitionType.scale,
         ),
         ChildRoute(
