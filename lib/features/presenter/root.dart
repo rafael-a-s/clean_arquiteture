@@ -8,6 +8,8 @@ class RootStyle {
   static const stColor = 0xFFb9b9b9;
   static const otherColor = 0xFF33415b;
 
+  static const sucessColor = 0xFF16BE81;
+  static const errorColor = 0xFFFF647C;
   static const winerColor = 0xFF25C432;
   static const lossColor = 0xFFCA1F1F;
 
