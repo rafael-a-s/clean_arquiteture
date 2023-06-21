@@ -69,6 +69,8 @@ flutter:
     - assets/svg/transaction.svg
     - assets/svg/graph.svg
     - assets/svg/coin.svg
+    - assets/svg/check-circle.svg
+    - assets/svg/x-circle.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
