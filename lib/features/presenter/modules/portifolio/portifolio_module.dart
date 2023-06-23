@@ -25,13 +25,13 @@ class PortifolioModule extends Module {
 
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => PortifolioDataSource(client: i())),
-    Bind.lazySingleton((i) => PortifolioRepository(i())),
-    Bind.lazySingleton((i) => CreatePortifolioUseCase(i())),
-    Bind.lazySingleton((i) => AddAssetPortifolioUseCase(i())),
-    Bind.lazySingleton((i) => GetAllPortifolioUseCase(i())),
-    Bind.lazySingleton((i) => GetInfoPortifolioUseCase(i())),
-    Bind.factory((i) => PortifolioController(i(), i(), i(), i())),
+    Bind.lazySingleton((i) => PortifolioDataSource(client: i()), export: true),
+    Bind.lazySingleton((i) => PortifolioRepository(i()), export: true),
+    Bind.lazySingleton((i) => CreatePortifolioUseCase(i()), export: true),
+    Bind.lazySingleton((i) => AddAssetPortifolioUseCase(i()), export: true),
+    Bind.lazySingleton((i) => GetAllPortifolioUseCase(i()), export: true),
+    Bind.lazySingleton((i) => GetInfoPortifolioUseCase(i()), export: true),
+    Bind.factory((i) => PortifolioController(i(), i(), i(), i()), export: true),
   ];
 
   @override
