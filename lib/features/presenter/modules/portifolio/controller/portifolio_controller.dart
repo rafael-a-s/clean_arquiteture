@@ -1,33 +1,65 @@
-import 'dart:ffi';
-
-import 'package:flutter_triple/flutter_triple.dart';
-import 'package:my_app/core/usecase/erros/failures.dart';
 import 'package:my_app/core/usecase/usecase.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/domain/entities/portifolio/portifolio_info.dart';
+import 'package:my_app/features/domain/usecases/portifolio/add_asset_portifolio.dart';
+import 'package:my_app/features/domain/usecases/portifolio/create.dart';
 import 'package:my_app/features/domain/usecases/portifolio/get_all_portifolios.dart';
 import 'package:my_app/features/domain/usecases/portifolio/get_infos_portifolio.dart';
 
-class GeralPageStore extends NotifierStore<Failure, PortifolioInfo> {
+class PortifolioController {
+  final CreatePortifolioUseCase createUsecase;
+  final AddAssetPortifolioUseCase addAssetUsecase;
   final GetInfoPortifolioUseCase getInfoUsecase;
   final GetAllPortifolioUseCase getAllPortifolioUseCase;
 
-  GeralPageStore(
+  PortifolioController(
+    this.createUsecase,
+    this.addAssetUsecase,
     this.getInfoUsecase,
     this.getAllPortifolioUseCase,
-  ) : super(
-          const PortifolioInfo(
-            total: 0,
-            totalUpdated: 0,
-            pnl: 0,
-            percent: 0,
-          ),
-        );
+  );
+
+  createTrade(Portifolio portifolio) async {
+    final result = await createUsecase(portifolio);
+    return result.fold(
+      (error) => const Portifolio(
+        id: '',
+        name: '',
+        coin: '',
+        subTotal: 0,
+        totalPriceActual: 0,
+        percent: 0,
+        assets: [Assets(symbol: '', quanty: 0, price: 0)],
+      ),
+      (sucess) => sucess,
+    );
+  }
+
+  Future<Portifolio> addAsset(String id, Assets asset) async {
+    final result = await addAssetUsecase(
+      TwoInputParams(
+        id,
+        asset,
+      ),
+    );
+
+    return result.fold(
+      (error) => const Portifolio(
+        id: '',
+        name: '',
+        coin: '',
+        subTotal: 0,
+        totalPriceActual: 0,
+        percent: 0,
+        assets: [Assets(symbol: '', quanty: 0, price: 0)],
+      ),
+      (sucess) => sucess,
+    );
+  }
+
   Future<List<Portifolio>> getAllPortifolio() async {
-    setLoading(true);
     final result = await getAllPortifolioUseCase(NoParams());
-    setLoading(false);
     return result.fold(
       (error) => <Portifolio>[
         const Portifolio(
@@ -45,9 +77,7 @@ class GeralPageStore extends NotifierStore<Failure, PortifolioInfo> {
   }
 
   Future<PortifolioInfo> getInfoAboutPortifolio() async {
-    setLoading(true);
     final result = await getInfoUsecase.call(NoParams());
-    setLoading(false);
     return result.fold(
       (error) => const PortifolioInfo(
         total: 0,
