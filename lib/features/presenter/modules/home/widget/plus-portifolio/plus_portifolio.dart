@@ -14,7 +14,7 @@ class PlusPortifolio extends StatelessWidget {
           color: Color(RootStyle.primaryColor),
           borderRadius: BorderRadius.all(Radius.circular(15.0))),
       child: IconButton(
-        onPressed: () => Modular.to.navigate('/new-portifolio'),
+        onPressed: () => Modular.to.navigate('/portifolio/new-portifolio'),
         icon: const Icon(Icons.add),
       ),
     );
