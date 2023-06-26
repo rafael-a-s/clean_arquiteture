@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/modules/home/controller/home_controller.dart';
@@ -11,38 +13,38 @@ import 'package:my_app/features/presenter/modules/portifolio/widget/list-portifo
 import 'package:my_app/features/presenter/root.dart';
 import 'package:my_app/features/presenter/widgets/appbar/app_bar.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatefulHookConsumerWidget {
   const HomePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  HomePageState createState() => HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final controller = Modular.get<HomeController>();
-  var _isLoading = false;
-  late List<Assets> _listAssets;
-  late List<Portifolio> _listPortifolio;
-
-  Future _fetchs() async {
-    _isLoading = true;
-    final resultAssets = await controller.getAllAssetsRecents();
-    final resultPortifolios = await controller.getAllPortifolio();
-    setState(() {
-      _listPortifolio = resultPortifolios;
-      _listAssets = resultAssets;
-      _isLoading = false;
+class HomePageState extends ConsumerState<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      ref.read(homeControllerProvider.notifier).fetch();
     });
   }
 
   @override
-  void initState() {
-    super.initState();
-    _fetchs();
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
+    final loading =
+        ref.watch(homeControllerProvider.select((state) => state.isLoading));
+
+    final portifolios =
+        ref.watch(homeControllerProvider.select((state) => state.portifolios));
+
+    final assets =
+        ref.watch(homeControllerProvider.select((state) => state.assets));
+
     return Container(
       padding: const EdgeInsets.only(top: 15, left: 15, right: 15),
       height: double.maxFinite,
@@ -59,9 +61,9 @@ class _HomePageState extends State<HomePage> {
               SizedBox(
                 height: 200,
                 width: 335,
-                child: _isLoading
+                child: loading
                     ? const ContainerCardSkeleton()
-                    : _listPortifolio.isEmpty
+                    : portifolios.isEmpty
                         ? const Center(
                             child: Text('Sem portifolio no momento'),
                           )
@@ -69,17 +71,17 @@ class _HomePageState extends State<HomePage> {
                             physics: const ClampingScrollPhysics(),
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: _listPortifolio.length,
+                            itemCount: portifolios.length,
                             itemBuilder: (context, item) {
                               return GestureDetector(
                                 onTap: () {
                                   Modular.to.navigate(
                                     '/portifolio/portifolio',
-                                    arguments: _listPortifolio[item],
+                                    arguments: portifolios[item],
                                   );
                                 },
                                 child: ContainerCard(
-                                  portifolio: _listPortifolio[item],
+                                  portifolio: portifolios[item],
                                 ),
                               );
                             },
@@ -100,7 +102,7 @@ class _HomePageState extends State<HomePage> {
               fontWeight: FontWeight.w900,
             ),
           ),
-          _isLoading
+          loading
               ? Expanded(
                   child: ListView.builder(
                     itemCount: 5,
@@ -110,12 +112,12 @@ class _HomePageState extends State<HomePage> {
                   ),
                 )
               : Expanded(
-                  child: _listAssets.isNotEmpty
+                  child: assets.isNotEmpty
                       ? ListView.builder(
-                          itemCount: _listAssets.length,
+                          itemCount: assets.length,
                           itemBuilder: (context, item) {
                             ListCardPortifolio list = ListCardPortifolio(
-                              assets: _listAssets[item],
+                              assets: assets[item],
                             );
                             return list;
                           },
