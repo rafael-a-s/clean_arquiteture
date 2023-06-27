@@ -232,7 +232,7 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
                               message:
                                   'Seu portifolio foi criado. Você poderá verificá lo, na pagina inicial. Fique a vontade para criar novos portifolios e adicionar novas compras.',
                               onPressed: () {
-                                Modular.to.navigate('/');
+                                Modular.to.navigate('/home');
                               },
                             ),
                           )
