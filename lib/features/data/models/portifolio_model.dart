@@ -3,7 +3,7 @@ import 'package:my_app/features/data/models/assets_model.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 
 class PortifolioModel extends Portifolio {
-  const PortifolioModel({
+  PortifolioModel({
     String? id,
     required String name,
     required String coin,
@@ -30,8 +30,9 @@ class PortifolioModel extends Portifolio {
       name: json['name'],
       coin: json['coin'],
       subTotal: double.parse(json['subTotal'].toString()),
-      totalPriceActual: double.parse(json['totalPriceActual'].toString()),
-      percent: double.parse(json['percent'].toString()),
+      totalPriceActual:
+          double.tryParse(json['totalPriceActual'].toString()) ?? 0.0,
+      percent: double.tryParse(json['percent'].toString()) ?? 0.0,
       assets: assets,
     );
   }

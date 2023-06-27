@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
-import 'package:my_app/features/presenter/pages/base_widget.dart';
-import 'package:my_app/features/presenter/root.dart';
+import 'package:my_app/features/presenter/base/base_widget.dart';
 
 class AppWidget extends StatelessWidget {
   const AppWidget({super.key});
@@ -13,8 +12,9 @@ class AppWidget extends StatelessWidget {
       theme: ThemeData(
         brightness: Brightness.dark,
       ),
-       builder: (context, child) => BaseWidget(child: child != null ? child : Container()),
-      initialRoute: "/",
-    ).modular(); 
+      builder: (context, child) =>
+          BaseWidget(child: child != null ? child : Container()),
+      initialRoute: "/home",
+    ).modular();
   }
 }

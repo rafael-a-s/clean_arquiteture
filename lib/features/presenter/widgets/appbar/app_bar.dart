@@ -45,7 +45,6 @@ class AppBarDefault extends StatelessWidget {
               ),
             ],
           ),
-          ImageCircle(),
         ],
       ),
     );

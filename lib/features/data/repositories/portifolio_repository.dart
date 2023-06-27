@@ -18,7 +18,7 @@ class PortifolioRepository implements IPortifolioRepoitory {
   @override
   Future<Either<Failure, List<Portifolio>>> getAllPortifolios() async {
     try {
-      final result = await datasource.getAllPortifolios();
+      final result = await datasource.getAll();
       return Right(result
           .map((value) => Portifolio(
                 id: value.id,
@@ -45,7 +45,7 @@ class PortifolioRepository implements IPortifolioRepoitory {
   Future<Either<Failure, Portifolio>> createPortifolio(
       Portifolio portifolio) async {
     try {
-      final result = await datasource.createPortifolio(PortifolioModel(
+      final result = await datasource.create(PortifolioModel(
         id: portifolio.id,
         name: portifolio.name,
         coin: portifolio.coin,

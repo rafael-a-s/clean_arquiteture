@@ -1,80 +1,57 @@
 import 'dart:convert';
 
+import 'package:dio/dio.dart';
+import 'package:dio/src/dio.dart';
+import 'package:my_app/core/data/datasources/base_datasource.dart';
+import 'package:my_app/core/domain/base_json_convert.dart';
 import 'package:my_app/core/usecase/erros/exceptions.dart';
-import 'package:my_app/features/data/datasources/endpoints/portifolio_endpoints.dart';
 import 'package:my_app/features/data/datasources/portifolio/i_portifolio_datasource.dart';
 import 'package:my_app/features/data/models/assets_model.dart';
-import 'package:http/http.dart' as http;
 import 'package:my_app/features/data/models/portifolio/portifolio_info_model.dart';
 import 'package:my_app/features/data/models/portifolio_model.dart';
-import 'package:pocketbase/pocketbase.dart';
 
-class PortifolioDataSource implements IPortifolioDataSource {
-  final http.Client client;
+class PortifolioDataSource extends BaseDatasource<PortifolioModel, dynamic>
+    implements IPortifolioDataSource {
+  final JsonModelConvert<PortifolioModel> jsonConvert =
+      JsonModelConvert<PortifolioModel>(
+    fromJson: (data) => PortifolioModel.fromJson(data),
+    toJson: (convert) =>
+        convert.id == null ? convert.toJsonCrate() : convert.toJson(),
+  );
 
   PortifolioDataSource({
-    required this.client,
+    required super.client,
+    required super.api,
   });
-
-  @override
-  Future<List<PortifolioModel>> getAllPortifolios() async {
-    final response = await client.get(PortifolioEndPoints.getAllPortifolios());
-
-    late List<dynamic> jsonResponse;
-
-    response.statusCode == 200
-        ? jsonResponse = json.decode(response.body)
-        : throw ServerException();
-
-    return jsonResponse
-        .map((value) => PortifolioModel.fromJson(value))
-        .toList();
-  }
-
-  @override
-  Future<PortifolioModel> createPortifolio(PortifolioModel portifolio) async {
-    final body = portifolio.toJsonCrate();
-    final response = await client.post(
-      PortifolioEndPoints.createPortifolio(),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(body),
-    );
-
-    return response.statusCode == 200
-        ? PortifolioModel.fromJson(json.decode(response.body))
-        : throw ServerException();
-  }
 
   @override
   Future<PortifolioModel> addAssetPortifolio(
       String id, AssetsModel asset) async {
     final body = asset.toJson();
     final response = await client.patch(
-      PortifolioEndPoints.addAssetPortifolio(id),
-      headers: <String, String>{
-        'Content-Type': 'application/json',
-      },
-      body: jsonEncode(body),
+      '',
+      data: jsonEncode(body),
     );
 
     return response.statusCode == 200
-        ? PortifolioModel.fromJson(json.decode(response.body))
+        ? PortifolioModel.fromJson(json.decode(response.data))
         : throw ServerException();
   }
 
   @override
   Future<PortifolioInfoModel> getInfoAboutPortifolio() async {
-    final response =
-        await client.get(PortifolioEndPoints.infosAboutPortifolios());
+    try {
+      final response = await client.get('$api/infos-general');
+      final data = response.data;
 
-    return response.statusCode == 200
-        ? PortifolioInfoModel.fromJson(
-            json.decode(
-              response.body,
-            ),
-          )
-        : throw ServerException();
+      return PortifolioInfoModel.fromJson(data);
+    } on DioException catch (e) {
+      throw DioException(requestOptions: RequestOptions(), error: e.error);
+    }
+  }
+
+  @override
+  JsonModelConvert<PortifolioModel> getJsonConvert() {
+    return jsonConvert;
   }
 }
