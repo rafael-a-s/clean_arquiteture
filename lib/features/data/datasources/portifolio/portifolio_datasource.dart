@@ -40,15 +40,14 @@ class PortifolioDataSource extends BaseDatasource<PortifolioModel, dynamic>
 
   @override
   Future<PortifolioInfoModel> getInfoAboutPortifolio() async {
-    final response = await client.get('');
+    try {
+      final response = await client.get('$api/infos-general');
+      final data = response.data;
 
-    return response.statusCode == 200
-        ? PortifolioInfoModel.fromJson(
-            json.decode(
-              response.data,
-            ),
-          )
-        : throw ServerException();
+      return PortifolioInfoModel.fromJson(data);
+    } on DioException catch (e) {
+      throw DioException(requestOptions: RequestOptions(), error: e.error);
+    }
   }
 
   @override
