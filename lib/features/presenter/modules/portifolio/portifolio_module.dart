@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:my_app/features/data/datasources/coin/coin_datasource.dart';
 import 'package:my_app/features/data/datasources/portifolio/portifolio_datasource.dart';
@@ -25,7 +26,15 @@ class PortifolioModule extends Module {
 
   @override
   final List<Bind> binds = [
-    Bind.lazySingleton((i) => PortifolioDataSource(client: i()), export: true),
+    Bind.singleton(
+        (i) => Dio(BaseOptions(
+              baseUrl: 'http://10.0.2.2:3000/',
+              connectTimeout: const Duration(seconds: 10),
+              receiveTimeout: const Duration(seconds: 10),
+            )),
+        export: true),
+    Bind.singleton((i) => PortifolioDataSource(client: i(), api: '/portifolio'),
+        export: true),
     Bind.lazySingleton((i) => PortifolioRepository(i()), export: true),
     Bind.lazySingleton((i) => CreatePortifolioUseCase(i()), export: true),
     Bind.lazySingleton((i) => AddAssetPortifolioUseCase(i()), export: true),
