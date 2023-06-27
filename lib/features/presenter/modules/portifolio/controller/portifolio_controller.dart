@@ -23,7 +23,7 @@ class PortifolioController {
   createTrade(Portifolio portifolio) async {
     final result = await createUsecase(portifolio);
     return result.fold(
-      (error) => const Portifolio(
+      (error) => Portifolio(
         id: '',
         name: '',
         coin: '',
@@ -45,14 +45,14 @@ class PortifolioController {
     );
 
     return result.fold(
-      (error) => const Portifolio(
+      (error) => Portifolio(
         id: '',
         name: '',
         coin: '',
         subTotal: 0,
         totalPriceActual: 0,
         percent: 0,
-        assets: [Assets(symbol: '', quanty: 0, price: 0)],
+        assets: [const Assets(symbol: '', quanty: 0, price: 0)],
       ),
       (sucess) => sucess,
     );
@@ -62,14 +62,14 @@ class PortifolioController {
     final result = await getAllPortifolioUseCase(NoParams());
     return result.fold(
       (error) => <Portifolio>[
-        const Portifolio(
+        Portifolio(
           id: '',
           name: '',
           coin: '',
           subTotal: 0,
           totalPriceActual: 0,
           percent: 0,
-          assets: [Assets(symbol: '', quanty: 0, price: 0)],
+          assets: [const Assets(symbol: '', quanty: 0, price: 0)],
         ),
       ],
       (sucess) => sucess,
