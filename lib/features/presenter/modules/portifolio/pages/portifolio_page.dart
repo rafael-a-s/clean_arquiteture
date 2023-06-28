@@ -6,6 +6,8 @@ import 'package:my_app/features/presenter/modules/portifolio/widget/card-portifo
 import 'package:my_app/features/presenter/modules/portifolio/widget/list-portifolio/list_card.dart';
 import 'package:my_app/features/presenter/root.dart';
 
+enum ActionItems { Editar, Apagar, Ajuda }
+
 class PortifolioPage extends StatefulWidget {
   Portifolio portifolio;
 
@@ -23,20 +25,6 @@ class _PortifolioPage extends State<PortifolioPage> {
   bool _isLoading = false;
   double total = 0.0;
 
-  Future<void> _fetchPortifolios() async {
-    _isLoading = true;
-    final result = await controller.getAllPortifolio();
-    setState(() {
-      _isLoading = false;
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    //_fetchPortifolios();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -48,12 +36,36 @@ class _PortifolioPage extends State<PortifolioPage> {
       height: double.maxFinite,
       child: Column(
         children: [
-          const Text(
-            'Portifolio',
-            style: TextStyle(
-              fontWeight: FontWeight.w800,
-              fontSize: 30,
-            ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () => Modular.to.navigate('/home/'),
+              ),
+              const Text(
+                'Portifolio',
+                style: TextStyle(
+                  fontWeight: FontWeight.w800,
+                  fontSize: 30,
+                ),
+              ),
+              PopupMenuButton(
+                color: const Color(RootStyle.secondColor),
+                icon: const Icon(
+                  Icons.more_vert,
+                  color: Color(RootStyle.ptColor),
+                ),
+                itemBuilder: (context) => List.generate(
+                  3,
+                  (index) => PopupMenuItem(
+                    child: Text(
+                      ActionItems.values[index].name,
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
           const SizedBox(
             height: 15,
