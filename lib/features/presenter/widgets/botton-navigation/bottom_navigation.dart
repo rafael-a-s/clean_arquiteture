@@ -13,6 +13,7 @@ class _BottomNavigation extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
+      padding: EdgeInsets.zero,
       shape: const CircularNotchedRectangle(),
       child: Container(
         padding: const EdgeInsets.only(left: 30, right: 30),
