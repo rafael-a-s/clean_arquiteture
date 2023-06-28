@@ -29,9 +29,9 @@ class _BottomNavigation extends State<BottomNavigation> {
               iconSize: 30,
               icon: Icon(
                 Icons.home,
-                color: Modular.to.path == '/'
-                    ? Color(RootStyle.primaryColor)
-                    : Color(RootStyle.stColor),
+                color: Modular.to.path == '/home/'
+                    ? const Color(RootStyle.primaryColor)
+                    : const Color(RootStyle.stColor),
               ),
               onPressed: () => setState(() {
                 Modular.to.navigate('/home');
@@ -42,8 +42,8 @@ class _BottomNavigation extends State<BottomNavigation> {
               icon: Icon(
                 Icons.ballot,
                 color: Modular.to.path == '/coin/list-coin'
-                    ? Color(RootStyle.primaryColor)
-                    : Color(RootStyle.stColor),
+                    ? const Color(RootStyle.primaryColor)
+                    : const Color(RootStyle.stColor),
               ),
               onPressed: () => setState(() {
                 Modular.to.navigate('/coin/list-coin');
@@ -63,9 +63,9 @@ class _BottomNavigation extends State<BottomNavigation> {
               iconSize: 30,
               icon: Icon(
                 Icons.credit_score,
-                color: Modular.to.path == '/portifolio'
-                    ? Color(RootStyle.primaryColor)
-                    : Color(RootStyle.stColor),
+                color: Modular.to.path == '/portifolio/'
+                    ? const Color(RootStyle.primaryColor)
+                    : const Color(RootStyle.stColor),
               ),
               onPressed: () => setState(() {
                 Modular.to.navigate('/portifolio');
