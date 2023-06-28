@@ -10,6 +10,7 @@ class AppWidget extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
+        useMaterial3: true,
         brightness: Brightness.dark,
       ),
       builder: (context, child) =>
