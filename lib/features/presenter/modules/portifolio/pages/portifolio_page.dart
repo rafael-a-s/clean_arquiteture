@@ -72,6 +72,18 @@ class _PortifolioPage extends State<PortifolioPage> {
                 ),
               ],
             ),
+            endActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              children: [
+                SlidableAction(
+                  backgroundColor: const Color(RootStyle.bgColor),
+                  foregroundColor: Colors.white,
+                  icon: Icons.remove,
+                  label: 'Remover',
+                  onPressed: (BuildContext context) {},
+                )
+              ],
+            ),
             child: CardPortifolio(
               portifolio: widget.portifolio,
             ),
@@ -117,25 +129,36 @@ class _PortifolioPage extends State<PortifolioPage> {
                       ? ListView.builder(
                           itemCount: widget.portifolio.assets.length,
                           itemBuilder: (context, item) {
-                            return GestureDetector(
-                              child: Slidable(
-                                key: const ValueKey(0),
-                                startActionPane: ActionPane(
-                                  motion: const ScrollMotion(),
-                                  children: [
-                                    SlidableAction(
-                                      backgroundColor:
-                                          const Color(RootStyle.bgColor),
-                                      foregroundColor: Colors.white,
-                                      icon: Icons.edit,
-                                      label: 'Editar',
-                                      onPressed: (BuildContext context) {},
-                                    ),
-                                  ],
-                                ),
-                                child: ListCardPortifolio(
-                                  assets: widget.portifolio.assets[item],
-                                ),
+                            return Slidable(
+                              key: const ValueKey(0),
+                              startActionPane: ActionPane(
+                                motion: const ScrollMotion(),
+                                children: [
+                                  SlidableAction(
+                                    backgroundColor:
+                                        const Color(RootStyle.bgColor),
+                                    foregroundColor: Colors.white,
+                                    icon: Icons.edit,
+                                    label: 'Editar',
+                                    onPressed: (BuildContext context) {},
+                                  ),
+                                ],
+                              ),
+                              endActionPane: ActionPane(
+                                motion: const ScrollMotion(),
+                                children: [
+                                  SlidableAction(
+                                    backgroundColor:
+                                        const Color(RootStyle.bgColor),
+                                    foregroundColor: Colors.red,
+                                    icon: Icons.swipe_down,
+                                    label: 'Vender',
+                                    onPressed: (BuildContext context) {},
+                                  )
+                                ],
+                              ),
+                              child: ListCardPortifolio(
+                                assets: widget.portifolio.assets[item],
                               ),
                             );
                           },
