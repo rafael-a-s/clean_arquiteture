@@ -5,8 +5,7 @@ import 'package:my_app/features/presenter/modules/portifolio/controller/portifol
 import 'package:my_app/features/presenter/modules/portifolio/widget/card-portifolio/card_portifolio.dart';
 import 'package:my_app/features/presenter/modules/portifolio/widget/list-portifolio/list_card.dart';
 import 'package:my_app/features/presenter/root.dart';
-
-enum ActionItems { Editar, Apagar, Ajuda }
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class PortifolioPage extends StatefulWidget {
   Portifolio portifolio;
@@ -43,35 +42,39 @@ class _PortifolioPage extends State<PortifolioPage> {
                 icon: const Icon(Icons.arrow_back),
                 onPressed: () => Modular.to.navigate('/home/'),
               ),
-              const Text(
-                'Portifolio',
-                style: TextStyle(
+              Text(
+                widget.portifolio.name,
+                style: const TextStyle(
                   fontWeight: FontWeight.w800,
                   fontSize: 30,
                 ),
               ),
-              PopupMenuButton(
-                color: const Color(RootStyle.secondColor),
-                icon: const Icon(
-                  Icons.more_vert,
-                  color: Color(RootStyle.ptColor),
-                ),
-                itemBuilder: (context) => List.generate(
-                  3,
-                  (index) => PopupMenuItem(
-                    child: Text(
-                      ActionItems.values[index].name,
-                    ),
-                  ),
-                ),
+              IconButton(
+                icon: const Icon(Icons.help),
+                onPressed: () {},
               ),
             ],
           ),
           const SizedBox(
             height: 15,
           ),
-          CardPortifolio(
-            portifolio: widget.portifolio,
+          Slidable(
+            key: const ValueKey(0),
+            startActionPane: ActionPane(
+              motion: const ScrollMotion(),
+              children: [
+                SlidableAction(
+                  backgroundColor: const Color(RootStyle.bgColor),
+                  foregroundColor: Colors.white,
+                  icon: Icons.edit,
+                  label: 'Editar',
+                  onPressed: (BuildContext context) {},
+                ),
+              ],
+            ),
+            child: CardPortifolio(
+              portifolio: widget.portifolio,
+            ),
           ),
           const SizedBox(
             height: 30,
@@ -114,10 +117,27 @@ class _PortifolioPage extends State<PortifolioPage> {
                       ? ListView.builder(
                           itemCount: widget.portifolio.assets.length,
                           itemBuilder: (context, item) {
-                            ListCardPortifolio list = ListCardPortifolio(
-                              assets: widget.portifolio.assets[item],
+                            return GestureDetector(
+                              child: Slidable(
+                                key: const ValueKey(0),
+                                startActionPane: ActionPane(
+                                  motion: const ScrollMotion(),
+                                  children: [
+                                    SlidableAction(
+                                      backgroundColor:
+                                          const Color(RootStyle.bgColor),
+                                      foregroundColor: Colors.white,
+                                      icon: Icons.edit,
+                                      label: 'Editar',
+                                      onPressed: (BuildContext context) {},
+                                    ),
+                                  ],
+                                ),
+                                child: ListCardPortifolio(
+                                  assets: widget.portifolio.assets[item],
+                                ),
+                              ),
                             );
-                            return list;
                           },
                         )
                       : const Center(
