@@ -1,5 +1,4 @@
 import 'package:my_app/core/usecase/erros/exceptions.dart';
-import 'package:my_app/features/data/datasources/coin/i_coin_datasource.dart';
 import 'package:my_app/features/data/datasources/portifolio/i_portifolio_datasource.dart';
 import 'package:my_app/features/data/models/assets_model.dart';
 import 'package:my_app/features/data/models/portifolio_model.dart';
@@ -111,6 +110,25 @@ class PortifolioRepository implements IPortifolioRepoitory {
           totalUpdated: result.totalUpdated,
           pnl: result.pnl,
           percent: result.percent,
+        ),
+      );
+    } on ServerException {
+      return Left(ServerFailure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Portifolio>> get(dynamic id) async {
+    try {
+      final result = await datasource.get(id);
+      return Right(
+        Portifolio(
+          name: result.name,
+          coin: result.coin,
+          subTotal: result.subTotal,
+          totalPriceActual: result.totalPriceActual,
+          percent: result.percent,
+          assets: result.assets,
         ),
       );
     } on ServerException {

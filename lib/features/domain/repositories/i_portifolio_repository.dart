@@ -6,6 +6,7 @@ import 'package:my_app/features/domain/entities/portifolio/portifolio_info.dart'
 
 abstract class IPortifolioRepoitory {
   Future<Either<Failure, List<Portifolio>>> getAllPortifolios();
+  Future<Either<Failure, Portifolio>> get(dynamic id);
   Future<Either<Failure, PortifolioInfo>> getInfoPortifolio();
   Future<Either<Failure, Portifolio>> createPortifolio(Portifolio assets);
   Future<Either<Failure, Portifolio>> addAssetPortifolio(
