@@ -6,6 +6,8 @@ import 'package:my_app/features/presenter/modules/portifolio/widget/card-portifo
 import 'package:my_app/features/presenter/modules/portifolio/widget/list-portifolio/list_card.dart';
 import 'package:my_app/features/presenter/root.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:my_app/features/presenter/widgets/form/form_base.dart';
+import 'package:my_app/features/presenter/widgets/text_buttom_base/text_buttom_base.dart';
 
 class PortifolioPage extends StatefulWidget {
   Portifolio portifolio;
@@ -23,6 +25,45 @@ class _PortifolioPage extends State<PortifolioPage> {
   final controller = Modular.get<PortifolioController>();
   bool _isLoading = false;
   double total = 0.0;
+
+  final _formKey = GlobalKey<FormState>();
+  final _name = TextEditingController();
+
+  final String INVALID_LABEL = 'Campos obrigatórios não podem ser vazios!';
+
+  void _modalEditNamePortifolio(context) {
+    _name.text = widget.portifolio.name;
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return FormBase(
+            title: 'Altere o nome do Portifolio',
+            buttom: TextButtomBase(
+              label: 'Alterar Portifolio',
+              onPressed: () {},
+            ),
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _name,
+                  keyboardType: TextInputType.number,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return INVALID_LABEL;
+                    }
+                    return null;
+                  },
+                  // ignore: prefer_const_constructors
+                  decoration: InputDecoration(
+                    label: const Text('Nome'),
+                    suffix: const Text('abc'),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -64,11 +105,14 @@ class _PortifolioPage extends State<PortifolioPage> {
               motion: const ScrollMotion(),
               children: [
                 SlidableAction(
+                  autoClose: true,
                   backgroundColor: const Color(RootStyle.bgColor),
                   foregroundColor: Colors.white,
                   icon: Icons.edit,
                   label: 'Editar',
-                  onPressed: (BuildContext context) {},
+                  onPressed: (BuildContext context) {
+                    _modalEditNamePortifolio(context);
+                  },
                 ),
               ],
             ),
