@@ -27,7 +27,7 @@ class _FormBaseState extends State<FormBase> {
       child: Container(
         color: const Color(RootStyle.secondColor),
         padding:
-            const EdgeInsets.only(top: 40, left: 30, right: 30, bottom: 40),
+            const EdgeInsets.only(top: 30, left: 30, right: 30, bottom: 30),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
