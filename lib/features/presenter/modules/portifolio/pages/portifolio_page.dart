@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/modules/portifolio/controller/portifolio_controller.dart';
 import 'package:my_app/features/presenter/modules/portifolio/widget/card-portifolio/card_portifolio.dart';
@@ -28,6 +30,9 @@ class _PortifolioPage extends State<PortifolioPage> {
 
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
+  final _price = TextEditingController();
+  final _priceOfTradeIn = TextEditingController();
+  final _quanty = TextEditingController();
 
   final String INVALID_LABEL = 'Campos obrigatórios não podem ser vazios!';
 
@@ -46,7 +51,7 @@ class _PortifolioPage extends State<PortifolioPage> {
               children: [
                 TextFormField(
                   controller: _name,
-                  keyboardType: TextInputType.number,
+                  keyboardType: TextInputType.text,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return INVALID_LABEL;
@@ -57,6 +62,126 @@ class _PortifolioPage extends State<PortifolioPage> {
                   decoration: InputDecoration(
                     label: const Text('Nome'),
                     suffix: const Text('abc'),
+                  ),
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  void _modalEditPriceAsset(context, Assets asset) {
+    _price.text = asset.price.toString();
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return FormBase(
+            title: 'Altere o preço da Ordem',
+            buttom: TextButtomBase(
+              label: 'Enviar alteração',
+              onPressed: () {},
+            ),
+            child: Column(
+              children: [
+                TextFormField(
+                  autofocus: true,
+                  keyboardType: TextInputType.number,
+                  controller: _price,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  autovalidateMode: AutovalidateMode.always,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return INVALID_LABEL;
+                    }
+                    return null;
+                  },
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 40,
+                  ),
+                  // ignore: prefer_const_constructors
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    suffix: Text(
+                      widget.portifolio.coin,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  onChanged: (value) => {
+                    setState(() {}),
+                  },
+                ),
+              ],
+            ),
+          );
+        });
+  }
+
+  void _modalTradeInAsset(context, Assets asset) {
+    _priceOfTradeIn.text = asset.price.toString();
+    _quanty.text = asset.quanty.toString();
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return FormBase(
+            title: 'Retirada de lucro',
+            buttom: TextButtomBase(
+              label: 'Confirmar venda',
+              onPressed: () {},
+            ),
+            child: Column(
+              children: [
+                TextFormField(
+                  autofocus: true,
+                  keyboardType: TextInputType.number,
+                  controller: _quanty,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  autovalidateMode: AutovalidateMode.always,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return INVALID_LABEL;
+                    }
+                    return null;
+                  },
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 30,
+                  ),
+                  // ignore: prefer_const_constructors
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    suffix: Text(
+                      widget.portifolio.coin,
+                      style: const TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  onChanged: (value) => {
+                    setState(() {}),
+                  },
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                TextFormField(
+                  controller: _priceOfTradeIn,
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                  autovalidateMode: AutovalidateMode.always,
+                  onChanged: (value) => {
+                    setState(() {}),
+                  },
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return INVALID_LABEL;
+                    }
+                    return null;
+                  },
+                  // ignore: prefer_const_constructors
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(),
+                    label: const Text('Preço por moeda'),
+                    hintText: 'Preço',
+                    suffix: const Text('\$'),
                   ),
                 ),
               ],
@@ -184,7 +309,10 @@ class _PortifolioPage extends State<PortifolioPage> {
                                     foregroundColor: Colors.white,
                                     icon: Icons.edit,
                                     label: 'Editar',
-                                    onPressed: (BuildContext context) {},
+                                    onPressed: (BuildContext context) {
+                                      _modalEditPriceAsset(context,
+                                          widget.portifolio.assets[item]);
+                                    },
                                   ),
                                 ],
                               ),
@@ -197,7 +325,10 @@ class _PortifolioPage extends State<PortifolioPage> {
                                     foregroundColor: Colors.red,
                                     icon: Icons.swipe_down,
                                     label: 'Vender',
-                                    onPressed: (BuildContext context) {},
+                                    onPressed: (BuildContext context) {
+                                      _modalTradeInAsset(context,
+                                          widget.portifolio.assets[item]);
+                                    },
                                   )
                                 ],
                               ),
