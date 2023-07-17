@@ -3,8 +3,8 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
-import 'package:my_app/features/domain/entities/portifolio.dart';
 import 'package:my_app/features/presenter/modules/home/controller/home_controller.dart';
+import 'package:my_app/features/presenter/modules/home/widget/bottom-sheats/modal_details_transaction.dart';
 import 'package:my_app/features/presenter/modules/home/widget/container-card/container_card.dart';
 import 'package:my_app/features/presenter/modules/home/widget/container-card/container_card_skeleton.dart';
 import 'package:my_app/features/presenter/modules/home/widget/plus-portifolio/plus_portifolio.dart';
@@ -32,6 +32,16 @@ class HomePageState extends ConsumerState<HomePage> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+  }
+
+  _modalDetailsTransaction(context, Assets asset) {
+    showModalBottomSheet(
+        context: context,
+        builder: (BuildContext bc) {
+          return ModalDetailsTransaction(
+            asset: asset,
+          );
+        });
   }
 
   @override
@@ -116,10 +126,14 @@ class HomePageState extends ConsumerState<HomePage> {
                       ? ListView.builder(
                           itemCount: assets.length,
                           itemBuilder: (context, item) {
-                            ListCardPortifolio list = ListCardPortifolio(
-                              assets: assets[item],
+                            return GestureDetector(
+                              onTap: () {
+                                _modalDetailsTransaction(context, assets[item]);
+                              },
+                              child: ListCardPortifolio(
+                                assets: assets[item],
+                              ),
                             );
-                            return list;
                           },
                         )
                       : const Center(
