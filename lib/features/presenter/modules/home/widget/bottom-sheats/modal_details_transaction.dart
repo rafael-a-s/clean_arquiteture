@@ -78,6 +78,20 @@ class _ModalDetailsTransactionState extends State<ModalDetailsTransaction> {
               ),
             ],
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text('Cod:'),
+              Text('${widget.asset.id}'),
+            ],
+          ),
+          const Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Data:'),
+              Text('14/12/2023'),
+            ],
+          ),
           TextButtomBase(label: 'Ver portifolio', onPressed: () {}),
         ],
       ),
