@@ -17,6 +17,7 @@ class AssetsRepository implements IAssetsRepository {
       final result = await dataSource.getAllAssetsRecets();
       return Right(result
           .map((asset) => Assets(
+                id: asset.id,
                 symbol: asset.symbol,
                 quanty: asset.quanty,
                 price: asset.price,
