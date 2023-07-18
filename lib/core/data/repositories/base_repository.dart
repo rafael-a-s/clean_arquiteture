@@ -12,6 +12,8 @@ abstract class BaseRepository<T extends BaseEntity, M extends BaseEntity, ID>
     extends IBaseRepository<T, M, ID> {
   late final IBaseDatasource datasource;
 
+  BaseRepository({required this.datasource});
+
   @override
   Future<Either<Failure, List<T>>> getAll() async {
     try {
