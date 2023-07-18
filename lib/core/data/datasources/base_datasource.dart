@@ -13,7 +13,7 @@ abstract class BaseDatasource<T extends BaseEntity, ID>
   @override
   Future<List<T>> getAll() async {
     try {
-      final response = await client.get('$api');
+      final response = await client.get(api);
       final data = response.data as List;
       final JsonModelConvert<T> convert = getJsonConvert();
       return data.map((value) => convert.fromJson(value)).toList();
@@ -39,7 +39,7 @@ abstract class BaseDatasource<T extends BaseEntity, ID>
     try {
       final JsonModelConvert<T> convert = getJsonConvert();
 
-      final response = await client.post('$api', data: convert.toJson(model));
+      final response = await client.post(api, data: convert.toJson(model));
       final data = response.data;
 
       return convert.fromJson(data);
