@@ -13,7 +13,7 @@ class GetAllPortifolioUseCase implements Usecase<List<Portifolio>, NoParams> {
 
   @override
   Future<Either<Failure, List<Portifolio>>> call(noParams) async {
-    final result = await repository.getAllPortifolios();
+    final result = await repository.getAll();
     return result;
   }
 }
