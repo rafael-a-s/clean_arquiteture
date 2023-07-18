@@ -9,7 +9,6 @@ import 'package:my_app/features/domain/entities/portifolio/portifolio_info.dart'
 abstract class IPortifolioRepoitory
     extends IBaseRepository<Portifolio, PortifolioModel, dynamic> {
   Future<Either<Failure, PortifolioInfo>> getInfoPortifolio();
-  Future<Either<Failure, Portifolio>> createPortifolio(Portifolio assets);
   Future<Either<Failure, Portifolio>> addAssetPortifolio(
     String id,
     Assets asset,

@@ -17,13 +17,21 @@ class PortifolioRepository
     implements IPortifolioRepoitory {
   final ModelConvert<Portifolio, PortifolioModel> modelConvert = ModelConvert(
       fromEntity: (data) => Portifolio(
+          id: data.id,
           name: data.name,
           coin: data.coin,
           subTotal: data.subTotal,
           totalPriceActual: data.totalPriceActual,
           percent: data.percent,
-          assets: data.assets),
+          assets: data.assets
+              .map((value) => Assets(
+                  id: value.id,
+                  symbol: value.symbol,
+                  quanty: value.quanty,
+                  price: value.price))
+              .toList()),
       toModel: (entity) => PortifolioModel(
+          id: entity.id,
           name: entity.name,
           coin: entity.coin,
           subTotal: entity.subTotal,
@@ -31,6 +39,7 @@ class PortifolioRepository
           percent: entity.percent,
           assets: entity.assets
               .map((value) => AssetsModel(
+                  id: value.id,
                   symbol: value.symbol,
                   quanty: value.quanty,
                   price: value.price))
@@ -39,40 +48,6 @@ class PortifolioRepository
   final IPortifolioDataSource _datasource;
 
   PortifolioRepository(this._datasource) : super(datasource: _datasource);
-
-  @override
-  Future<Either<Failure, Portifolio>> createPortifolio(
-      Portifolio portifolio) async {
-    try {
-      final result = await datasource.create(PortifolioModel(
-        id: portifolio.id,
-        name: portifolio.name,
-        coin: portifolio.coin,
-        percent: portifolio.percent,
-        subTotal: portifolio.subTotal,
-        totalPriceActual: portifolio.totalPriceActual,
-        assets: portifolio.assets
-            .map((value) => AssetsModel(
-                  symbol: value.symbol,
-                  quanty: value.quanty,
-                  price: value.price,
-                ))
-            .toList(),
-      ));
-
-      return Right(Portifolio(
-        id: result.id,
-        name: result.name,
-        coin: portifolio.coin,
-        percent: result.percent,
-        subTotal: result.subTotal,
-        totalPriceActual: result.totalPriceActual,
-        assets: result.assets,
-      ));
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
 
   @override
   Future<Either<Failure, Portifolio>> addAssetPortifolio(
