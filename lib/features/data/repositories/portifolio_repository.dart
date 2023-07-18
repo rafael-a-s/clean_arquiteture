@@ -1,5 +1,7 @@
+import 'package:my_app/core/data/datasources/i_base_datasource.dart';
+import 'package:my_app/core/data/repositories/base_repository.dart';
+import 'package:my_app/core/domain/base_model_convert.dart';
 import 'package:my_app/core/usecase/erros/exceptions.dart';
-import 'package:my_app/features/data/datasources/coin/i_coin_datasource.dart';
 import 'package:my_app/features/data/datasources/portifolio/i_portifolio_datasource.dart';
 import 'package:my_app/features/data/models/assets_model.dart';
 import 'package:my_app/features/data/models/portifolio_model.dart';
@@ -10,36 +12,33 @@ import 'package:dartz/dartz.dart';
 import 'package:my_app/features/domain/entities/portifolio/portifolio_info.dart';
 import 'package:my_app/features/domain/repositories/i_portifolio_repository.dart';
 
-class PortifolioRepository implements IPortifolioRepoitory {
-  late final IPortifolioDataSource datasource;
+class PortifolioRepository
+    extends BaseRepository<Portifolio, PortifolioModel, dynamic>
+    implements IPortifolioRepoitory {
+  final ModelConvert<Portifolio, PortifolioModel> modelConvert = ModelConvert(
+      fromEntity: (data) => Portifolio(
+          name: data.name,
+          coin: data.coin,
+          subTotal: data.subTotal,
+          totalPriceActual: data.totalPriceActual,
+          percent: data.percent,
+          assets: data.assets),
+      toModel: (entity) => PortifolioModel(
+          name: entity.name,
+          coin: entity.coin,
+          subTotal: entity.subTotal,
+          totalPriceActual: entity.totalPriceActual,
+          percent: entity.percent,
+          assets: entity.assets
+              .map((value) => AssetsModel(
+                  symbol: value.symbol,
+                  quanty: value.quanty,
+                  price: value.price))
+              .toList()));
 
-  PortifolioRepository(this.datasource);
+  final IPortifolioDataSource _datasource;
 
-  @override
-  Future<Either<Failure, List<Portifolio>>> getAllPortifolios() async {
-    try {
-      final result = await datasource.getAll();
-      return Right(result
-          .map((value) => Portifolio(
-                id: value.id,
-                name: value.name,
-                coin: value.coin,
-                percent: value.percent,
-                subTotal: value.subTotal,
-                totalPriceActual: value.totalPriceActual,
-                assets: value.assets
-                    .map((value) => Assets(
-                          symbol: value.symbol,
-                          quanty: value.quanty,
-                          price: value.price,
-                        ))
-                    .toList(),
-              ))
-          .toList());
-    } on ServerException {
-      return Left(ServerFailure());
-    }
-  }
+  PortifolioRepository(this._datasource) : super(datasource: _datasource);
 
   @override
   Future<Either<Failure, Portifolio>> createPortifolio(
@@ -117,4 +116,12 @@ class PortifolioRepository implements IPortifolioRepoitory {
       return Left(ServerFailure());
     }
   }
+
+  @override
+  ModelConvert<Portifolio, PortifolioModel> getModelConvert() {
+    return modelConvert;
+  }
+
+  @override
+  IPortifolioDataSource get datasource => _datasource;
 }
