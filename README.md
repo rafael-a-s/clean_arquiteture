@@ -1,16 +1,20 @@
-# my_app
+# Gerenciador de Criptomoedas em Flutter
 
-A new Flutter project.
+## Visão Geral
 
-## Getting Started
+Este projeto é um aplicativo Flutter para gerenciamento de criptomoedas. Ele permite aos usuários acompanhar suas carteiras de criptomoedas e receber atualizações sobre as mudanças no valor das criptomoedas. O aplicativo é projetado para ser intuitivo e fácil de usar, tornando-o acessível para iniciantes, mas também poderoso o suficiente para holders experientes.
 
-This project is a starting point for a Flutter application.
+## Funcionalidades
 
-A few resources to get you started if this is your first Flutter project:
+- **Acompanhamento de Carteira**: Monitore suas criptomoedas e veja o desempenho geral da sua carteira.
+- **Dados do Mercado em Tempo Real**: Acesse as cotações atuais e gráficos históricos para uma variedade de criptomoedas.
+- **Alertas Personalizados**: Configure alertas para ser notificado quando uma criptomoeda atingir um preço específico.
+- **Segurança**: Proteja suas informações com recursos avançados de segurança e criptografia.
+- **Interface Amigável**: Uma experiência de usuário suave e intuitiva, otimizada para dispositivos móveis.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Tecnologias Utilizadas
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- **Flutter**: Para a criação de uma UI rica e responsiva.
+- **Dart**: Linguagem de programação para lógica de negócios.
+- **APIs de Criptomoedas**: Para fornecer dados em tempo real e históricos.
+
