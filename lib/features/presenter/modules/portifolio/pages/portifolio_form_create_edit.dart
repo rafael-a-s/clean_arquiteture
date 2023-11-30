@@ -1,24 +1,23 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:my_app/core/utils/status-screen-arguments/StatusScreenArgument.dart';
 import 'package:my_app/features/domain/entities/assets.dart';
 import 'package:my_app/features/domain/entities/coin.dart';
 import 'package:my_app/features/domain/entities/portifolio.dart';
-import 'package:my_app/features/presenter/modules/coin/controller/coin_controller.dart';
 import 'package:my_app/features/presenter/modules/portifolio/controller/portifolio_controller.dart';
+import 'package:my_app/features/presenter/modules/portifolio/controller/portifolio_form_controller.dart';
 import 'package:my_app/features/presenter/root.dart';
 
-class CreatePortifolio extends StatefulWidget {
-  const CreatePortifolio({super.key});
+class PortifolioForm extends StatefulHookConsumerWidget {
+  const PortifolioForm({super.key});
 
   @override
-  State<CreatePortifolio> createState() => _CreatePortifolioState();
+  PortifolioFormState createState() => PortifolioFormState();
 }
 
-class _CreatePortifolioState extends State<CreatePortifolio> {
-  final controllerCoin = Modular.get<CoinController>();
+class PortifolioFormState extends ConsumerState<PortifolioForm> {
   final controller = Modular.get<PortifolioController>();
   final _formKey = GlobalKey<FormState>();
   final _name = TextEditingController();
@@ -26,29 +25,43 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
   final _quanty = TextEditingController();
   final _price = TextEditingController();
   bool _isFieldEnabled = false;
+  late final dynamic id;
 
   final String INVALID_LABEL = 'Campos obrigatórios não podem ser vazios!';
 
-  late List<Coin> _list;
-  List<Coin> _filtered = [];
-  bool _isLoading = false;
-  Timer? _timer;
-
-  Future<void> _fetchCoins() async {
-    _isLoading = true;
-    final result = await controllerCoin.getAllCoinSymbol();
-    setState(() {
-      _list = result;
-      _filtered =
-          _list.where((e) => e.symbol.toUpperCase().contains('USDT')).toList();
-      _isLoading = false;
-    });
+  _createPortifolio() async {
+    ref
+        .read(portifolioFormControllerProvider.notifier)
+        .createTrade(pathValue());
   }
 
-  Future<bool> _createPortifolio() async {
-    _isLoading = true;
-    Portifolio result = await controller.createTrade(
-      Portifolio(
+  resultAndRedirectFeedback(Portifolio result) {
+    return result.id == null
+        ? Modular.to.navigate(
+            '/status-feedback',
+            arguments: StatusScreenArguments(
+              isError: true,
+              message:
+                  'Infelizmente ocorreu um erro ao criar seu portifolio. Por favor tente novamente.',
+              onPressed: () {
+                Modular.to.navigate('/new-portifolio');
+              },
+            ),
+          )
+        : Modular.to.navigate(
+            '/status-feedback',
+            arguments: StatusScreenArguments(
+              isError: false,
+              message:
+                  'Seu portifolio foi criado. Você poderá verificá lo, na página inicial. Fique a vontade para criar novos portifolios e adicionar novas compras.',
+              onPressed: () {
+                Modular.to.navigate('/home');
+              },
+            ),
+          );
+  }
+
+  pathValue() => Portifolio(
         name: _name.text,
         coin: _asset.text,
         subTotal: 0,
@@ -61,23 +74,30 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
             price: double.parse(_price.text),
           ),
         ],
-      ),
-    );
-    _isLoading = false;
-    print(result.id);
-
-    return result.id == null ? false : true;
-  }
+      );
 
   @override
   void initState() {
     super.initState();
+
+    SchedulerBinding.instance.addPostFrameCallback((__) {
+      ref.read(portifolioFormControllerProvider.notifier).fetch();
+    });
+
     _quanty.text = '0';
-    _fetchCoins();
   }
 
   @override
   Widget build(BuildContext context) {
+    final loading = ref.watch(
+        portifolioFormControllerProvider.select((value) => value.isLoading));
+    final coins = ref
+        .watch(portifolioFormControllerProvider.select((value) => value.coins));
+    final result = ref.watch(
+        portifolioFormControllerProvider.select((value) => value.portifolio));
+
+    if (result != null) resultAndRedirectFeedback(result);
+
     return Container(
       margin: const EdgeInsets.only(top: 70),
       padding: const EdgeInsets.only(top: 50, left: 30, right: 30),
@@ -127,7 +147,7 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
                       if (textEditingValue.text == '') {
                         return const Iterable<Coin>.empty();
                       }
-                      return _filtered
+                      return coins
                           .where((Coin coin) => coin.symbol
                               .toLowerCase()
                               .startsWith(textEditingValue.text.toLowerCase()))
@@ -160,14 +180,14 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
               decoration: InputDecoration(
                 label: const Text('Quantidade'),
                 suffix: const Text('123'),
-                suffixIcon: Container(
+                suffixIcon: SizedBox(
                   height: 56, // Altura do TextFormField padrão
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Expanded(
                         child: IconButton(
-                          icon: Icon(Icons.arrow_upward),
+                          icon: const Icon(Icons.arrow_upward),
                           iconSize: 15, // Tamanho do ícone
                           onPressed: () {
                             setState(() {
@@ -179,7 +199,7 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
                       ),
                       Expanded(
                         child: IconButton(
-                          icon: Icon(Icons.arrow_downward),
+                          icon: const Icon(Icons.arrow_downward),
                           iconSize: 15, // Tamanho do ícone
                           onPressed: () {
                             setState(() {
@@ -224,29 +244,7 @@ class _CreatePortifolioState extends State<CreatePortifolio> {
               onPressed: () async => {
                 if (_formKey.currentState!.validate())
                   {
-                    _createPortifolio().then((value) => value
-                        ? Modular.to.navigate(
-                            '/status-feedback',
-                            arguments: StatusScreenArguments(
-                              isError: false,
-                              message:
-                                  'Seu portifolio foi criado. Você poderá verificá lo, na pagina inicial. Fique a vontade para criar novos portifolios e adicionar novas compras.',
-                              onPressed: () {
-                                Modular.to.navigate('/home');
-                              },
-                            ),
-                          )
-                        : Modular.to.navigate(
-                            '/status-feedback',
-                            arguments: StatusScreenArguments(
-                              isError: true,
-                              message:
-                                  'Infelizmente ocorreu um erro ao criar seu portifolio. Por favor tente novamente.',
-                              onPressed: () {
-                                Modular.to.navigate('/new-portifolio');
-                              },
-                            ),
-                          ))
+                    _createPortifolio(),
                   }
               },
               child: const Text(

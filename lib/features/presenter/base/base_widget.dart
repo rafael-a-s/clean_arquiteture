@@ -12,7 +12,6 @@ class BaseWidget extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(RootStyle.bgColor),
       bottomNavigationBar: const BottomNavigation(),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       body: Column(
         children: [
           Expanded(

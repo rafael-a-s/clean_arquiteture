@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_app/features/presenter/root.dart';
-import 'package:my_app/features/presenter/widgets/about/image_circular.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 class AppBarDefault extends StatelessWidget {
@@ -12,8 +11,8 @@ class AppBarDefault extends StatelessWidget {
       padding:
           EdgeInsets.only(top: MediaQuery.of(context).padding.top, left: 15),
       width: double.maxFinite,
-      height: 115,
-      child: Row(
+      height: MediaQuery.of(context).size.height / 6.5,
+      child: const Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Column(
@@ -22,7 +21,7 @@ class AppBarDefault extends StatelessWidget {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const <Widget>[
+                children: <Widget>[
                   Text(
                     'Bem vindo de volta',
                     textAlign: TextAlign.start,

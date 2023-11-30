@@ -30,4 +30,18 @@ class RootStyle {
     fontWeight: FontWeight.w400,
     color: Color(RootStyle.stColor),
   );
+
+  static final buttomStylePrimary = ButtonStyle(
+    shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(15),
+      side: BorderSide.none,
+    )),
+    minimumSize: const MaterialStatePropertyAll<Size?>(
+      Size(double.infinity, 50),
+    ),
+    backgroundColor: const MaterialStatePropertyAll<Color?>(
+      Color(RootStyle.primaryColor),
+    ),
+  );
 }
